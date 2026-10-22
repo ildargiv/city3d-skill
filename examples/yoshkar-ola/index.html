@@ -1,0 +1,284 @@
+<meta charset="utf-8">
+<title>City 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: full-bleed 3D scene, one floating panel (left on desktop, bottom sheet on phone) */
+:root {
+  --bg: #e9eef0;
+  --panel: rgba(250, 252, 252, 0.92);
+  --fg: #1d2a30;
+  --muted: #5d6e76;
+  --line: #cfd9dd;
+  --accent: #c2410c;
+  --accent-ink: #ffffff;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12191c; --panel: rgba(22, 30, 34, 0.92); --fg: #e4ecef; --muted: #93a5ad;
+  --line: #2c3a40; --accent: #fb923c; --accent-ink: #1a0d04; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #12191c; --panel: rgba(22, 30, 34, 0.92); --fg: #e4ecef; --muted: #93a5ad;
+  --line: #2c3a40; --accent: #fb923c; --accent-ink: #1a0d04; color-scheme: dark }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); overflow: hidden; }
+#scene { position: fixed; inset: 0; }
+#scene canvas { display: block; touch-action: none; }
+.panel {
+  position: fixed; z-index: 2;
+  top: calc(16px + env(safe-area-inset-top, 0px));
+  left: max(16px, env(safe-area-inset-left, 0px));
+  width: 300px; max-width: calc(100% - 32px);
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+  backdrop-filter: blur(8px); padding: 16px; display: grid; gap: 12px;
+}
+h1 { font: 700 1.15rem/1.2 var(--display); margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.sub { color: var(--muted); font-size: 0.85rem; margin: 2px 0 0; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-variant-numeric: tabular-nums; }
+.stat b { display: block; font: 600 1.1rem/1 var(--body); }
+.stat span { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { font: 500 0.9rem var(--body); padding: 8px; border: 0; background: transparent; color: var(--fg); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+#info { font-size: 0.88rem; border-top: 1px solid var(--line); padding-top: 10px; min-height: 3.2em; }
+#info .k { color: var(--muted); }
+#info a { color: var(--accent); }
+.note { font-size: 0.75rem; color: var(--muted); margin: 0; }
+.credit {
+  position: fixed; z-index: 2; font-size: 0.72rem; color: var(--muted);
+  right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  background: var(--panel); padding: 2px 8px; border-radius: 4px;
+}
+#err { color: var(--accent); font-size: 0.85rem; }
+@media (max-width: 560px) {
+  .panel { top: auto; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); width: auto;
+    right: max(16px, env(safe-area-inset-right, 0px)); max-width: none; gap: 8px; padding: 12px; }
+  .note { display: none; }
+}
+</style>
+
+<div id="scene" aria-label="3D-модель квартала"></div>
+<section class="panel">
+  <div>
+    <h1 id="title">City 3D</h1>
+    <p class="sub" id="subtitle">Загружаю данные…</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="sB">–</b><span>домов</span></div>
+    <div class="stat"><b id="sK">–</b><span>с этажами</span></div>
+    <div class="stat"><b id="sR">–</b><span>дорог</span></div>
+  </div>
+  <div class="seg" role="group" aria-label="Стиль">
+    <button id="btnReal" aria-pressed="true">Реализм</button>
+    <button id="btnToon" aria-pressed="false">Мультяшный</button>
+  </div>
+  <div id="info">Нажмите на дом, чтобы увидеть его паспорт.</div>
+  <p class="note">Это болванки по контурам OSM: высота из этажности или по умолчанию 3 этажа. Детали фасадов добавятся на следующем шаге.</p>
+  <div id="err" hidden></div>
+</section>
+<div class="credit">© участники OpenStreetMap, ODbL</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const STYLES = {
+  real: {
+    sky: 0xcdd8de, ground: 0x8d958f, road: 0x4a4f53, park: 0x6f8f5a, water: 0x5b7f99,
+    square: 0xb9b2a5, pitch: 0x6d9a5f, fog: true,
+    building: b => colourOf(b.colour) ?? (b.levels >= 5 ? 0xc9c3b8 : b.levels >= 3 ? 0xd8cfc0 : 0xbfae98),
+    edges: false,
+  },
+  toon: {
+    sky: 0x9fd8ff, ground: 0x7cc95a, road: 0x7c7f99, park: 0x6cc955, water: 0x4fb3ff,
+    square: 0xffe2a8, pitch: 0x58c26a, fog: false,
+    building: b => [0xff8fa3, 0xffc46b, 0x8fd3ff, 0xb59cff, 0x7fe0b8, 0xffa07a][Math.abs(b.id) % 6],
+    edges: true,
+  },
+};
+function colourOf(c) {
+  if (!c) return null;
+  try { return new THREE.Color(c).getHex(); } catch (e) { return null; }
+}
+
+const host = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+host.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 1, 5000);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.maxPolarAngle = Math.PI * 0.48;
+const hemi = new THREE.HemisphereLight(0xffffff, 0x445544, 0.5);
+const sun = new THREE.DirectionalLight(0xfff4e0, 0.6);
+sun.position.set(-300, 500, 200);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.bias = -0.0008;
+sun.shadow.normalBias = 0.5;
+Object.assign(sun.shadow.camera, { left: -500, right: 500, top: 500, bottom: -500, far: 2000 });
+scene.add(hemi, sun);
+
+let data = null, world = null, style = 'real', selected = null;
+const pickables = [];
+
+function flat(shapePts, y) {
+  const s = new THREE.Shape(shapePts.map(([x, z]) => new THREE.Vector2(x, z)));
+  const g = new THREE.ShapeGeometry(s);
+  g.rotateX(-Math.PI / 2);
+  g.translate(0, y, 0);
+  return g;
+}
+
+function ribbon(line, width, y) {
+  const pos = [];
+  for (let i = 0; i < line.length - 1; i++) {
+    const [x1, y1] = line[i], [x2, y2] = line[i + 1];
+    const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy) || 1;
+    const nx = -dy / len * width / 2, ny = dx / len * width / 2;
+    const p = [[x1 + nx, y1 + ny], [x1 - nx, y1 - ny], [x2 - nx, y2 - ny], [x2 + nx, y2 + ny]]
+      .map(([x, z]) => [x, y, -z]);
+    pos.push(...p[0], ...p[1], ...p[2], ...p[0], ...p[2], ...p[3]);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.computeVertexNormals();
+  return g;
+}
+
+function mat(color) {
+  return style === 'toon'
+    ? new THREE.MeshToonMaterial({ color })
+    : new THREE.MeshStandardMaterial({ color, roughness: 0.9, metalness: 0 });
+}
+
+function build() {
+  if (world) scene.remove(world);
+  pickables.length = 0;
+  world = new THREE.Group();
+  const S = STYLES[style];
+  scene.background = new THREE.Color(S.sky);
+  scene.fog = S.fog ? new THREE.Fog(S.sky, data.radius * 1.5, data.radius * 4) : null;
+  hemi.intensity = style === 'toon' ? 0.6 : 0.5;
+
+  const ground = new THREE.Mesh(new THREE.CircleGeometry(data.radius * 1.2, 64), mat(S.ground));
+  ground.rotation.x = -Math.PI / 2;
+  ground.receiveShadow = true;
+  world.add(ground);
+
+  for (const a of data.areas) {
+    if (a.polygon.length < 3) continue;
+    const m = new THREE.Mesh(flat(a.polygon.map(([x, y]) => [x, y]), 0.05), mat(S[a.kind] ?? S.park));
+    m.material.side = THREE.DoubleSide;
+    m.receiveShadow = true;
+    world.add(m);
+  }
+  for (const r of data.roads) {
+    const m = new THREE.Mesh(ribbon(r.line, r.width, 0.1), mat(S.road));
+    m.material.side = THREE.DoubleSide;
+    m.receiveShadow = true;
+    world.add(m);
+  }
+  for (const b of data.buildings) {
+    if (b.has_parts) continue;
+    const base = b.base || 0;
+    const shape = new THREE.Shape(b.footprint.map(([x, y]) => new THREE.Vector2(x, y)));
+    const g = new THREE.ExtrudeGeometry(shape, { depth: Math.max(0.5, b.height - base), bevelEnabled: false });
+    g.rotateX(-Math.PI / 2);
+    g.translate(0, base, 0);
+    const m = new THREE.Mesh(g, mat(S.building(b)));
+    m.castShadow = m.receiveShadow = true;
+    m.userData = b;
+    world.add(m);
+    pickables.push(m);
+    if (S.edges) {
+      const e = new THREE.LineSegments(new THREE.EdgesGeometry(g, 30),
+        new THREE.LineBasicMaterial({ color: 0x2b2340 }));
+      world.add(e);
+    }
+  }
+  scene.add(world);
+  if (selected) highlight(pickables.find(p => p.userData.id === selected));
+}
+
+const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const osmUrl = id => id < 0
+  ? `https://www.openstreetmap.org/relation/${Math.floor(-id / 100)}`
+  : `https://www.openstreetmap.org/way/${id}`;
+
+function highlight(m) {
+  for (const p of pickables) p.material.emissive?.setHex(0x000000);
+  if (!m) return;
+  m.material.emissive?.setHex(style === 'toon' ? 0x553300 : 0x5a2a0a);
+  const b = m.userData;
+  selected = b.id;
+  const row = (k, v) => v ? `<div><span class="k">${k}:</span> ${esc(v)}</div>` : '';
+  document.getElementById('info').innerHTML =
+    `<div><b>${esc(b.name || (b.part ? 'Часть здания' : 'Здание'))}</b></div>` +
+    row('Адрес', b.address) +
+    row('Этажей', b.levels + (b.levels_known ? '' : ' (нет в OSM, по умолчанию)')) +
+    row('Высота', b.height + ' м') + row('Площадь', b.area_m2 + ' м²') +
+    `<div><a href="${osmUrl(b.id)}" target="_blank" rel="noopener">Открыть в OSM</a></div>`;
+}
+
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
+let down = null;
+renderer.domElement.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+renderer.domElement.addEventListener('pointerup', e => {
+  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return;
+  const r = renderer.domElement.getBoundingClientRect();
+  ptr.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
+  ray.setFromCamera(ptr, camera);
+  const hit = ray.intersectObjects(pickables)[0];
+  if (hit) highlight(hit.object);
+});
+
+function setStyle(s) {
+  style = s;
+  document.getElementById('btnReal').setAttribute('aria-pressed', s === 'real');
+  document.getElementById('btnToon').setAttribute('aria-pressed', s === 'toon');
+  if (data) build();
+}
+document.getElementById('btnReal').onclick = () => setStyle('real');
+document.getElementById('btnToon').onclick = () => setStyle('toon');
+
+function resize() {
+  const w = host.clientWidth, h = host.clientHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize);
+resize();
+
+fetch('city.json').then(r => r.json()).then(d => {
+  data = d;
+  if (d.name) document.getElementById('title').textContent = document.title = d.name;
+  document.getElementById('subtitle').textContent =
+    `Радиус ${d.radius} м · центр ${d.center[0].toFixed(5)}, ${d.center[1].toFixed(5)}`;
+  const whole = d.buildings.filter(b => !b.part);
+  document.getElementById('sB').textContent = whole.length;
+  document.getElementById('sK').textContent = whole.filter(b => b.levels_known).length;
+  document.getElementById('sR').textContent = d.roads.length;
+  camera.position.set(d.radius * 0.9, d.radius * 0.8, d.radius * 0.9);
+  controls.target.set(0, 0, 0);
+  build();
+  const centre = pickables.find(p => /театр кукол/i.test(p.userData.name)) ||
+    pickables.slice().sort((a, b) => a.userData.dist_m - b.userData.dist_m)[0];
+  if (centre) highlight(centre);
+}).catch(() => {
+  const e = document.getElementById('err');
+  e.hidden = false;
+  e.textContent = 'Не удалось загрузить данные квартала (city.json).';
+});
+
+(function loop() {
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(loop);
+})();
+</script>

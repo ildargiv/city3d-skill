@@ -1,0 +1,96 @@
+# city3d: настоящий город в 3D
+
+Скил для Claude Code, который превращает реальный район в 3D-сцену для игры.
+Каждый дом получается отдельной моделью на своём месте, ландшафт собирается
+одним куском, а стилей два: реалистичный и мультяшный.
+
+Основа берётся из открытых данных OpenStreetMap. Качество дают ваши
+собственные фото и видео: агент строит всё, что может, а потом говорит, какие
+дома и с каких сторон доснять.
+
+![Квартал в Blender, реализм](docs/blender_real.png)
+![Тот же квартал, мультяшный стиль](docs/blender_toon.png)
+
+## Как это работает
+
+```
+место + радиус → OpenStreetMap → болванки всех домов → список съёмки
+       ↑                                                    ↓
+пересборка со сканами ← модели из кадров ← вы снимаете по списку
+```
+
+1. Вы называете место и радиус, например «театр кукол, Йошкар-Ола, 300 м».
+2. Агент выгружает OSM и строит все дома по контурам и этажности, а также
+   единый ландшафт: дороги, газоны, воду и деревья.
+3. Агент смотрит ваши фото и видео и отмечает, что из них уже годится.
+4. Вы получаете **список съёмки**: карту для телефона, дома в порядке обхода
+   и для каждого дома нужные фасады.
+5. Из новых кадров собираются модели домов (COLMAP + OpenMVS или
+   RealityScan). Они ставятся на свои контуры, и всё повторяется, пока
+   результат вас не устроит.
+6. Экспорт в Blender (`.blend`) и `.glb` для Unreal, Godot и Unity.
+
+![Список съёмки](docs/shotlist.png)
+
+## Установка
+
+В Claude Code:
+
+```
+/plugin marketplace add ildargiv/city3d-skill
+/plugin install city3d@city3d
+```
+
+Потом просто напишите: «Сделай в 3D район вокруг ... радиусом 300 м».
+
+Что понадобится:
+- Python 3.9+
+- Blender 4.2+ (для сцены и экспорта; [BlenderMCP](https://github.com/ahujasid/blender-mcp) по желанию)
+- ffmpeg (для видео)
+- COLMAP и OpenMVS для сборки моделей из кадров. Обе программы работают без
+  NVIDIA, но медленно. С видеокартой NVIDIA лучше взять RealityScan.
+
+## Что можно использовать
+
+Кратко: OpenStreetMap, открытые карты высот, Mapillary/Panoramax и ваши
+собственные съёмки. Карты, панорамы и 3D-модели Google, Яндекса и 2ГИС
+можно только смотреть глазами для сверки, копировать их в модель нельзя даже
+для личных целей. Подробности и ссылки на условия сервисов:
+[references/legal.md](skills/city-3d/references/legal.md).
+
+Во всех экспортах ставится подпись «© участники OpenStreetMap (ODbL)».
+
+## Пример
+
+[examples/yoshkar-ola](examples/yoshkar-ola): квартал у Республиканского
+театра кукол в Йошкар-Оле радиусом 320 м. Это 43 здания и 65 частей зданий
+с готовым списком съёмки. Чтобы открыть `index.html`, запустите в этой папке
+локальный сервер (`python3 -m http.server`).
+
+## Скрипты
+
+| Скрипт | Что делает |
+|---|---|
+| `fetch_osm.py` | выгружает OSM по точке и радиусу (Overpass) |
+| `osm2city.py` | из OSM делает `buildings.csv`, `city.json` и `city.obj` |
+| `preview.html` | 3D-просмотр в браузере с переключением стилей |
+| `blender_city.py` | сцена в Blender: дома отдельными объектами, единый ландшафт, экспорт `.glb` |
+| `shotlist.py` | список съёмки: что доснять и в каком порядке |
+| `extract_frames.py` | нарезает видео на резкие кадры |
+| `photogrammetry.py` | собирает модель дома из кадров (COLMAP + OpenMVS) |
+
+---
+
+## English
+
+A Claude Code skill that turns a real neighbourhood into a game-ready 3D
+scene: one model per building on its OpenStreetMap footprint, one shared
+landscape, realistic and cartoon styles, export to Blender and
+Unreal/Godot/Unity. The agent builds everything it can from open data, then
+gives you a shot list of which facades to photograph. Your own photos and
+video are turned into building models, and the loop repeats.
+
+Install: `/plugin marketplace add ildargiv/city3d-skill`, then
+`/plugin install city3d@city3d`. Data rules:
+[legal.md](skills/city-3d/references/legal.md). The code is under the MIT
+licence; the map data is © OpenStreetMap contributors, ODbL.

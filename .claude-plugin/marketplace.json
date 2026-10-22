@@ -1,0 +1,11 @@
+{
+  "name": "city3d",
+  "owner": { "name": "ildargiv", "url": "https://github.com/ildargiv" },
+  "plugins": [
+    {
+      "name": "city3d",
+      "source": "./",
+      "description": "Real city districts in 3D from OpenStreetMap plus your own photos and video."
+    }
+  ]
+}
