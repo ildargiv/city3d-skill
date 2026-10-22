@@ -113,8 +113,30 @@ Gives `shotlist.md` and `shotlist.html`, a phone-friendly map with numbered
 buildings in walking order, colour by status, and the facades still needed
 with their lengths. Hand it over together with the short capture rules from
 `references/capture.md` (walk around at 10–20 m, camera on the facade,
-overcast, second lap higher, no panoramas). Then wait for the user's next
-batch.
+overcast, second lap higher, no panoramas).
+
+Then give every building its own folder on the user's machine, so new
+photos land in the right place:
+
+```bash
+python3 scripts/house_folders.py init city/city.json --root "<project>/дома" --coverage coverage.json
+```
+
+Each folder `NN <name> [<osm id>]` has `фото/` (the user drops photos and
+video here), `кадры/` (frames you cut from earlier videos that show this
+building), `модель/` (your result) and `ДОСНЯТЬ.md` (what is still
+missing). `<project>/дома/СТАТУС.md` sums it up. Re-running `init` keeps
+existing folders and files and refreshes the two .md files.
+
+When the user says they added photos:
+
+```bash
+python3 scripts/house_folders.py status city/city.json --root "<project>/дома" --coverage coverage.json
+```
+
+It lists buildings with new files since the last check; process only those
+(step 6), update `coverage.json`, and run `init` again to refresh
+`ДОСНЯТЬ.md` and `СТАТУС.md`.
 
 ## 6. Photogrammetry per building
 
