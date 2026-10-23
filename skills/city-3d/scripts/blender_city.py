@@ -18,11 +18,25 @@ Outputs in --out:
 Swap a block model for a photogrammetry or hand-made one by replacing the
 mesh of its "B_<id>" object in city.blend and exporting again with
 --from-blend city.blend.
+
+Or let the script do it for a whole team's work:
+  blender -b -P blender_city.py -- city.json --scans buildings/ --out out/
+  blender -b -P blender_city.py -- city.json --from-blend out/city.blend --scans buildings/ --out out/
+Every building folder "<NN> <name> [<osm id>]" under --scans whose model/
+(or модель/) holds a .glb/.gltf/.obj/.fbx replaces that building's block
+(and its building:part blocks). The model is expected in metres, Z up,
+north = +Y, origin at the footprint centre on the ground: the same frame as
+block.obj that house_folders.py writes into each folder. The script still
+puts it on the ground, centres it on the footprint and fixes the scale when
+it is more than 25 % off (photogrammetry units are arbitrary). A
+model/place.json {"rotate_deg": 0, "scale": 1, "offset": [0, 0, 0]}
+overrides that.
 """
 import argparse
 import json
 import math
 import os
+import re
 import sys
 
 import bpy  # first: the pip build of bpy provides bmesh/mathutils on import
@@ -62,6 +76,7 @@ def args_after_dashes():
     ap.add_argument("--out", default="out")
     ap.add_argument("--style", choices=["real", "toon", "both"], default="both")
     ap.add_argument("--from-blend", help="re-export an edited city.blend")
+    ap.add_argument("--scans", help="folder of building folders with finished models")
     ap.add_argument("--no-split", action="store_true",
                     help="skip the per-building .glb files")
     return ap.parse_args(argv)
@@ -271,8 +286,8 @@ def export_glb(path, objs):
 def recolour(pal):
     """Repaint an existing scene with another palette, keeping geometry."""
     for ob in bpy.data.objects:
-        if ob.type != "MESH":
-            continue
+        if ob.type != "MESH" or "scan" in ob:
+            continue  # scanned models keep their own textures
         for slot in ob.material_slots:
             m = slot.material
             if not m:
@@ -284,6 +299,134 @@ def recolour(pal):
                 rgb = pal.get(kind)
             if rgb:
                 slot.material = material(kind, tuple(rgb), pal["roughness"])
+
+
+MODEL_DIRS = ("model", "модель")
+MODEL_EXT = (".glb", ".gltf", ".obj", ".fbx")
+
+
+def point_in(pt, ring):
+    x, y = pt
+    inside = False
+    for (x1, y1), (x2, y2) in zip(ring, ring[1:] + ring[:1]):
+        if (y1 > y) != (y2 > y) and x < (x2 - x1) * (y - y1) / (y2 - y1) + x1:
+            inside = not inside
+    return inside
+
+
+def obj_name(i):
+    return f"B_{abs(i)}" + ("r" if i < 0 else "")
+
+
+def find_models(root):
+    """osm id -> newest model file in the folder's model/ (or модель/)."""
+    out = {}
+    for d in sorted(os.listdir(root)):
+        m = re.search(r"\[(-?\d+)\]\s*$", d)
+        if not m:
+            continue
+        # no glob here: "[123]" in the folder name is a glob pattern
+        dirs = [os.path.join(root, d, sub) for sub in MODEL_DIRS]
+        files = [os.path.join(p, f) for p in dirs if os.path.isdir(p)
+                 for f in os.listdir(p) if f.lower().endswith(MODEL_EXT)]
+        if files:
+            out[int(m.group(1))] = max(files, key=os.path.getmtime)
+    return out
+
+
+def import_model(path):
+    before = set(bpy.data.objects)
+    ext = os.path.splitext(path)[1].lower()
+    if ext in (".glb", ".gltf"):
+        bpy.ops.import_scene.gltf(filepath=path)
+    elif ext == ".obj":
+        bpy.ops.wm.obj_import(filepath=path)
+    else:
+        bpy.ops.import_scene.fbx(filepath=path)
+    meshes = [o for o in set(bpy.data.objects) - before if o.type == "MESH"]
+    for o in set(bpy.data.objects) - before:
+        if o.type != "MESH":
+            bpy.data.objects.remove(o)
+    if not meshes:
+        return None
+    select_only(meshes)
+    for o in meshes:  # bake parents and transforms before joining
+        o.matrix_world = o.matrix_world.copy()
+        o.parent = None
+    bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+    if len(meshes) > 1:
+        bpy.ops.object.join()
+    return bpy.context.view_layer.objects.active
+
+
+def diameter(points):
+    """Largest distance between two points: does not depend on rotation."""
+    pts = points if len(points) <= 400 else points[::len(points) // 400]
+    return max((math.dist(p, q) for p in pts for q in pts), default=0.0)
+
+
+def place_scans(data, root):
+    """Replace blocks with the finished models found under root."""
+    blds = collection("Buildings")
+    by_id = {b["id"]: b for b in data["buildings"]}
+    placed = []
+    for bid, path in find_models(root).items():
+        b = by_id.get(bid)
+        if not b:
+            print(f"city3d: {path}: building {bid} is not in city.json, skipped")
+            continue
+        ob = import_model(path)
+        if not ob:
+            print(f"city3d: {path}: no mesh inside, skipped")
+            continue
+        cfg_path = os.path.join(os.path.dirname(path), "place.json")
+        cfg = {}
+        if os.path.exists(cfg_path):
+            with open(cfg_path, encoding="utf-8") as f:
+                cfg = json.load(f)
+        me = ob.data
+        if "rotate_deg" in cfg:
+            a = math.radians(cfg["rotate_deg"])
+            for v in me.vertices:
+                x, y = v.co.x, v.co.y
+                v.co.x, v.co.y = x * math.cos(a) - y * math.sin(a), x * math.sin(a) + y * math.cos(a)
+        foot = [(x - b["x"], y - b["y"]) for x, y in b["footprint"]]
+        if "scale" in cfg:
+            k = cfg["scale"]
+        else:
+            want, have = diameter(foot), diameter([(v.co.x, v.co.y) for v in me.vertices])
+            k = want / have if have and not 0.8 < want / have < 1.25 else 1.0
+        xs = [v.co.x for v in me.vertices]
+        ys = [v.co.y for v in me.vertices]
+        zmin = min(v.co.z for v in me.vertices)
+        cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
+        # land the model's box centre on the footprint's box centre
+        fx = (min(p[0] for p in foot) + max(p[0] for p in foot)) / 2
+        fy = (min(p[1] for p in foot) + max(p[1] for p in foot)) / 2
+        off = cfg.get("offset", [0, 0, 0])
+        for v in me.vertices:
+            v.co = Vector(((v.co.x - cx) * k + fx + off[0], (v.co.y - cy) * k + fy + off[1],
+                           (v.co.z - zmin) * k + off[2]))
+        # the old block and any building:part blocks standing inside it
+        ring = b["footprint"]
+        for p in data["buildings"]:
+            if p["id"] == bid or (p.get("part") and point_in((p["x"], p["y"]), ring)):
+                old = bpy.data.objects.get(obj_name(p["id"]))
+                if old:
+                    bpy.data.objects.remove(old)
+        for c in list(ob.users_collection):
+            c.objects.unlink(ob)
+        blds.objects.link(ob)
+        ob.name = me.name = obj_name(bid)
+        ob.location = (b["x"], b["y"], 0)
+        for key in ("name", "address", "type", "levels", "height", "roof"):
+            ob[key] = b.get(key) or ""
+        ob["osm_id"] = bid
+        ob["scan"] = os.path.relpath(path, root)
+        placed.append(f"{ob.name} <- {ob['scan']} (scale {k:.3g})")
+    for line in placed:
+        print("city3d: placed", line)
+    return placed
 
 
 def main():
@@ -300,6 +443,14 @@ def main():
         bpy.context.scene["city3d_attribution"] = data.get("attribution", "")
         bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(
             os.path.join(a.out, "city.blend")))
+    if a.scans:
+        if not a.city_json:
+            sys.exit("--scans needs city.json too (footprints and ids)")
+        with open(a.city_json, encoding="utf-8") as f:
+            data = json.load(f)
+        if place_scans(data, a.scans):
+            bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(
+                os.path.join(a.out, "city.blend")))
 
     blds = [o for o in bpy.data.collections["Buildings"].all_objects]
     land = [o for o in bpy.data.collections["Landscape"].all_objects]

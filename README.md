@@ -36,6 +36,17 @@ rebuild with scans  ←  models from your frames  ←  you shoot what is listed
    are happy with the result.
 6. Export to Blender (`.blend`) and `.glb` for Unreal, Godot and Unity.
 
+### Working as a team
+
+Each building folder is self-contained: hand it to a helper, they shoot the
+building, build a model in any tool, align it to the `block.obj` in the
+folder and put a `.glb` into `model/`. When the folders come back, one
+command puts every finished building on the map in place of its block:
+
+```
+blender -b -P blender_city.py -- city/city.json --scans buildings/ --out build/
+```
+
 | Close-up: Spasskaya Tower, realistic | The same, cartoon |
 |---|---|
 | ![](docs/tower_real.png) | ![](docs/tower_toon.png) |

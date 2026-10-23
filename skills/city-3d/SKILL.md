@@ -189,16 +189,22 @@ what is missing into `coverage.json` entries and go back to step 5.
 
 ## 7. Put the scan on the map
 
-In Blender:
-1. Import `scene_textured.obj` and clean it: delete ground, cars, people and
-   trees around the building; fill holes.
-2. Align it to the building's `B_<id>` block: scale so the footprint matches
-   (OSM outline length is the ruler), rotate so walls follow the outline,
-   drop it to Z = 0.
+1. Clean the mesh (in Blender, or ask the user): delete ground, cars, people
+   and trees around the building; fill holes.
+2. Align it to the folder's `block.obj` (the OSM block in the same frame:
+   metres, origin on the footprint centre, north up the map): walls along
+   the block's walls, ground at 0.
 3. Decimate to a game budget (houses 20–80k triangles; landmarks more) and
-   bake the texture to one 4K map.
-4. Replace the block's mesh with the scan, keep the object name and origin,
-   then re-export: `blender -b -P scripts/blender_city.py -- --from-blend build/city.blend --out build/`.
+   bake the texture to one 4K map. Save it as `.glb` in the folder's
+   `model/`.
+4. Put every finished model on the map at once:
+   `blender -b -P scripts/blender_city.py -- city/city.json --scans "<project>/buildings" --out build/`
+   (add `--from-blend build/city.blend` to keep edits made in the scene).
+   Each `model/*.glb|obj|fbx` replaces that building's block and its
+   `building:part` blocks. The script lands it on the ground, centres it on
+   the footprint and fixes the scale when it is more than 25 % off; the
+   rotation must come from step 2, or from `model/place.json`
+   (`{"rotate_deg": 90, "scale": 1, "offset": [0, 0, 0]}`).
 5. Mark the building `done` in `coverage.json`.
 
 Roofs not seen from the ground keep the OSM roof shape and colour.
@@ -219,6 +225,17 @@ up (or ask). Run steps 6–7 for its `photos/` and `frames/` only, write the
 result to its `model/`, update its `coverage.json` entry and re-run `init`.
 Do not rebuild the district, re-read other folders or re-export other
 buildings.
+
+## A team of helpers
+
+Every building folder is self-contained, so the user can hand folders to
+other people. `TO_SHOOT.md` ends with a "For a helper" section: shoot the
+missing facades, build the model in any tool, align it to `block.obj`,
+export `.glb` into `model/`, send the folder back without renaming it (the
+`[osm id]` places it). When folders come back, the user drops them into the
+same root and step 7.4 puts them all on the map. Check each returned model
+before placing it: a mesh, sensible size, textures inside, nothing that
+came from Google, Yandex or 2GIS.
 
 ## Keeping it cheap: which model does what
 
