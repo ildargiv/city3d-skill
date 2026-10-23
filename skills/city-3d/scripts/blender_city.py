@@ -18,6 +18,12 @@ Outputs in --out:
   buildings_<style>.glb           every building, placed in world position
   buildings/<name>.glb            each building alone, centred on its origin
   placement.json                  world position of every building origin
+  city.usdc                       the whole scene as USD (--usd), for film and
+                                  VFX tools (Blender, Houdini, Omniverse, Unreal)
+
+Every building carries its OSM id, name, address, type, levels and height as
+custom properties; they go into the .glb files as glTF "extras", so a game,
+a guided tour or any app can show what a building is.
 
 Swap a block model for a photogrammetry or hand-made one by replacing the
 mesh of its "B_<id>" object in city.blend and exporting again with
@@ -83,6 +89,7 @@ def args_after_dashes():
     ap.add_argument("--from-blend", help="re-export an edited city.blend")
     ap.add_argument("--tile", type=float, default=250, help="landscape tile size, metres")
     ap.add_argument("--scans", help="folder of building folders with finished models")
+    ap.add_argument("--usd", action="store_true", help="also write city.usdc")
     ap.add_argument("--no-split", action="store_true",
                     help="skip the per-building .glb files")
     return ap.parse_args(argv)
@@ -303,7 +310,7 @@ def export_glb(path, objs):
     select_only(objs)
     bpy.ops.export_scene.gltf(filepath=path, export_format="GLB",
                               use_selection=True, export_apply=True,
-                              export_yup=True)
+                              export_yup=True, export_extras=True)
 
 
 def recolour(pal):
@@ -499,6 +506,9 @@ def main():
                 o.location = Vector((0, 0, 0))
                 export_glb(os.path.join(a.out, "buildings", f"{o.name}_{style}.glb"), [o])
                 o.location = loc
+    if a.usd:
+        bpy.ops.wm.usd_export(filepath=os.path.abspath(os.path.join(a.out, "city.usdc")),
+                              selected_objects_only=False, export_custom_properties=True)
     print(f"city3d: {len(blds)} buildings, {len(land)} landscape objects -> {a.out}")
 
 

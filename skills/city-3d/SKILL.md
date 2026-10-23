@@ -1,13 +1,18 @@
 ---
 name: city-3d
-description: Build a 3D model of a real city district from OpenStreetMap plus the user's own photos and video, one model per building on one shared landscape, realistic first and restyled later (cartoon or any other look), exported to Blender and Unreal/Godot/Unity. Use when someone wants to recreate a real street, district or town in 3D or in a game.
+description: Build a universal, realistic 3D map of a real city from OpenStreetMap plus the user's own photos and video, one model per building on one shared, growable landscape, to serve as the base for games, films, animation, guided tours and other projects; restyle later, export to Blender, USD and Unreal/Godot/Unity. Use when someone wants to recreate a real street, district or town in 3D.
 ---
 
 # City 3D
 
-Turns a place and a radius into a game-ready district: every building is a
-separate model standing on its OSM footprint, the landscape is one piece, and
-the user's own photos and video raise the quality building by building.
+Builds a real city in 3D as a universal base map: every building is a
+separate model standing on its OSM footprint, the landscape is shared and
+grows tile by tile, and the user's own photos and video raise the quality
+building by building. The map is not tied to one use: games, films,
+cartoons, guided walks, VR and anything else are separate projects built on
+top of it (see `references/engines.md`). Keep it that way: accurate, real,
+one master scene, with names and addresses on every building, and no
+project-specific changes in the master.
 
 The work runs as a loop. Build everything possible from what exists, then
 tell the user exactly what to photograph, then build again with the new

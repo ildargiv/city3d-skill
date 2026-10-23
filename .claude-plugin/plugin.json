@@ -1,10 +1,10 @@
 {
   "name": "city3d",
   "version": "0.1.0",
-  "description": "Build a real city district in 3D from OpenStreetMap and your own photos/video: one model per building, one landscape, realistic first, then any style (cartoon included), export to Blender and Unreal/Godot/Unity.",
+  "description": "A universal realistic 3D map of a real city from OpenStreetMap and your own photos/video: one model per building, one growable landscape, a base for games, films, animation and guided tours; export to Blender, USD, Unreal/Godot/Unity.",
   "author": { "name": "ildargiv", "url": "https://github.com/ildargiv" },
   "homepage": "https://github.com/ildargiv/city3d-skill",
   "repository": "https://github.com/ildargiv/city3d-skill",
   "license": "MIT",
-  "keywords": ["3d", "city", "openstreetmap", "blender", "photogrammetry", "unreal", "gamedev"]
+  "keywords": ["3d", "city", "openstreetmap", "blender", "photogrammetry", "unreal", "gamedev", "film", "digital-twin"]
 }
