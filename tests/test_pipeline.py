@@ -159,6 +159,17 @@ class Helpers(unittest.TestCase):
         finally:
             shutil.rmtree(tmp)
 
+    def test_colmap_exe_preferred_over_bat(self):
+        from photogrammetry import tool
+        tmp = tempfile.mkdtemp()
+        try:
+            os.makedirs(os.path.join(tmp, "bin"))
+            for name in ("COLMAP.bat", os.path.join("bin", "colmap.exe")):
+                open(os.path.join(tmp, name), "w").close()
+            self.assertEqual(tool("colmap", tmp), os.path.join(tmp, "bin", "colmap.exe"))
+        finally:
+            shutil.rmtree(tmp)
+
     def test_doctor_runs(self):
         report = json.loads(run("doctor.py", "--json"))
         self.assertTrue(next(r for r in report if r["tool"] == "python")["ok"])

@@ -47,23 +47,38 @@ import sys
 
 
 def tool(name, folder):
-    for cand in ([os.path.join(folder, name), os.path.join(folder, name + ".exe"),
-                  os.path.join(folder, "bin", name + ".exe"),
-                  os.path.join(folder, "bin", name)] if folder else []) + [name]:
-        path = shutil.which(cand) or (cand if os.path.isfile(cand) else None)
+    # real executables first: on Windows shutil.which("…/colmap") also matches
+    # COLMAP.bat, and cmd.exe breaks .bat arguments with spaces or [brackets]
+    for cand in ([os.path.join(folder, name + ".exe"), os.path.join(folder, "bin", name + ".exe"),
+                  os.path.join(folder, "bin", name), os.path.join(folder, name)]
+                 if folder else []) + [name]:
+        if os.path.isfile(cand) and (cand.lower().endswith(".exe") or os.access(cand, os.X_OK)):
+            return cand
+        path = shutil.which(cand)
         if path:
             return path
     return None
 
 
+ENV = dict(os.environ)
+
+
+def use_colmap_libs(colmap):
+    """What COLMAP.bat does: its DLLs and Qt plugins live in <folder>/lib."""
+    lib = os.path.join(os.path.dirname(os.path.dirname(colmap)), "lib")
+    if os.path.isdir(lib):
+        ENV["PATH"] = lib + os.pathsep + ENV.get("PATH", "")
+        ENV.setdefault("QT_PLUGIN_PATH", os.path.join(lib, "plugins"))
+
+
 def run(cmd):
     print("$", " ".join(cmd), flush=True)
-    subprocess.run(cmd, check=True)
+    subprocess.run(cmd, check=True, env=ENV)
 
 
 def pick_option(colmap, command, *names):
     """COLMAP renamed options between versions; use the one this build knows."""
-    out = subprocess.run([colmap, command, "-h"], capture_output=True, text=True)
+    out = subprocess.run([colmap, command, "-h"], capture_output=True, text=True, env=ENV)
     text = out.stdout + out.stderr
     for n in names:
         if n in text:
@@ -108,7 +123,7 @@ def prepare_images(images, work):
 
 
 def has_option(exe, option, *args):
-    out = subprocess.run([exe, *args], capture_output=True, text=True)
+    out = subprocess.run([exe, *args], capture_output=True, text=True, env=ENV)
     return option in out.stdout + out.stderr
 
 
@@ -173,14 +188,14 @@ def georeference(colmap, model, out, city_json, positions):
     return out
 
 
-def sparse(colmap, images, work, sequential):
+def sparse(colmap, images, work, sequential, single_camera=True):
     db = os.path.join(work, "database.db")
     model = os.path.join(work, "sparse")
     os.makedirs(model, exist_ok=True)
     gpu = pick_option(colmap, "feature_extractor",
                       "FeatureExtraction.use_gpu", "SiftExtraction.use_gpu")
     cmd = [colmap, "feature_extractor", "--database_path", db,
-           "--image_path", images, "--ImageReader.single_camera", "1",
+           "--image_path", images, "--ImageReader.single_camera", "1" if single_camera else "0",
            "--ImageReader.camera_model", "OPENCV"]
     if gpu:
         cmd += [f"--{gpu}", "0"]
@@ -249,7 +264,8 @@ def mesh(colmap, openmvs, images, work, model, refine=False, texture_size=4096):
         meshed = mesh_input("scene_dense_mesh_refine")
     cmd = [t["TextureMesh"], *meshed, "--export-type", "obj", "-o",
            os.path.join(mvs, "scene_textured.mvs"), "-w", mvs]
-    help_text = subprocess.run([t["TextureMesh"], "--help"], capture_output=True, text=True)
+    help_text = subprocess.run([t["TextureMesh"], "--help"], capture_output=True, text=True,
+                               env=ENV)
     help_text = help_text.stdout + help_text.stderr
     if "max-texture-size" in help_text:
         cmd += ["--max-texture-size", str(texture_size)]
@@ -282,13 +298,16 @@ def main():
                  "https://github.com/colmap/colmap/releases and pass --colmap <folder>.")
     # OpenMVS runs inside <work>/mvs, so relative paths would break
     a.work, a.images = os.path.abspath(a.work), os.path.abspath(a.images)
+    use_colmap_libs(colmap)
     os.makedirs(a.work, exist_ok=True)
     images = prepare_images(a.images, a.work)
     final = os.path.join(a.work, "sparse", "final")
     if a.stage == "sparse" or not os.path.isdir(final):
         model = os.path.join(a.work, "sparse", "0")
         if a.stage == "sparse" or not os.path.isdir(model):
-            model = sparse(colmap, images, a.work, sequential=not a.photos)
+            # photos may come from several cameras; video frames share one
+            model = sparse(colmap, images, a.work, sequential=not a.photos,
+                           single_camera=not a.photos)
         model = filter_points(colmap, model, os.path.join(a.work, "sparse", "filtered"))
         if a.city:
             if a.gps:
