@@ -45,7 +45,7 @@ NAMES = {
     "en": {"subdirs": ("photos", "frames", "model"), "todo": "TO_SHOOT.md",
            "status_md": "STATUS.md", "building": "Building",
            "done": "**Done, nothing to shoot.**", "need": "**Facades to shoot:**",
-           "note": "**Note:**",
+           "note": "**Note:**", "invented": "**Invented, not shot:**",
            "how": "How to shoot: walk round 10–20 m away, camera on the facade, a frame "
                   "every 1–2 steps (or slow 4K video), second lap with the camera higher. "
                   "Overcast or shade, no panoramas from one spot.",
@@ -66,7 +66,7 @@ NAMES = {
     "ru": {"subdirs": ("фото", "кадры", "модель"), "todo": "ДОСНЯТЬ.md",
            "status_md": "СТАТУС.md", "building": "Здание",
            "done": "**Готово, снимать не нужно.**", "need": "**Снять фасады:**",
-           "note": "**Замечание:**",
+           "note": "**Замечание:**", "invented": "**Придумано, не снято:**",
            "how": "Как снимать: обойти дом на 10–20 м, камера на фасаде, кадр каждые "
                   "1–2 шага (или видео 4K, медленно), второй круг с камерой выше. "
                   "Пасмурно или в тени, без панорам с одной точки.",
@@ -139,8 +139,10 @@ def init(a):
         if not sides:
             continue  # sheds and kiosks
         c = cov.get(str(b["id"]), {})
-        missing = [s for s in SIDES if s in sides and s not in c.get("sides", [])]
-        items.append({**b, "missing": missing, "sides": sides,
+        invented = c.get("invented", [])
+        missing = [s for s in SIDES if s in sides and s not in c.get("sides", [])
+                   and s not in invented]
+        items.append({**b, "missing": missing, "sides": sides, "invented": invented,
                       "status": c.get("status", "none"), "note": c.get("note", "")})
     parts = [p for p in city["buildings"] if p.get("part")]
     made = 0
@@ -164,6 +166,8 @@ def init(a):
         lines = [f"# {b['name'] or L['building']}", b["address"] or "", "",
                  L["done"] if done else L["need"] + " " + ", ".join(
                      f"{T['sides'][s]} ({b['sides'][s]:.0f} {T['m']})" for s in b["missing"]),
+                 f"{L['invented']} " + ", ".join(T["roof"] if s == "roof" else T["sides"].get(s, s)
+                                                 for s in b["invented"]) if b["invented"] else "",
                  f"{L['note']} {b['note']}" if b["note"] else "", "",
                  L["how"], "", L["drop"], "", f"{L['map']}: {osm_link(b['id'])}",
                  "", L["helper"]]

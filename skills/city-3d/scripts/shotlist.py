@@ -7,6 +7,9 @@ coverage.json is kept by the agent between rounds, keyed by OSM id:
   {"1052243741": {"status": "partial", "sides": ["S", "E"],
                   "note": "south facade in shade, reshoot overcast"}}
 status: none | partial | done. "sides" lists facades already covered well.
+"invented" lists sides (and "roof") the user chose not to shoot: they are
+filled in by guess (e.g. the texture of a shot side) and stay marked as
+invented in the building's data, never as shot. They leave the shot list.
 Buildings missing from the file count as "none".
 
 Writes shotlist.md (to read or print) and shotlist.html (a map to carry on a
@@ -34,7 +37,8 @@ TEXT = {
                "a frame every 1–2 steps (or slow 4K video), then a second lap with the camera "
                "higher. Overcast or shade, no panoramas from one spot.",
         "levels": "levels", "m": "m", "need": "Facades to shoot", "note": "Note",
-        "map": "On the map", "facades": "Facades",
+        "map": "On the map", "facades": "Facades", "invented": "Invented, not shot",
+        "roof": "roof",
         "legend": ("not shot", "partly", "done", "north is up"),
     },
     "ru": {
@@ -45,7 +49,8 @@ TEXT = {
                "шаг 1–2 м между кадрами (или видео 4K, медленно). Затем второй круг с камерой "
                "выше. Пасмурная погода или тень, без панорам с одной точки.",
         "levels": "эт.", "m": "м", "need": "Снять фасады", "note": "Замечание",
-        "map": "На карте", "facades": "Фасады",
+        "map": "На карте", "facades": "Фасады", "invented": "Придумано, не снято",
+        "roof": "крыша",
         "legend": ("не снят", "частично", "готов", "север сверху"),
     },
 }
@@ -106,8 +111,10 @@ def main():
         c = cov.get(str(b["id"]), {})
         status = c.get("status", "none")
         sides = facades(b["footprint"])
-        missing = {s: l for s, l in sides.items() if s not in c.get("sides", [])}
-        item = {**b, "status": status, "missing": missing,
+        invented = c.get("invented", [])
+        missing = {s: l for s, l in sides.items()
+                   if s not in c.get("sides", []) and s not in invented}
+        item = {**b, "status": status, "missing": missing, "invented": invented,
                 "note": c.get("note", ""), "sides": sides}
         if not sides:
             tiny += 1  # sheds and kiosks: no facade worth a dedicated shot
@@ -130,6 +137,9 @@ def main():
         need = ", ".join(f"{L['sides'][s]} ({l:.0f} {L['m']})" for s, l in
                          sorted(b["missing"].items(), key=lambda kv: SIDES.index(kv[0])))
         lines.append(f"- {L['need']}: {need}")
+        if b["invented"]:
+            lines.append(f"- {L['invented']}: " + ", ".join(
+                L["roof"] if s == "roof" else L["sides"].get(s, s) for s in b["invented"]))
         if b["note"]:
             lines.append(f"- {L['note']}: {b['note']}")
         lines.append(f"- {L['map']}: https://www.openstreetmap.org/"

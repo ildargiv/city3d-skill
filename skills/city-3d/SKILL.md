@@ -148,6 +148,22 @@ Record the result in `coverage.json`:
 `status` is `none | partial | done`; `sides` lists compass sides already
 covered well (N, NE, E, SE, S, SW, W, NW).
 
+Real or invented. A side is either shot (it is in `sides`) or still to
+shoot, unless the user says they do not want to shoot it (a courtyard behind
+a fence, a wall nobody will see, a roof without a drone). Only then may it be
+filled in by guess, for example with the texture of a shot side of the same
+building, and it goes into `invented`:
+
+```json
+{"1052243741": {"status": "partial", "sides": ["S"], "invented": ["N", "roof"]}}
+```
+
+Never decide this yourself and never fill a side in silently. Invented sides
+leave the shot list, show as "Invented, not shot" in the building's
+TO_SHOOT.md, and `blender_city.py --coverage coverage.json` writes
+`shot_sides` and `invented_sides` onto the building, so every export (glTF
+extras, USD) says which parts of the city are real.
+
 ## 5. Shot list
 
 ```bash

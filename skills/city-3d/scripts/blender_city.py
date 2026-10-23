@@ -89,6 +89,7 @@ def args_after_dashes():
     ap.add_argument("--from-blend", help="re-export an edited city.blend")
     ap.add_argument("--tile", type=float, default=250, help="landscape tile size, metres")
     ap.add_argument("--scans", help="folder of building folders with finished models")
+    ap.add_argument("--coverage", help="coverage.json: mark shot and invented sides on each building")
     ap.add_argument("--usd", action="store_true", help="also write city.usdc")
     ap.add_argument("--no-split", action="store_true",
                     help="skip the per-building .glb files")
@@ -461,6 +462,28 @@ def place_scans(data, root):
     return placed
 
 
+def mark_sources(city_json, coverage):
+    """Write what is real and what is guessed onto each building object:
+    shot_sides, invented_sides (sides or "roof" filled in by guess, at the
+    user's choice), coverage status. They travel into the .glb as extras."""
+    with open(city_json, encoding="utf-8") as f:
+        data = json.load(f)
+    with open(coverage, encoding="utf-8") as f:
+        cov = json.load(f)
+    whole = [b for b in data["buildings"] if not b.get("part")]
+    for b in data["buildings"]:
+        owner = b
+        if b.get("part"):  # parts share the record of the building they stand in
+            owner = next((w for w in whole if point_in((b["x"], b["y"]), w["footprint"])), b)
+        c = cov.get(str(owner["id"]))
+        ob = bpy.data.objects.get(obj_name(b["id"]))
+        if not (c and ob):
+            continue
+        ob["coverage"] = c.get("status", "none")
+        ob["shot_sides"] = ",".join(c.get("sides", []))
+        ob["invented_sides"] = ",".join(c.get("invented", []))
+
+
 def main():
     a = args_after_dashes()
     os.makedirs(os.path.join(a.out, "buildings"), exist_ok=True)
@@ -484,6 +507,8 @@ def main():
             bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(
                 os.path.join(a.out, "city.blend")))
 
+    if a.coverage and a.city_json:
+        mark_sources(a.city_json, a.coverage)
     blds = [o for o in bpy.data.collections["Buildings"].all_objects]
     land = [o for o in bpy.data.collections["Landscape"].all_objects]
     placement = [{"object": o.name, "osm_id": o.get("osm_id"),
