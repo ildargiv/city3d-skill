@@ -16,7 +16,8 @@ Quality and memory:
   error) before the dense step, and dense points need 3 views to survive.
   RefineMesh is off by default: it needs far more RAM than the rest
   (a 4K scene can exhaust 16 GB). --refine turns it on for big machines.
-  Textures are capped at --texture-size (default 4096).
+  Textures are capped at --texture-size (default 4096). Seam leveling is
+  off: with OpenMVS 2.4 it made the texture nearly black.
 
 Georeference (--city city.json plus camera positions):
   With positions for at least 3 frames, the sparse model is moved, turned
@@ -248,8 +249,14 @@ def mesh(colmap, openmvs, images, work, model, refine=False, texture_size=4096):
         meshed = mesh_input("scene_dense_mesh_refine")
     cmd = [t["TextureMesh"], *meshed, "--export-type", "obj", "-o",
            os.path.join(mvs, "scene_textured.mvs"), "-w", mvs]
-    if has_option(t["TextureMesh"], "max-texture-size", "--help"):
+    help_text = subprocess.run([t["TextureMesh"], "--help"], capture_output=True, text=True)
+    help_text = help_text.stdout + help_text.stderr
+    if "max-texture-size" in help_text:
         cmd += ["--max-texture-size", str(texture_size)]
+    # seam leveling turned the atlas almost black with OpenMVS 2.4 on video frames
+    for opt in ("global-seam-leveling", "local-seam-leveling"):
+        if opt in help_text:
+            cmd += [f"--{opt}", "0"]
     run(cmd)
     print(f"\nMESH: {os.path.join(mvs, 'scene_textured.obj')}")
 

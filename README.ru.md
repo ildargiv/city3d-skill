@@ -125,4 +125,5 @@ blender -b -P blender_city.py -- city/city.json --scans дома/ --out build/
 | `house_folders.py` | папка на каждый дом (с `--lang ru`: `фото`, `кадры`, `модель`, `ДОСНЯТЬ.md`) и проверка, куда добавились новые фото |
 | `extract_frames.py` | нарезает видео на резкие кадры |
 | `photogrammetry.py` | собирает модель дома из кадров (COLMAP + OpenMVS) |
+| `odm_split.py` | режет модель с дрона из OpenDroneMap/WebODM на модели отдельных домов |
 

@@ -359,8 +359,10 @@ def find_models(root):
         dirs = [os.path.join(root, d, sub) for sub in MODEL_DIRS]
         files = [os.path.join(p, f) for p in dirs if os.path.isdir(p)
                  for f in os.listdir(p) if f.lower().endswith(MODEL_EXT)]
-        if files:
-            out[int(m.group(1))] = max(files, key=os.path.getmtime)
+        # a walk-round scan beats the drone cut (odm_split.py writes drone.*)
+        own = [f for f in files if not os.path.basename(f).lower().startswith("drone.")]
+        if own or files:
+            out[int(m.group(1))] = max(own or files, key=os.path.getmtime)
     return out
 
 

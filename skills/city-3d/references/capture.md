@@ -36,5 +36,18 @@ from one spot gives a nice picture and no 3D at all.
 ## Roofs
 
 Roofs of tall buildings are not visible from the ground. Use the OSM
-roof shape and colour. Drones need flight permission in Russia (and are
-restricted in city centres); do not plan around them without that.
+roof shape and colour, or fly a drone.
+
+## Drone flights (for OpenDroneMap / WebODM)
+
+Only where flying is allowed: check the local rules first. In Russia a
+flight over a city needs registration and permission, and city centres are
+often closed zones; elsewhere, check the national aviation authority.
+
+- Grid flight for the block: 70–80 % front overlap, 60–70 % side overlap,
+  height 60–100 m, camera tilted 70–80° (not straight down) so facades show.
+- Add a second grid crossing the first, or an orbit round each landmark at
+  2–3 heights with the camera on the building, for walls and towers.
+- Overcast light, fixed exposure, GPS on (drones store it in every photo).
+- Flight apps that plan grids: DJI Pilot 2 / GS Pro, Litchi, Dronelink;
+  WebODM reads their photos directly.

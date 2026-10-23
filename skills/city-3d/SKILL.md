@@ -242,6 +242,25 @@ cloud and needs no GPU.
 Judge the result: registered images vs total, holes, smeared textures. Turn
 what is missing into `coverage.json` entries and go back to step 5.
 
+### From a drone (OpenDroneMap / WebODM)
+
+A drone flight gives what the street cannot: roofs, upper floors, courtyards
+and whole blocks at once, already georeferenced. Process the photos in
+[WebODM](https://github.com/OpenDroneMap/WebODM) (free, runs in Docker; or
+its paid one-click installers) or ODM on the command line, with
+`--auto-boundary` and a textured mesh. Then cut the result into buildings:
+
+```bash
+python3 scripts/odm_split.py <odm project> city/city.json --root "<project>/buildings"
+```
+
+It moves the georeferenced mesh into the city frame and writes
+`model/drone.obj` (+ textures) into every building folder the flight covered
+well, in the `block.obj` frame, without the pavement. Step 7 places them;
+a walk-round scan in the same folder wins over `drone.obj`, so the best
+result is both: the drone for roofs and blocks, the ground for facades.
+Flight rules: `references/capture.md`.
+
 ## 7. Put the scan on the map
 
 1. Clean the mesh (in Blender, or ask the user): delete ground, cars, people

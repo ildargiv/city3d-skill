@@ -141,6 +141,7 @@ Building names come from OSM and stay in Russian.
 | `house_folders.py` | a folder per building (`photos`, `frames`, `model`, `TO_SHOOT.md`) and a check for newly added photos |
 | `extract_frames.py` | cuts video into sharp frames |
 | `photogrammetry.py` | builds a building model from frames (COLMAP + OpenMVS) |
+| `odm_split.py` | cuts a drone model from OpenDroneMap/WebODM into one model per building |
 
 ## Licence
 
