@@ -194,15 +194,25 @@ def osm_url(i):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("input")
+    ap.add_argument("input", nargs="+",
+                    help="one or more .osm/.json files; pieces of a big area are merged")
     ap.add_argument("--lat", type=float)
     ap.add_argument("--lon", type=float)
-    ap.add_argument("--radius", type=float, default=300, help="metres")
+    ap.add_argument("--radius", type=float, default=300,
+                    help="metres; 0 keeps everything in the files (a box export)")
     ap.add_argument("--out", default="out")
     ap.add_argument("--name", default="")
     args = ap.parse_args()
 
-    nodes, ways, points = load(args.input)
+    nodes, ways, points = {}, {}, []
+    for path in args.input:
+        n, w, p = load(path)
+        nodes.update(n)
+        for way in w:  # the same way can sit in two overlapping exports
+            ways[way[0]] = way
+        points += p
+    ways = list(ways.values())
+    points = list({(la, lo): (la, lo, t) for la, lo, t in points}.values())
     if args.lat is None or args.lon is None:
         lats = [p[0] for p in nodes.values()]
         lons = [p[1] for p in nodes.values()]
@@ -220,7 +230,7 @@ def main():
         if tags.get("natural") != "tree":
             continue
         x, y = (lon - args.lon) * k_lon, (lat - args.lat) * k_lat
-        if math.hypot(x, y) <= args.radius:
+        if not args.radius or math.hypot(x, y) <= args.radius:
             trees.append({"x": round(x, 2), "y": round(y, 2),
                           "height": num(tags.get("height")) or 8.0})
     for wid, refs, tags in ways:
@@ -230,7 +240,7 @@ def main():
         closed = refs[0] == refs[-1] and len(refs) >= 4
         cx = sum(p[0] for p in pts) / len(pts)
         cy = sum(p[1] for p in pts) / len(pts)
-        if math.hypot(cx, cy) > args.radius:
+        if args.radius and math.hypot(cx, cy) > args.radius:
             continue
         rounded = [[round(x, 2), round(y, 2)] for x, y in pts]
         if closed and ("building" in tags or "building:part" in tags):
@@ -295,7 +305,8 @@ def main():
 
     with open(os.path.join(args.out, "city.json"), "w", encoding="utf-8") as f:
         json.dump({"name": args.name, "center": [args.lat, args.lon],
-                   "radius": args.radius,
+                   # box exports: the extent of what was kept
+                   "radius": args.radius or max([b["dist_m"] for b in buildings] + [50]) + 30,
                    "attribution": "© OpenStreetMap contributors (ODbL)",
                    "buildings": buildings, "roads": roads, "areas": areas,
                    "trees": trees},

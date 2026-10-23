@@ -62,6 +62,12 @@ pieces are drawn by their parts. Missing levels default to 3 (house: 2) and
 are flagged `levels_known=False`: ask the user to confirm those from their
 photos.
 
+For an area between landmarks (for example "from one tower to the other"),
+export a box that covers both with a margin, pass `--radius 0` to keep
+everything in it, and put the centre between the landmarks. A big area that
+openstreetmap.org refuses to export in one go can be exported in pieces and
+passed together: `osm2city.py part1.osm part2.osm ...` merges them.
+
 Show it: copy `scripts/preview.html` next to `city.json` and open or publish
 it. It has a Realistic / Cartoon switch and a card per building.
 
