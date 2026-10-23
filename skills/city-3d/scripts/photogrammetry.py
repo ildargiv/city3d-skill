@@ -232,14 +232,21 @@ def mesh(colmap, openmvs, images, work, model, refine=False, texture_size=4096):
         if has_option(t["DensifyPointCloud"], "min-views-fuse", "--help"):
             cmd += ["--min-views-fuse", "3"]
         run(cmd)
-    meshed = os.path.join(mvs, "scene_dense_mesh.mvs")
-    if not done("scene_dense_mesh.mvs"):
+    def mesh_input(stem):
+        """OpenMVS 2.x writes only <stem>.ply; older versions also <stem>.mvs."""
+        if done(stem + ".mvs"):
+            return [os.path.join(mvs, stem + ".mvs")]
+        return [os.path.join(mvs, "scene_dense.mvs"), "-m", os.path.join(mvs, stem + ".ply")]
+
+    if not (done("scene_dense_mesh.mvs") or done("scene_dense_mesh.ply")):
         run([t["ReconstructMesh"], os.path.join(mvs, "scene_dense.mvs"), "-w", mvs])
+    meshed = mesh_input("scene_dense_mesh")
     if refine and t["RefineMesh"]:
-        if not done("scene_dense_mesh_refine.mvs"):
-            run([t["RefineMesh"], meshed, "--resolution-level", "2", "-w", mvs])
-        meshed = os.path.join(mvs, "scene_dense_mesh_refine.mvs")
-    cmd = [t["TextureMesh"], meshed, "--export-type", "obj", "-o",
+        if not (done("scene_dense_mesh_refine.mvs") or done("scene_dense_mesh_refine.ply")):
+            run([t["RefineMesh"], *meshed, "--resolution-level", "2", "-o",
+                 os.path.join(mvs, "scene_dense_mesh_refine.mvs"), "-w", mvs])
+        meshed = mesh_input("scene_dense_mesh_refine")
+    cmd = [t["TextureMesh"], *meshed, "--export-type", "obj", "-o",
            os.path.join(mvs, "scene_textured.mvs"), "-w", mvs]
     if has_option(t["TextureMesh"], "max-texture-size", "--help"):
         cmd += ["--max-texture-size", str(texture_size)]
