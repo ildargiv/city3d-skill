@@ -210,6 +210,16 @@ textures, rough PBR. `toon`: a bright palette per building, flat roofs in
 one colour, cel-shading in the engine. Keep both exports in sync from the
 same `city.blend`.
 
+## Working on one building
+
+The user can point at a single building folder ("improve the building in
+`.../buildings/116 ... [898107550]`"). Then touch only that building: the
+OSM id in brackets names it in `city.json`, the city folder is two levels
+up (or ask). Run steps 6–7 for its `photos/` and `frames/` only, write the
+result to its `model/`, update its `coverage.json` entry and re-run `init`.
+Do not rebuild the district, re-read other folders or re-export other
+buildings.
+
 ## Keeping it cheap: which model does what
 
 Heavy lifting (OSM, Blender, ffmpeg, COLMAP, OpenMVS) is done by programs on
