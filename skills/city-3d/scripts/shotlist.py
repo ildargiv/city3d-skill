@@ -29,7 +29,7 @@ TEXT = {
     "en": {
         "sides": SIDE_EN, "status": {"none": "not shot", "partial": "partly shot", "done": "done"},
         "title": "Shot list", "district": "district", "building": "Building",
-        "summary": "To shoot: {n} buildings. Done: {d}. Small structures without their own shoot: {t}.",
+        "summary": "To shoot: {n} buildings, {p} of them partly shot. Done: {d}. Small structures without their own shoot: {t}.",
         "how": "How to shoot: walk round the building 10–20 m away, camera on the facade, "
                "a frame every 1–2 steps (or slow 4K video), then a second lap with the camera "
                "higher. Overcast or shade, no panoramas from one spot.",
@@ -40,7 +40,7 @@ TEXT = {
     "ru": {
         "sides": SIDE_RU, "status": STATUS_RU,
         "title": "Список съёмки", "district": "район", "building": "Здание",
-        "summary": "Нужно снять: {n} зданий. Готово: {d}. Мелких построек без отдельной съёмки: {t}.",
+        "summary": "Нужно снять: {n} зданий, из них частично снято {p}. Готово: {d}. Мелких построек без отдельной съёмки: {t}.",
         "how": "Как снимать: обойти дом на расстоянии 10–20 м, камера всё время на фасаде, "
                "шаг 1–2 м между кадрами (или видео 4K, медленно). Затем второй круг с камерой "
                "выше. Пасмурная погода или тень, без панорам с одной точки.",
@@ -118,7 +118,7 @@ def main():
     os.makedirs(args.out, exist_ok=True)
 
     lines = [f"# {L['title']}: {city.get('name') or L['district']}", "",
-             L["summary"].format(n=len(route), d=len(done), t=tiny), "", L["how"], ""]
+             L["summary"].format(n=len(route), p=sum(b["status"] == "partial" for b in route), d=len(done), t=tiny), "", L["how"], ""]
     for i, b in enumerate(route, 1):
         title = b["name"] or b["address"] or f"{L['building']} {b['id']}"
         lines.append(f"## {i}. {title}")

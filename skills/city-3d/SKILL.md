@@ -99,8 +99,13 @@ For each folder of photos or video the user points to:
   `buildings.csv` names, addresses, colours and shapes), which sides, and
   quality (blur, sun glare, people, distance).
 - Classify honestly: *walk-around* (usable for 3D), *one facade while
-  moving* (facade relief and texture), *panorama from one spot* or *far
-  view* (reference only, no 3D).
+  moving* (facade relief and texture), *corridor* (driving or walking along
+  a street 40–70 m from the houses: texture only), *panorama from one spot*
+  or *far view* (reference only, no 3D).
+- A corridor clip gives one long strip of facades, not separate buildings.
+  Run it through photogrammetry at most once, as a test of the tools; do
+  not try to cut building models out of it. Building models come from a
+  walk round each building (step 5).
 
 Record the result in `coverage.json`:
 
@@ -160,13 +165,32 @@ Video → sharp frames:
 python3 scripts/extract_frames.py clip.mp4 --fps 3 --out frames/
 ```
 
-Frames or photos → model. Check the capture first with the sparse stage; it
-runs on CPU in minutes:
+If the clip has GPS (a DJI `.SRT` next to it, or samples exiftool can read),
+this also writes `frames/<clip>_gps.txt`. Many gimbal cameras record none;
+phone photos usually carry GPS in EXIF.
+
+Frames or photos → model, one building per work folder (`work/<osm id>`).
+Use the building's own `photos/` and `frames/`; frames shared with a
+neighbour are fine, but drop frames where the building is not the main
+subject. Check the capture first with the sparse stage; it runs on CPU in
+minutes:
 
 ```bash
-python3 scripts/photogrammetry.py frames/clip --work work/house35 --stage sparse --colmap <folder>
-python3 scripts/photogrammetry.py frames/clip --work work/house35 --stage mesh --colmap <folder> --openmvs <folder>
+python3 scripts/photogrammetry.py <building>/frames --work work/<osm id> --stage sparse --colmap <folder> --city city/city.json [--gps frames/<clip>_gps.txt]
+python3 scripts/photogrammetry.py <building>/frames --work work/<osm id> --stage mesh --colmap <folder> --openmvs <folder>
 ```
+
+- Loose points are filtered after mapping and dense points need 3 views, so
+  floating junk does not reach the mesh.
+- With `--city` and GPS for at least 3 images, the model is put into the
+  city frame (metres, oriented, in place); without GPS it is aligned to
+  `block.obj` in step 7.
+- RefineMesh is off by default: on a 16 GB laptop it can run out of memory.
+  Add `--refine` only on a big machine. Textures are capped at 4096 px.
+- Raw photos (DNG etc.) are converted to JPG in the work folder (needs
+  `pip install rawpy imageio`); originals are untouched.
+- An interrupted mesh stage continues where it stopped. Always run the dense
+  steps through the script, not by hand.
 
 Tools on the user's machine. Claude Code's safety checks usually block an
 agent from downloading and running third-party programs, even after the user
