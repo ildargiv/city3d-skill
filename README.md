@@ -1,6 +1,6 @@
 # city3d: a real city in 3D
 
-**English** · [Русский](README.ru.md)
+**English** · [Русский](README.ru.md) · [Live demo](https://ildargiv.github.io/city3d-skill/examples/yoshkar-ola/)
 
 A Claude Code skill that builds a real city in 3D: a universal, realistic
 map that other projects are built on. Every building is a separate model

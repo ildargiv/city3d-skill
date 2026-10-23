@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A universal realistic 3D map of a real city from OpenStreetMap and your own photos/video: one model per building, one growable landscape, a base for games, films, animation and guided tours; export to Blender, USD, Unreal/Godot/Unity.",
   "author": { "name": "ildargiv", "url": "https://github.com/ildargiv" },
-  "homepage": "https://github.com/ildargiv/city3d-skill",
+  "homepage": "https://ildargiv.github.io/city3d-skill/examples/yoshkar-ola/",
   "repository": "https://github.com/ildargiv/city3d-skill",
   "license": "MIT",
   "keywords": ["3d", "city", "openstreetmap", "blender", "photogrammetry", "unreal", "gamedev", "film", "digital-twin"]
