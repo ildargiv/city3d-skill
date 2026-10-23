@@ -7,6 +7,13 @@ map that other projects are built on. Every building is a separate model
 standing on its own footprint and knows its name and address; the
 landscape is shared and grows tile by tile as the map gets bigger.
 
+<p align="center">
+  <img src="docs/centre_real.png" width="49%" alt="Yoshkar-Ola centre: realistic 3D map built from OpenStreetMap">
+  <img src="docs/centre_toon.png" width="49%" alt="The same district restyled as a cartoon">
+</p>
+
+<p align="center"><sub>Yoshkar-Ola centre: 202 buildings, 153 with levels, 592 roads — built from OpenStreetMap.<br>The same map on the right is restyled, not rebuilt.</sub></p>
+
 On top of one map you can make many things:
 - games (Unreal, Godot, Unity);
 - films and animation (USD for Blender, Houdini, Omniverse, Unreal);
@@ -19,9 +26,6 @@ from it, not in it.
 The base comes from open OpenStreetMap data. The quality comes from your own
 photos and video: the agent builds everything it can, then tells you which
 buildings to shoot and from which sides.
-
-![Yoshkar-Ola centre, realistic style](docs/centre_real.png)
-![The same district, cartoon style](docs/centre_toon.png)
 
 ## How it works
 
