@@ -51,6 +51,12 @@
 - ffmpeg (для видео)
 - COLMAP и OpenMVS для сборки моделей из кадров. Обе программы работают без
   NVIDIA, но медленно. С видеокартой NVIDIA лучше взять RealityScan.
+  Скачайте их сами и распакуйте, установка не нужна:
+  [COLMAP](https://github.com/colmap/colmap/releases) (`colmap-x64-windows-nocuda.zip`)
+  в `Программы\colmap` и
+  [OpenMVS](https://github.com/cdcseacave/openMVS/releases) (`OpenMVS_Windows_x64.zip`)
+  в `Программы\openmvs`. Агенту обычно не разрешено качать и запускать
+  сторонние программы самому.
 
 ## Экономия: какая модель что делает
 

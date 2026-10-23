@@ -163,8 +163,19 @@ python3 scripts/photogrammetry.py frames/clip --work work/house35 --stage sparse
 python3 scripts/photogrammetry.py frames/clip --work work/house35 --stage mesh --colmap <folder> --openmvs <folder>
 ```
 
-Ask before downloading COLMAP or OpenMVS onto the user's machine (name the
-file, size and folder). With an NVIDIA card, RealityScan gives better meshes
+Tools on the user's machine. Claude Code's safety checks usually block an
+agent from downloading and running third-party programs, even after the user
+says yes, so give the user the direct links and the target folder and let
+them unpack it themselves:
+
+| Tool | Download | Unpack to (Windows example) |
+|---|---|---|
+| COLMAP, no CUDA | https://github.com/colmap/colmap/releases (`colmap-x64-windows-nocuda.zip`, ~120 MB) | `Desktop\Программы\colmap` |
+| OpenMVS | https://github.com/cdcseacave/openMVS/releases (`OpenMVS_Windows_x64.zip`, ~22 MB) | `Desktop\Программы\openmvs` |
+
+Then pass `--colmap <folder> --openmvs <folder>` to `photogrammetry.py`. If
+the user prefers the agent to run them, they add an allow rule in Claude
+Code (`/permissions`) for that folder. With an NVIDIA card, RealityScan gives better meshes
 and can replace this step; the RealityScan phone app computes in Epic's
 cloud and needs no GPU.
 
