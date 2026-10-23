@@ -127,6 +127,8 @@ def main():
     if not colmap:
         sys.exit("COLMAP not found. Download it from "
                  "https://github.com/colmap/colmap/releases and pass --colmap <folder>.")
+    # OpenMVS runs inside <work>/mvs, so relative paths would break
+    a.work, a.images = os.path.abspath(a.work), os.path.abspath(a.images)
     os.makedirs(a.work, exist_ok=True)
     model = os.path.join(a.work, "sparse", "0")
     if a.stage == "sparse" or not os.path.isdir(model):

@@ -1,109 +1,432 @@
 id,name,address,type,part,has_parts,levels,height,base,levels_known,roof,colour,material,area_m2,dist_m,x,y,osm_url
-1052243741,Республиканский театр кукол,Царьградский проспект 35,yes,False,True,3,10.0,0.0,True,flat,#a3331e,,2101.7,0,-0.0,-0.0,https://www.openstreetmap.org/way/1052243741
-1052243752,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,13.0,0.0,True,flat,#a3331e,,58.4,10,-10.1,-0.3,https://www.openstreetmap.org/way/1052243752
-1052243753,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,28.0,12.0,True,flat,#a3331e,,29.5,11,-11.0,0.7,https://www.openstreetmap.org/way/1052243753
-1052243754,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,37.0,15.0,True,pyramidal,#a3331e,,17.1,11,-10.7,0.7,https://www.openstreetmap.org/way/1052243754
-1052243760,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,pyramidal,#a3331e,,13.9,12,-2.7,11.4,https://www.openstreetmap.org/way/1052243760
-1052243758,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,flat,#a3331e,,16.1,15,-0.5,15.0,https://www.openstreetmap.org/way/1052243758
-1052243747,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,13.0,0.0,True,pyramidal,#a3331e,,18.8,16,-14.4,-6.3,https://www.openstreetmap.org/way/1052243747
-1052243742,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,16.0,0.0,True,pyramidal,#a3331e,,13.8,19,-10.6,-16.4,https://www.openstreetmap.org/way/1052243742
-1052243761,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,pyramidal,#a3331e,,15.7,19,18.9,3.7,https://www.openstreetmap.org/way/1052243761
-1052386738,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,22.0,9.0,True,flat,#C0C0C0,,8.9,20,-2.5,-20.0,https://www.openstreetmap.org/way/1052386738
-1052386739,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,13.0,0.0,True,flat,#ffffff,,0.2,20,-5.0,-19.3,https://www.openstreetmap.org/way/1052386739
-1052386741,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,25.6,12.0,True,flat,#ffffff,,0.2,20,-4.7,-19.5,https://www.openstreetmap.org/way/1052386741
-1052386742,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,26.8,12.6,True,flat,#ffffff,,0.2,20,-4.2,-19.6,https://www.openstreetmap.org/way/1052386742
-1052386743,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,28.0,13.2,True,flat,#ffffff,,0.2,20,-3.7,-19.8,https://www.openstreetmap.org/way/1052386743
-1052386744,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,29.2,13.8,True,flat,#ffffff,,0.2,20,-3.3,-20.0,https://www.openstreetmap.org/way/1052386744
-1052386750,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,30.4,14.4,True,flat,#ffffff,,0.2,20,-2.8,-20.2,https://www.openstreetmap.org/way/1052386750
-1052983719,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,3,10.0,0.0,False,flat,#a3331e,,8.9,20,-2.5,-20.0,https://www.openstreetmap.org/way/1052983719
-1052243757,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,gabled,#a3331e,,241.7,21,10.4,18.6,https://www.openstreetmap.org/way/1052243757
-1052243759,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,flat,#a3331e,,13.8,21,19.6,7.7,https://www.openstreetmap.org/way/1052243759
-1052243763,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,2,14.5,6.0,True,flat,#ffffff,,11.9,21,-2.5,-20.4,https://www.openstreetmap.org/way/1052243763
-1052386737,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,2,16.8,7.5,True,flat,#ffffff,,3.3,21,-2.5,-20.8,https://www.openstreetmap.org/way/1052386737
-1052386745,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,25.6,12.0,True,flat,#ffffff,,0.2,21,0.4,-21.4,https://www.openstreetmap.org/way/1052386745
-1052386746,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,26.8,12.6,True,flat,#ffffff,,0.2,21,-0.1,-21.2,https://www.openstreetmap.org/way/1052386746
-1052386747,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,28.0,13.2,True,flat,#ffffff,,0.2,21,-0.6,-21.1,https://www.openstreetmap.org/way/1052386747
-1052386748,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,29.2,13.8,True,flat,#ffffff,,0.2,21,-1.1,-20.9,https://www.openstreetmap.org/way/1052386748
-1052386749,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,30.4,14.4,True,flat,#ffffff,,0.2,21,-1.5,-20.7,https://www.openstreetmap.org/way/1052386749
-1052386751,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,31.6,15.0,True,flat,#ffffff,,0.3,21,-2.2,-20.4,https://www.openstreetmap.org/way/1052386751
-1052243762,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,1,3.5,0.0,True,flat,#ffffff,,40.0,22,-2.9,-21.4,https://www.openstreetmap.org/way/1052243762
-1052386736,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,1,7.8,3.0,True,flat,#ffffff,,7.8,22,-3.0,-22.1,https://www.openstreetmap.org/way/1052386736
-1052386740,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,13.0,0.0,True,flat,#ffffff,,0.2,22,0.8,-21.6,https://www.openstreetmap.org/way/1052386740
-1052243743,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,16.0,0.0,True,pyramidal,#a3331e,,16.5,23,6.1,-22.1,https://www.openstreetmap.org/way/1052243743
-1052243744,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,19.0,0.0,True,pyramidal,#a3331e,,11.1,23,-11.1,20.6,https://www.openstreetmap.org/way/1052243744
-1052243749,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,8,43.0,18.0,True,pyramidal,#a3331e,,42.9,23,18.5,-13.6,https://www.openstreetmap.org/way/1052243749
-1052243748,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,22.0,0.0,True,flat,#a3331e,,72.7,24,18.8,-14.3,https://www.openstreetmap.org/way/1052243748
-1052243764,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,pyramidal,#a3331e,,5.4,28,2.8,27.7,https://www.openstreetmap.org/way/1052243764
-1052243756,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,19.0,0.0,True,pyramidal,#a3331e,,27.5,31,29.9,7.1,https://www.openstreetmap.org/way/1052243756
-1052243765,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,pyramidal,#a3331e,,5.3,32,25.1,19.6,https://www.openstreetmap.org/way/1052243765
-1052243745,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,19.0,0.0,True,flat,#a3331e,,32.9,36,1.0,35.7,https://www.openstreetmap.org/way/1052243745
-1052243751,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,34.0,15.0,True,pyramidal,#a3331e,,16.8,36,0.2,36.4,https://www.openstreetmap.org/way/1052243751
-1052243746,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,19.0,0.0,True,flat,#a3331e,,25.6,40,30.3,25.4,https://www.openstreetmap.org/way/1052243746
-1052243750,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,34.0,15.0,True,pyramidal,#a3331e,,11.6,40,30.8,25.2,https://www.openstreetmap.org/way/1052243750
-220442687,Часовня святых Петра и Февроньи Муромских,,chapel,False,True,6,10.0,0.0,True,cone,,,57.7,57,-43.3,-37.8,https://www.openstreetmap.org/way/220442687
-372584153,,Царьградский проспект 33,commercial,False,False,2,7.0,0.0,True,flat,,,354.7,57,56.0,-8.9,https://www.openstreetmap.org/way/372584153
-1044758923,Часовня святых Петра и Февроньи Муромских,,yes,True,False,3,10.0,0.0,True,flat,#a3331e,,57.7,57,-43.3,-37.8,https://www.openstreetmap.org/way/1044758923
-1044758924,Часовня святых Петра и Февроньи Муромских,,yes,True,False,4,22.0,9.0,True,pyramidal,#a3331e,,33.9,58,-42.6,-38.8,https://www.openstreetmap.org/way/1044758924
-1044758925,Часовня святых Петра и Февроньи Муромских,,roof,True,False,6,37.0,18.0,True,onion,,,2.2,58,-42.7,-38.7,https://www.openstreetmap.org/way/1044758925
-1081002713,,,yes,False,True,1,3.5,0.0,True,flat,#a3331e,,80.9,80,59.2,53.9,https://www.openstreetmap.org/way/1081002713
-1081002714,,,yes,True,False,2,7.0,0.0,True,flat,#a3331e,,49.7,81,58.9,55.3,https://www.openstreetmap.org/way/1081002714
-1051660897,,Царьградский проспект 37,yes,True,False,2,7.0,0.0,True,flat,#ec8859,,3102.6,102,-85.9,54.3,https://www.openstreetmap.org/way/1051660897
-1052618179,,Царьградский проспект 37,yes,True,False,4,25.0,10.5,True,pyramidal,#ec8859,,4.1,106,-101.5,30.0,https://www.openstreetmap.org/way/1052618179
-1051660896,,Царьградский проспект 37,yes,True,False,5,16.0,0.0,True,flat,#ec8859,,37.8,107,-105.0,19.3,https://www.openstreetmap.org/way/1051660896
-1052983721,,Царьградский проспект 37,yes,True,False,5,16.0,0.0,True,pyramidal,#ec8859,,22.0,107,-105.2,19.1,https://www.openstreetmap.org/way/1052983721
-1051660899,,Царьградский проспект 37,retail,False,True,6,19.0,0.0,True,flat,#ec8859,,4776.2,108,-101.4,38.6,https://www.openstreetmap.org/way/1051660899
-1052618180,,Царьградский проспект 37,yes,True,False,4,25.0,10.5,True,pyramidal,#ec8859,,3.4,112,-109.6,24.1,https://www.openstreetmap.org/way/1052618180
-1052618176,,Царьградский проспект 37,yes,True,False,4,13.0,0.0,True,flat,#ec8859,,96.2,113,-109.3,29.2,https://www.openstreetmap.org/way/1052618176
-1052618177,,Царьградский проспект 37,yes,True,False,4,24.5,11.6,True,pyramidal,#ec8859,,66.4,114,-109.6,31.0,https://www.openstreetmap.org/way/1052618177
-1052618178,,Царьградский проспект 37,yes,True,False,4,25.0,10.5,True,pyramidal,#ec8859,,4.2,114,-107.1,37.6,https://www.openstreetmap.org/way/1052618178
-1051660898,,Царьградский проспект 37,yes,True,False,3,10.0,0.0,True,flat,#ec8859,,1647.1,116,-111.0,35.5,https://www.openstreetmap.org/way/1051660898
-1052618174,,Царьградский проспект 37,yes,True,False,2,13.5,6.0,True,flat,#ffffff,,26.5,116,-112.9,27.9,https://www.openstreetmap.org/way/1052618174
-1052618175,,Царьградский проспект 37,yes,True,False,3,19.5,9.0,True,flat,#ffffff,,26.6,116,-113.0,27.8,https://www.openstreetmap.org/way/1052618175
-1052618181,,Царьградский проспект 37,yes,True,False,4,25.0,10.5,True,pyramidal,#ec8859,,4.4,120,-115.4,31.6,https://www.openstreetmap.org/way/1052618181
-1052618173,,Царьградский проспект 37,yes,True,False,7,22.0,0.0,True,flat,#ec8859,,37.8,129,-121.8,41.4,https://www.openstreetmap.org/way/1052618173
-1052983720,,Царьградский проспект 37,yes,True,False,7,22.0,0.0,True,pyramidal,#ec8859,,20.0,129,-122.1,41.7,https://www.openstreetmap.org/way/1052983720
-1347755459,Информационно-туристический центр,,yes,False,False,3,10.0,0.0,False,flat,,,97.7,154,-146.7,48.5,https://www.openstreetmap.org/way/1347755459
-671100147,,,yes,False,True,1,3.5,0.0,True,flat,#a3331e,,82.8,166,-113.0,121.4,https://www.openstreetmap.org/way/671100147
-1051660894,,,yes,True,False,2,7.0,0.0,True,flat,#a3331e,,43.9,166,-112.1,122.9,https://www.openstreetmap.org/way/1051660894
-1051660895,,,yes,True,False,3,10.0,0.0,True,pyramidal,#a3331e,,24.3,166,-112.1,122.6,https://www.openstreetmap.org/way/1051660895
--837435400,,набережная Брюгге 1,school,False,False,3,10.0,0.0,True,flat,,,5835.0,166,162.8,-32.8,https://www.openstreetmap.org/relation/8374354
-1393042974,,,yes,False,False,3,10.0,0.0,False,flat,,,32.4,169,-128.3,110.7,https://www.openstreetmap.org/way/1393042974
-87197248,,,yes,False,False,3,10.0,0.0,False,flat,,,128.3,170,107.0,131.8,https://www.openstreetmap.org/way/87197248
-87197240,,2,yes,False,False,3,10.0,0.0,False,flat,,,144.9,178,21.1,177.0,https://www.openstreetmap.org/way/87197240
-87197197,,4,yes,False,False,3,10.0,0.0,False,flat,,,127.7,194,31.9,191.9,https://www.openstreetmap.org/way/87197197
-450835357,,1А,yes,False,False,3,10.0,0.0,False,flat,,,80.3,203,-73.4,189.4,https://www.openstreetmap.org/way/450835357
-87197231,,6А,yes,False,False,3,10.0,0.0,False,flat,,,78.1,204,72.8,190.2,https://www.openstreetmap.org/way/87197231
-32373870,,,yes,False,False,3,10.0,0.0,False,flat,,,254.1,205,163.4,123.4,https://www.openstreetmap.org/way/32373870
-450835356,,6,yes,False,False,3,10.0,0.0,False,flat,,,157.6,210,34.7,207.2,https://www.openstreetmap.org/way/450835356
--837434600,,набережная Брюгге 2,office,False,False,4,13.0,0.0,True,flat,,,512.2,219,168.7,-140.0,https://www.openstreetmap.org/relation/8374346
--837434700,,набережная Брюгге 2,office,False,True,4,13.0,0.0,True,flat,,,923.8,240,153.0,-184.9,https://www.openstreetmap.org/relation/8374347
-1052009941,,набережная Брюгге 2,yes,True,False,4,13.0,0.0,True,flat,,,500.6,251,148.1,-202.1,https://www.openstreetmap.org/way/1052009941
-1031655020,ЦСК картинг,Царьградский проспект 36,garage,False,False,1,3.5,0.0,True,flat,,,145.0,258,216.9,139.6,https://www.openstreetmap.org/way/1031655020
-1067702208,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,0.6,273,253.7,101.9,https://www.openstreetmap.org/way/1067702208
--1422878000,,,yes,True,False,1,5.0,0.0,True,flat,#a3331e,,22.2,273,252.1,105.7,https://www.openstreetmap.org/relation/14228780
-1067702196,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,9.0,275,254.2,103.9,https://www.openstreetmap.org/way/1067702196
-1067702195,,,yes,True,False,3,10.0,9.0,True,flat,#a3331e,,82.2,279,259.1,102.2,https://www.openstreetmap.org/way/1067702195
--1422878100,,,yes,False,True,5,15.0,0.0,True,flat,#a3331e,,126.9,279,259.4,102.5,https://www.openstreetmap.org/relation/14228781
--942322100,,,yes,False,False,2,6.0,0.0,True,pyramidal,#ec8859,brick,12.2,293,-287.9,-51.6,https://www.openstreetmap.org/relation/9423221
--937981104,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,42.2,300,-291.5,70.3,https://www.openstreetmap.org/relation/9379811
--942322700,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,61.7,300,-298.9,-24.6,https://www.openstreetmap.org/relation/9423227
--937981200,,,yes,False,False,3,10.0,0.0,True,pyramidal,#ec8859,brick,12.5,301,-298.7,40.7,https://www.openstreetmap.org/relation/9379812
--937981201,,,yes,False,False,3,10.0,0.0,True,pyramidal,#ec8859,brick,16.1,301,-283.5,100.2,https://www.openstreetmap.org/relation/9379812
--942322701,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,67.5,301,-292.7,-69.9,https://www.openstreetmap.org/relation/9423227
-898107550,,Воскресенский проспект 9Б,commercial,False,False,3,10.0,0.0,True,flat,,,736.0,302,254.7,-162.3,https://www.openstreetmap.org/way/898107550
--937981103,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,12.8,302,-279.9,113.8,https://www.openstreetmap.org/relation/9379811
--937981202,,,yes,False,False,3,10.0,0.0,True,pyramidal,#ec8859,brick,12.5,302,-277.5,120.0,https://www.openstreetmap.org/relation/9379812
-678703074,,,yes,False,False,2,5.0,0.0,True,flat,#ec8859,brick,32.0,304,-303.0,-27.8,https://www.openstreetmap.org/way/678703074
--942322201,,,yes,False,False,2,6.0,0.0,True,pyramidal,#ec8859,brick,10.5,304,-304.0,-10.7,https://www.openstreetmap.org/relation/9423222
--942322802,,,wall,False,False,1,3.0,0.0,True,flat,#ec8859,brick,35.0,304,-304.1,1.3,https://www.openstreetmap.org/relation/9423228
--937981102,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,17.6,305,-274.2,133.9,https://www.openstreetmap.org/relation/9379811
--942322200,,,yes,False,False,2,6.0,0.0,True,pyramidal,#ec8859,brick,43.5,305,-304.4,19.0,https://www.openstreetmap.org/relation/9423222
--937981203,,,yes,False,False,3,10.0,0.0,True,pyramidal,#ec8859,brick,16.1,308,-270.3,147.3,https://www.openstreetmap.org/relation/9379812
--942322801,,,wall,False,False,1,3.0,0.0,True,flat,#ec8859,brick,12.7,313,-311.6,24.6,https://www.openstreetmap.org/relation/9423228
--937981101,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,26.6,314,-263.2,171.5,https://www.openstreetmap.org/relation/9379811
-90606527,,,yes,False,False,3,10.0,0.0,False,flat,,,107.3,315,-294.9,110.1,https://www.openstreetmap.org/way/90606527
--942322000,,,yes,False,False,6,18.0,0.0,True,pyramidal,#ec8859,brick,56.1,316,-299.6,-98.9,https://www.openstreetmap.org/relation/9423220
-898107549,,Воскресенский проспект 9В,yes,False,False,3,10.0,0.0,True,flat,,,468.3,317,236.6,-211.7,https://www.openstreetmap.org/way/898107549
--942321900,,,yes,False,False,7,20.0,0.0,True,pyramidal,#ec8859,brick,9.9,317,-303.7,-91.8,https://www.openstreetmap.org/relation/9423219
--942321800,,,yes,False,False,5,16.0,0.0,True,gabled,#ec8859,brick,21.3,318,-303.4,-96.2,https://www.openstreetmap.org/relation/9423218
--937981204,,,yes,False,False,3,10.0,0.0,True,pyramidal,#ec8859,brick,12.5,320,-258.5,188.1,https://www.openstreetmap.org/relation/9379812
+1359212521,Сувениры,,commercial,False,False,3,10.0,0.0,False,flat,,,31.5,84,-82.8,-16.1,https://www.openstreetmap.org/way/1359212521
+1053099604,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,3,10.0,0.0,True,dome,#ec8859,,69.4,143,-124.1,-71.8,https://www.openstreetmap.org/way/1053099604
+1064018653,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,143,-133.8,-50.3,https://www.openstreetmap.org/way/1064018653
+1064018659,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,143,-133.2,-52.0,https://www.openstreetmap.org/way/1064018659
+1064018652,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,144,-133.3,-53.8,https://www.openstreetmap.org/way/1064018652
+1064018660,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,144,-135.3,-49.1,https://www.openstreetmap.org/way/1064018660
+1064018654,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,145,-137.0,-48.8,https://www.openstreetmap.org/way/1064018654
+1064018658,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,145,-134.5,-55.2,https://www.openstreetmap.org/way/1064018658
+1053099617,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,5,28.0,12.0,True,flat,#ec8859,,81.3,146,-136.6,-52.6,https://www.openstreetmap.org/way/1053099617
+1053443266,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,8,43.0,18.0,True,flat,#ec8859,,58.4,146,-136.6,-52.6,https://www.openstreetmap.org/way/1053443266
+1062856600,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,roof,True,False,8,25.0,0.0,True,onion,#ec8859,,34.1,146,-136.7,-52.2,https://www.openstreetmap.org/way/1062856600
+1064018651,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,147,-136.1,-56.0,https://www.openstreetmap.org/way/1064018651
+1064018661,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,148,-139.0,-49.6,https://www.openstreetmap.org/way/1064018661
+1053099605,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,4,13.0,0.0,True,dome,#ec8859,,144.5,149,-124.6,-81.9,https://www.openstreetmap.org/way/1053099605
+1064018655,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,149,-140.2,-51.2,https://www.openstreetmap.org/way/1064018655
+1064018657,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,149,-137.8,-55.9,https://www.openstreetmap.org/way/1064018657
+1077926483,,площадь Никонова 1А,tower,True,False,5,16.0,0.0,True,flat,#ec8859,,15.0,149,-137.5,57.5,https://www.openstreetmap.org/way/1077926483
+1053099598,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,4,13.0,0.0,True,flat,#ec8859,,168.0,150,-139.4,-55.6,https://www.openstreetmap.org/way/1053099598
+1053099611,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,9,43.0,15.0,True,onion,#ec8859,,26.7,150,-133.2,-69.5,https://www.openstreetmap.org/way/1053099611
+1064018650,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,150,-139.3,-54.9,https://www.openstreetmap.org/way/1064018650
+1064018656,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,6,34.0,15.0,True,flat,#ec8859,,1.2,150,-140.3,-53.2,https://www.openstreetmap.org/way/1064018656
+1077926481,,площадь Никонова 1А,tower,True,False,5,16.0,0.0,True,flat,#ec8859,,20.4,151,-125.8,83.7,https://www.openstreetmap.org/way/1077926481
+1053099602,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,1,3.5,0.0,True,pyramidal,#ec8859,,30.2,154,-144.6,-51.8,https://www.openstreetmap.org/way/1053099602
+1053099603,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,3,10.0,0.0,True,dome,#ec8859,,70.0,159,-130.8,-90.6,https://www.openstreetmap.org/way/1053099603
+1158171934,,,retail,False,False,1,3.5,0.0,True,flat,,,55.8,159,-158.1,14.7,https://www.openstreetmap.org/way/1158171934
+171216973,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,False,True,3,10.0,0.0,False,flat,#ec8859,,1385.4,160,-141.0,-75.1,https://www.openstreetmap.org/way/171216973
+1053099606,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,roof,True,False,1,3.5,0.0,False,flat,#ec8859,,62.2,162,-149.3,-62.6,https://www.openstreetmap.org/way/1053099606
+1052009942,,набережная Брюгге 4,yes,True,False,3,10.0,0.0,True,flat,,,221.6,163,161.5,-23.6,https://www.openstreetmap.org/way/1052009942
+1053099610,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,9,43.0,15.0,True,onion,#ec8859,,26.7,163,-150.2,-63.2,https://www.openstreetmap.org/way/1053099610
+1053099614,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,8,25.0,0.0,True,flat,#ec8859,,125.9,163,-144.4,-74.8,https://www.openstreetmap.org/way/1053099614
+1053099615,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,10,31.0,0.0,True,pyramidal,#ec8859,,43.3,163,-144.8,-74.8,https://www.openstreetmap.org/way/1053099615
+1061292535,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,13,40.0,0.0,True,onion,#ec8859,,16.5,163,-144.8,-74.8,https://www.openstreetmap.org/way/1061292535
+-837435200,,набережная Брюгге 4,apartments,False,True,3,10.0,0.0,True,gabled,,,1099.9,163,162.1,-17.7,https://www.openstreetmap.org/relation/8374352
+-837435300,,набережная Брюгге 5,public,False,False,3,10.0,0.0,True,flat,,,904.7,163,141.1,-82.2,https://www.openstreetmap.org/relation/8374353
+1053099616,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,roof,True,False,5,16.0,0.0,True,round,#ec8859,,424.8,164,-145.6,-75.4,https://www.openstreetmap.org/way/1053099616
+1054249360,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,9,43.0,15.0,True,onion,#ec8859,,26.7,164,-139.6,-86.1,https://www.openstreetmap.org/way/1054249360
+1053099597,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,5,16.0,0.0,True,flat,#ec8859,,676.7,166,-147.5,-76.5,https://www.openstreetmap.org/way/1053099597
+1053099600,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,2,7.0,0.0,True,round,#ec8859,,63.9,174,-160.4,-67.8,https://www.openstreetmap.org/way/1053099600
+1062829981,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,1,3.5,0.0,True,round,#ec8859,,22.7,174,-149.7,-89.1,https://www.openstreetmap.org/way/1062829981
+1053099608,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,roof,True,False,1,3.5,0.0,False,flat,#ec8859,,69.6,175,-156.8,-78.9,https://www.openstreetmap.org/way/1053099608
+1053099613,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,9,43.0,15.0,True,onion,#ec8859,,26.7,175,-155.9,-80.0,https://www.openstreetmap.org/way/1053099613
+1044746256,Спасская башня,набережная Брюгге 6,yes,True,False,4,13.0,0.0,True,flat,#ec8859,brick,129.9,177,136.0,-113.0,https://www.openstreetmap.org/way/1044746256
+1062829982,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,1,3.5,0.0,True,pyramidal,#ec8859,,15.9,177,-151.0,-92.6,https://www.openstreetmap.org/way/1062829982
+1053099601,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,1,3.5,0.0,True,gabled,#ec8859,,56.2,179,-166.5,-65.8,https://www.openstreetmap.org/way/1053099601
+1062829985,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,0,2.0,0.0,True,flat,#ec8859,,1.0,179,-168.5,-61.6,https://www.openstreetmap.org/way/1062829985
+1077926479,,площадь Никонова 1А,yes,True,False,4,13.0,0.0,True,flat,#ec8859,,58.6,179,-174.8,38.7,https://www.openstreetmap.org/way/1077926479
+383639414,,площадь Никонова 1А,construction,False,True,3,10.0,0.0,True,flat,#ec8859,,6209.6,180,-156.7,89.3,https://www.openstreetmap.org/way/383639414
+1044694836,Спасская башня,набережная Брюгге 6,yes,True,False,5,28.0,12.0,True,flat,#ec8859,brick,136.8,180,134.7,-118.8,https://www.openstreetmap.org/way/1044694836
+1044694837,Спасская башня,набережная Брюгге 6,yes,True,False,6,34.0,15.0,True,flat,#ec8859,brick,101.1,180,134.8,-119.0,https://www.openstreetmap.org/way/1044694837
+1044694838,Спасская башня,набережная Брюгге 6,yes,True,False,7,40.0,18.0,True,flat,#ec8859,brick,70.5,180,134.9,-119.2,https://www.openstreetmap.org/way/1044694838
+1077926484,,площадь Никонова 1А,yes,True,False,3,10.0,0.0,True,gabled,#ec8859,,2246.1,180,-150.1,98.6,https://www.openstreetmap.org/way/1077926484
+1044694839,Спасская башня,набережная Брюгге 6,yes,True,False,8,46.0,21.0,True,pyramidal,#ec8859,brick,34.6,181,135.3,-120.4,https://www.openstreetmap.org/way/1044694839
+1044694835,Спасская башня,набережная Брюгге 6,yes,True,False,4,22.0,9.0,True,flat,#ec8859,brick,102.7,182,136.7,-120.2,https://www.openstreetmap.org/way/1044694835
+1077926485,,площадь Никонова 1А,yes,True,False,3,10.0,0.0,True,flat,#ec8859,,2696.7,183,-175.7,52.9,https://www.openstreetmap.org/way/1077926485
+181829581,Спасская башня,набережная Брюгге 6,yes,False,True,3,10.0,0.0,False,flat,#ec8859,brick,370.5,184,138.5,-120.8,https://www.openstreetmap.org/way/181829581
+1053099599,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,2,8.5,1.5,True,pyramidal,#ec8859,,68.8,184,-172.5,-63.8,https://www.openstreetmap.org/way/1053099599
+1062829984,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,0,2.0,0.0,True,flat,#ec8859,,1.0,184,-174.7,-59.2,https://www.openstreetmap.org/way/1062829984
+1044746257,Спасская башня,набережная Брюгге 6,yes,True,False,4,13.0,0.0,True,flat,#ec8859,brick,130.3,185,135.3,-126.7,https://www.openstreetmap.org/way/1044746257
+1062829986,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,0,2.0,0.0,True,flat,#ec8859,,1.0,185,-171.3,-69.0,https://www.openstreetmap.org/way/1062829986
+-837435100,,набережная Брюгге 3,office,False,False,4,13.0,0.0,True,flat,,,607.0,188,186.3,28.4,https://www.openstreetmap.org/relation/8374351
+1046208427,Спасская башня,набережная Брюгге 6,yes,True,False,3,11.5,0.0,True,flat,#ec8859,brick,0.7,189,145.6,-121.3,https://www.openstreetmap.org/way/1046208427
+1077926482,,площадь Никонова 1А,tower,True,False,5,16.0,0.0,True,flat,#ec8859,,33.6,189,-143.5,123.6,https://www.openstreetmap.org/way/1077926482
+1046208428,Спасская башня,набережная Брюгге 6,yes,True,False,3,20.5,9.0,True,flat,#ec8859,brick,6.2,190,145.0,-123.3,https://www.openstreetmap.org/way/1046208428
+1062829983,Собор Благовещения Пресвятой Богородицы,Воскресенская набережная 32,yes,True,False,0,2.0,0.0,True,flat,#ec8859,,1.0,190,-177.5,-66.6,https://www.openstreetmap.org/way/1062829983
+500413375,Республиканская детско-юношеская библиотека им. В. Х. Колумба,улица Эшкинина 10,commercial,False,False,3,10.0,0.0,True,flat,,,989.7,191,113.8,-152.9,https://www.openstreetmap.org/way/500413375
+1046208426,Спасская башня,набережная Брюгге 6,yes,True,False,3,11.5,0.0,True,flat,#ec8859,brick,0.7,191,143.8,-125.9,https://www.openstreetmap.org/way/1046208426
+1415079924,,,retail,False,False,1,3.5,0.0,True,flat,,,55.9,199,-196.5,29.7,https://www.openstreetmap.org/way/1415079924
+651250408,,,yes,False,False,1,3.5,0.0,True,flat,,,80.3,202,201.7,4.8,https://www.openstreetmap.org/way/651250408
+1077926480,,площадь Никонова 1А,yes,True,False,4,13.0,0.0,True,flat,#ec8859,,50.5,204,-198.5,48.0,https://www.openstreetmap.org/way/1077926480
+361008782,Трапезная Благовещенского собора,Воскресенская набережная 32 к1,yes,False,False,3,10.0,0.0,False,flat,,,517.8,208,-172.7,-115.9,https://www.openstreetmap.org/way/361008782
+181823348,,Архангельская слобода 1,yes,False,False,2,7.0,0.0,True,gabled,,,158.2,213,-200.2,-73.7,https://www.openstreetmap.org/way/181823348
+-837435000,,набережная Брюгге 3,office,False,False,4,13.0,0.0,True,flat,,,561.3,215,203.0,70.3,https://www.openstreetmap.org/relation/8374350
+1077926486,,площадь Никонова 1А,tower,True,False,5,16.0,0.0,True,flat,#ec8859,,49.1,220,-180.7,126.3,https://www.openstreetmap.org/way/1077926486
+361005720,,улица Эшкинина 10А,public,False,False,3,10.0,0.0,True,flat,,,931.1,224,79.7,-209.6,https://www.openstreetmap.org/way/361005720
+361008783,,Воскресенская набережная 32Б,yes,False,False,3,10.0,0.0,False,gabled,,,173.2,226,-180.2,-136.1,https://www.openstreetmap.org/way/361008783
+181823352,,Архангельская слобода 2,yes,False,False,2,7.0,0.0,True,gabled,,,239.6,227,-207.7,-91.8,https://www.openstreetmap.org/way/181823352
+1049944829,,площадь Никонова 1А,yes,True,False,1,3.5,0.0,True,flat,#ec8859,,1134.4,230,-184.3,137.6,https://www.openstreetmap.org/way/1049944829
+1158171935,,,retail,False,False,1,3.5,0.0,True,flat,,,55.8,230,-226.3,42.2,https://www.openstreetmap.org/way/1158171935
+1046427641,Благовещенская башня,,yes,True,False,1,1.0,16.5,True,pyramidal,#a3331e,brick,0.3,236,-234.1,30.8,https://www.openstreetmap.org/way/1046427641
+1049429736,Благовещенская башня,,yes,True,False,5,32.5,15.0,True,gabled,#a3331e,brick,2.2,238,-237.3,22.3,https://www.openstreetmap.org/way/1049429736
+1046427640,Благовещенская башня,,yes,True,False,1,1.0,16.5,True,pyramidal,#a3331e,brick,0.3,241,-240.5,13.4,https://www.openstreetmap.org/way/1046427640
+1046542638,Благовещенская башня,,yes,True,False,7,37.0,15.0,True,pyramidal,#a3331e,brick,0.6,242,-240.9,27.2,https://www.openstreetmap.org/way/1046542638
+1046427636,Благовещенская башня,,yes,True,False,3,16.0,6.0,True,flat,#a3331e,brick,21.5,243,-240.4,36.8,https://www.openstreetmap.org/way/1046427636
+1046427638,Благовещенская башня,,yes,True,False,3,10.0,0.0,True,flat,#a3331e,brick,23.5,243,-239.6,38.9,https://www.openstreetmap.org/way/1046427638
+181823339,,Архангельская слобода 3,yes,False,False,2,7.0,0.0,True,gabled,,,237.2,244,-216.4,-112.2,https://www.openstreetmap.org/way/181823339
+1046427637,Благовещенская башня,,yes,True,False,3,10.0,0.0,True,flat,#a3331e,brick,23.0,244,-241.5,34.8,https://www.openstreetmap.org/way/1046427637
+1046542639,Благовещенская башня,,yes,True,False,7,37.0,15.0,True,pyramidal,#a3331e,brick,0.7,244,-243.6,20.2,https://www.openstreetmap.org/way/1046542639
+1046875159,Благовещенская башня,,yes,True,False,3,19.8,9.0,True,flat,#a3331e,brick,14.2,244,-240.9,36.7,https://www.openstreetmap.org/way/1046875159
+1046305172,Благовещенская башня,,yes,True,False,5,25.0,9.0,True,flat,#a3331e,brick,109.4,245,-244.1,25.0,https://www.openstreetmap.org/way/1046305172
+1046305176,Благовещенская башня,,yes,True,False,5,32.5,15.0,True,flat,#a3331e,brick,21.5,245,-242.6,30.9,https://www.openstreetmap.org/way/1046305176
+1046305175,Благовещенская башня,,yes,True,False,5,32.5,15.0,True,flat,#a3331e,brick,20.4,246,-245.5,18.4,https://www.openstreetmap.org/way/1046305175
+1046427645,Благовещенская башня,,yes,True,False,8,46.0,21.0,True,flat,#a3331e,brick,44.9,246,-245.1,24.6,https://www.openstreetmap.org/way/1046427645
+-837434900,,набережная Брюгге 3,office,False,False,4,13.0,0.0,True,flat,,,610.7,246,219.1,111.8,https://www.openstreetmap.org/relation/8374349
+1046305174,Благовещенская башня,,yes,True,False,5,16.0,0.0,True,flat,#a3331e,brick,117.0,247,-244.8,33.7,https://www.openstreetmap.org/way/1046305174
+1046427639,Благовещенская башня,,yes,True,False,6,34.0,15.0,True,flat,#a3331e,brick,82.0,247,-245.9,26.2,https://www.openstreetmap.org/way/1046427639
+1046427644,Благовещенская башня,,yes,True,False,7,40.0,18.0,True,flat,#a3331e,brick,54.9,247,-245.6,25.3,https://www.openstreetmap.org/way/1046427644
+1046427646,Благовещенская башня,,yes,True,False,9,52.0,24.0,True,pyramidal,#a3331e,brick,35.4,247,-245.4,25.3,https://www.openstreetmap.org/way/1046427646
+-751899400,Благовещенская башня,,yes,False,True,3,10.0,0.0,False,flat,#a3331e,brick,459.3,247,-245.6,25.5,https://www.openstreetmap.org/relation/7518994
+1046305173,Благовещенская башня,,yes,True,False,5,16.0,0.0,True,flat,#a3331e,brick,110.5,249,-248.0,18.3,https://www.openstreetmap.org/way/1046305173
+1046542641,Благовещенская башня,,yes,True,False,7,37.0,15.0,True,pyramidal,#a3331e,brick,0.7,249,-247.4,29.7,https://www.openstreetmap.org/way/1046542641
+181823347,,Архангельская слобода 11,office,False,False,2,7.0,0.0,True,gabled,,,156.0,250,-243.3,-57.2,https://www.openstreetmap.org/way/181823347
+1046305170,Благовещенская башня,,yes,True,False,3,10.0,0.0,True,flat,#a3331e,brick,19.1,250,-249.8,15.8,https://www.openstreetmap.org/way/1046305170
+1062573813,,Воскресенская набережная 34,yes,True,False,2,7.0,0.0,True,pyramidal,#a3331e,,12.7,250,-189.4,-163.0,https://www.openstreetmap.org/way/1062573813
+1046305168,Благовещенская башня,,yes,True,False,3,16.0,6.0,True,flat,#a3331e,brick,19.6,251,-250.7,14.1,https://www.openstreetmap.org/way/1046305168
+1046305171,Благовещенская башня,,yes,True,False,3,19.8,9.0,True,flat,#a3331e,brick,11.9,251,-250.1,14.3,https://www.openstreetmap.org/way/1046305171
+1046542640,Благовещенская башня,,yes,True,False,7,37.0,15.0,True,pyramidal,#a3331e,brick,0.7,251,-250.1,22.7,https://www.openstreetmap.org/way/1046542640
+1062803870,,Воскресенская набережная 34,yes,True,False,1,7.3,3.0,True,flat,#a3331e,,2.1,251,-192.9,-160.8,https://www.openstreetmap.org/way/1062803870
+1062803873,,Воскресенская набережная 34,yes,True,False,3,19.0,7.5,True,pyramidal,#a3331e,,0.6,251,-193.4,-159.8,https://www.openstreetmap.org/way/1062803873
+1046305169,Благовещенская башня,,yes,True,False,3,10.0,0.0,True,flat,#a3331e,brick,16.0,252,-251.4,12.3,https://www.openstreetmap.org/way/1046305169
+1046427642,Благовещенская башня,,yes,True,False,1,1.0,16.5,True,pyramidal,#a3331e,brick,0.6,253,-250.0,36.5,https://www.openstreetmap.org/way/1046427642
+1062573818,,Воскресенская набережная 34,yes,True,False,3,10.0,0.0,True,flat,#a3331e,,39.9,253,-197.2,-159.2,https://www.openstreetmap.org/way/1062573818
+1062803874,,Воскресенская набережная 34,yes,True,False,3,19.0,7.5,True,pyramidal,#a3331e,,0.6,254,-194.6,-163.2,https://www.openstreetmap.org/way/1062803874
+1062854654,,Воскресенская набережная 34,yes,True,False,2,9.2,0.0,True,flat,#a3331e,,31.7,254,-197.6,-159.5,https://www.openstreetmap.org/way/1062854654
+1062803869,,Воскресенская набережная 34,yes,True,False,1,7.3,3.0,True,flat,#a3331e,,2.1,255,-200.7,-158.1,https://www.openstreetmap.org/way/1062803869
+1062803871,,Воскресенская набережная 34,yes,True,False,3,19.0,7.5,True,pyramidal,#a3331e,,0.6,255,-199.9,-157.6,https://www.openstreetmap.org/way/1062803871
+1062573819,,Воскресенская набережная 34,yes,True,False,1,5.5,0.0,True,flat,#a3331e,,51.4,256,-192.4,-169.0,https://www.openstreetmap.org/way/1062573819
+1046427643,Благовещенская башня,,yes,True,False,1,1.0,16.5,True,pyramidal,#a3331e,brick,0.5,257,-256.4,19.5,https://www.openstreetmap.org/way/1046427643
+1062803872,,Воскресенская набережная 34,yes,True,False,3,19.0,7.5,True,pyramidal,#a3331e,,0.6,258,-201.1,-160.9,https://www.openstreetmap.org/way/1062803872
+361008781,,Воскресенская набережная 34,yes,False,True,2,7.0,0.0,True,flat,#a3331e,,340.2,259,-199.3,-166.0,https://www.openstreetmap.org/way/361008781
+1062573812,,Воскресенская набережная 34,yes,True,False,2,7.0,0.0,True,pyramidal,#a3331e,,13.1,259,-205.3,-157.7,https://www.openstreetmap.org/way/1062573812
+181823351,,Архангельская слобода 4,yes,False,False,2,7.0,0.0,True,gabled,green,,164.0,261,-236.7,-109.3,https://www.openstreetmap.org/way/181823351
+1062573811,,Воскресенская набережная 34,yes,True,False,2,7.0,0.0,True,flat,#a3331e,,143.7,261,-199.9,-168.1,https://www.openstreetmap.org/way/1062573811
+181823342,,Архангельская слобода 10,yes,False,False,2,7.0,0.0,True,gabled,green,,242.2,262,-250.8,-74.6,https://www.openstreetmap.org/way/181823342
+361005722,Бизнес-инкубатор,улица Эшкинина 10Б,commercial,False,False,3,10.0,0.0,True,gabled,,,1111.6,262,47.8,-257.4,https://www.openstreetmap.org/way/361005722
+1062573807,,Воскресенская набережная 34,yes,True,False,2,7.0,0.0,True,pyramidal,#a3331e,,18.9,262,-193.5,-176.3,https://www.openstreetmap.org/way/1062573807
+1062573817,,Воскресенская набережная 34,yes,True,False,4,25.0,10.5,True,pyramidal,#a3331e,,0.8,263,-199.6,-171.8,https://www.openstreetmap.org/way/1062573817
+1062573820,,Воскресенская набережная 34,yes,True,False,1,5.5,0.0,True,flat,#a3331e,,50.3,263,-206.0,-163.6,https://www.openstreetmap.org/way/1062573820
+1062573809,,Воскресенская набережная 34,yes,True,False,4,13.0,0.0,True,pyramidal,#a3331e,,17.8,265,-201.4,-172.7,https://www.openstreetmap.org/way/1062573809
+1062573816,,Воскресенская набережная 34,yes,True,False,4,25.0,10.5,True,pyramidal,#a3331e,,0.9,265,-202.5,-170.5,https://www.openstreetmap.org/way/1062573816
+1062573815,,Воскресенская набережная 34,yes,True,False,4,25.0,10.5,True,pyramidal,#a3331e,,0.8,266,-200.2,-174.6,https://www.openstreetmap.org/way/1062573815
+1062573810,,Воскресенская набережная 34,yes,True,False,1,3.5,0.0,True,flat,#a3331e,,10.2,267,-202.3,-174.2,https://www.openstreetmap.org/way/1062573810
+1062573814,,Воскресенская набережная 34,yes,True,False,4,25.0,10.5,True,pyramidal,#a3331e,,0.8,268,-203.8,-173.3,https://www.openstreetmap.org/way/1062573814
+361021471,,Воскресенский проспект 17,retail,False,False,2,7.0,0.0,False,flat,,,847.0,269,250.0,-98.1,https://www.openstreetmap.org/way/361021471
+1062573808,,Воскресенская набережная 34,yes,True,False,2,7.0,0.0,True,pyramidal,#a3331e,,17.5,270,-209.7,-170.6,https://www.openstreetmap.org/way/1062573808
+55954003,,бульвар Чавайна 27,commercial,False,False,3,10.0,0.0,True,flat,#a3331e,,1522.7,273,165.5,-216.9,https://www.openstreetmap.org/way/55954003
+181823349,,Архангельская слобода 5,yes,False,False,2,7.0,0.0,True,gabled,,,160.3,273,-255.8,-96.6,https://www.openstreetmap.org/way/181823349
+-1221903600,,Воскресенский проспект 15,apartments,False,False,3,11.0,0.0,True,flat,,,1547.5,274,274.2,4.0,https://www.openstreetmap.org/relation/12219036
+176043138,,,yes,False,False,3,10.0,0.0,False,pyramidal,#ec8859,,69.5,278,-200.0,193.1,https://www.openstreetmap.org/way/176043138
+-837434800,,набережная Брюгге 3,office,False,False,4,13.0,0.0,True,flat,,,638.4,279,236.3,147.8,https://www.openstreetmap.org/relation/8374348
+1051123701,,,yes,False,False,2,5.0,0.0,True,pyramidal,#ec8859,,12.6,282,-192.3,205.8,https://www.openstreetmap.org/way/1051123701
+181823341,,Архангельская слобода 9,office,False,False,2,7.0,0.0,True,gabled,,,150.9,286,-283.3,-42.1,https://www.openstreetmap.org/way/181823341
+181823338,,Архангельская слобода 6,office,False,False,2,7.0,0.0,True,gabled,,,328.5,295,-279.6,-92.9,https://www.openstreetmap.org/way/181823338
+361005725,Комитет Республики Марий Эл по делам архивов,улица Эшкинина 10В,yes,False,False,3,10.0,0.0,True,gabled,,,624.9,295,24.9,-293.8,https://www.openstreetmap.org/way/361005725
+1049451866,Академический русский театр драмы им. Георгия Константинова,площадь Никонова 1,yes,True,False,3,16.0,6.0,True,flat,,,1313.6,295,-268.1,124.0,https://www.openstreetmap.org/way/1049451866
+181823350,,Архангельская слобода 8,yes,False,False,2,7.0,0.0,True,gabled,,,278.5,296,-290.0,-59.2,https://www.openstreetmap.org/way/181823350
+1049944828,Академический русский театр драмы им. Георгия Константинова,площадь Никонова 1,yes,True,False,5,25.0,9.0,True,flat,,,395.3,298,-258.4,149.3,https://www.openstreetmap.org/way/1049944828
+56053281,Академический русский театр драмы им. Георгия Константинова,площадь Никонова 1,yes,False,True,2,7.0,0.0,True,flat,,,3432.4,299,-266.5,136.4,https://www.openstreetmap.org/way/56053281
+-1221903500,,Воскресенский проспект 13,apartments,False,False,4,14.0,0.0,True,flat,,,574.7,299,293.6,58.0,https://www.openstreetmap.org/relation/12219035
+452365626,,,yes,False,False,3,10.0,0.0,False,flat,#a3331e,,262.4,302,163.3,-253.6,https://www.openstreetmap.org/way/452365626
+1052009941,,набережная Брюгге 2,yes,True,False,4,13.0,0.0,True,flat,,,500.6,302,246.7,174.7,https://www.openstreetmap.org/way/1052009941
+55954008,,улица Эшкинина 18,yes,False,False,3,10.0,0.0,False,flat,#a3331e,,2135.1,307,144.5,-271.2,https://www.openstreetmap.org/way/55954008
+115958113,,,yes,False,False,3,10.0,0.0,False,flat,,,68.5,307,184.0,-245.5,https://www.openstreetmap.org/way/115958113
+181823353,,Архангельская слобода 7,retail,False,False,2,7.0,0.0,True,gabled,,,163.2,309,-297.9,-81.1,https://www.openstreetmap.org/way/181823353
+1385504271,,Воскресенский проспект 17А,residential,False,False,8,25.0,0.0,True,flat,,,1019.9,311,293.0,-105.6,https://www.openstreetmap.org/way/1385504271
+361008784,Музей истории православия,18,yes,False,False,3,10.0,0.0,False,hipped,#ec8859,,442.6,312,-211.8,228.8,https://www.openstreetmap.org/way/361008784
+176043140,,,yes,False,False,3,10.0,0.0,False,flat,,,78.1,314,-235.0,207.8,https://www.openstreetmap.org/way/176043140
+-837434700,,набережная Брюгге 2,office,False,True,4,13.0,0.0,True,flat,,,923.9,317,251.7,191.9,https://www.openstreetmap.org/relation/8374347
+1051123705,,,yes,False,False,2,5.0,0.0,True,pyramidal,#ec8859,,7.4,329,-215.6,248.0,https://www.openstreetmap.org/way/1051123705
+372584289,,бульвар Чавайна 25,apartments,False,False,16,49.0,0.0,True,flat,#ec8859,,1002.0,330,239.9,-226.2,https://www.openstreetmap.org/way/372584289
+1051123706,,,yes,False,False,2,5.0,0.0,True,pyramidal,#ec8859,,7.4,333,-213.8,254.8,https://www.openstreetmap.org/way/1051123706
+1051123703,,,yes,False,False,2,7.0,0.0,True,pyramidal,#ec8859,,33.2,338,-212.4,263.2,https://www.openstreetmap.org/way/1051123703
+1215533780,,,yes,False,False,3,10.0,0.0,False,flat,,,42.5,338,336.5,-30.8,https://www.openstreetmap.org/way/1215533780
+361021479,,Воскресенский проспект 13А,apartments,False,False,7,24.0,0.0,True,flat,,,731.2,341,340.5,23.5,https://www.openstreetmap.org/way/361021479
+1075080423,,Воскресенский проспект 11,yes,False,False,4,13.0,0.0,True,flat,,,704.8,342,319.2,122.2,https://www.openstreetmap.org/way/1075080423
+1044758924,Часовня святых Петра и Февроньи Муромских,,yes,True,False,4,22.0,9.0,True,pyramidal,#a3331e,,33.9,343,56.1,338.1,https://www.openstreetmap.org/way/1044758924
+1044758925,Часовня святых Петра и Февроньи Муромских,,roof,True,False,6,37.0,18.0,True,onion,,,2.2,343,55.9,338.1,https://www.openstreetmap.org/way/1044758925
+-942322000,,,yes,False,False,6,18.0,0.0,True,pyramidal,#ec8859,brick,56.1,343,-201.0,277.9,https://www.openstreetmap.org/relation/9423220
+220442687,Часовня святых Петра и Февроньи Муромских,,chapel,False,True,6,10.0,0.0,True,cone,,,57.7,344,55.4,339.1,https://www.openstreetmap.org/way/220442687
+1044758923,Часовня святых Петра и Февроньи Муромских,,yes,True,False,3,10.0,0.0,True,flat,#a3331e,,57.7,344,55.4,339.1,https://www.openstreetmap.org/way/1044758923
+169823834,Церковь Троицы Живоначальной,Вознесенская улица 53,church,False,False,3,10.0,0.0,False,flat,,,609.4,345,-265.0,220.4,https://www.openstreetmap.org/way/169823834
+-942321800,,,yes,False,False,5,16.0,0.0,True,gabled,#ec8859,brick,21.3,347,-204.8,280.6,https://www.openstreetmap.org/relation/9423218
+-942321900,,,yes,False,False,7,20.0,0.0,True,pyramidal,#ec8859,brick,9.9,351,-205.1,285.0,https://www.openstreetmap.org/relation/9423219
+176043137,,,yes,False,False,3,10.0,0.0,False,flat,,,95.3,353,-287.1,206.2,https://www.openstreetmap.org/way/176043137
+431827113,,улица Эшкинина 10Г,yes,False,False,2,7.0,0.0,True,gabled,,,1592.8,354,-15.1,-353.8,https://www.openstreetmap.org/way/431827113
+-942322300,,,wall,False,False,3,10.0,0.0,True,gabled,#ec8859,brick,108.5,354,-214.7,281.8,https://www.openstreetmap.org/relation/9423223
+1390879212,,бульвар Чавайна 31,yes,True,False,1,3.5,0.0,True,flat,,,108.9,355,-353.0,36.0,https://www.openstreetmap.org/way/1390879212
+-837434600,,набережная Брюгге 2,office,False,False,4,13.0,0.0,True,flat,,,512.2,357,267.3,236.8,https://www.openstreetmap.org/relation/8374346
+430330512,,,yes,False,False,3,10.0,0.0,False,flat,,,55.8,361,-275.7,232.6,https://www.openstreetmap.org/way/430330512
+864200889,,улица Эшкинина 19,apartments,False,False,8,25.0,0.0,True,flat,,,2105.6,361,350.1,-88.6,https://www.openstreetmap.org/way/864200889
+-942322701,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,67.6,363,-194.1,306.9,https://www.openstreetmap.org/relation/9423227
+375997746,,,yes,False,False,3,10.0,0.0,False,flat,,,289.9,365,-364.6,-21.3,https://www.openstreetmap.org/way/375997746
+1052386736,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,1,7.8,3.0,True,flat,#ffffff,,7.8,367,95.6,354.7,https://www.openstreetmap.org/way/1052386736
+1052243762,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,1,3.5,0.0,True,flat,#ffffff,,40.0,368,95.8,355.4,https://www.openstreetmap.org/way/1052243762
+1052243763,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,2,14.5,6.0,True,flat,#ffffff,,11.9,369,96.1,356.5,https://www.openstreetmap.org/way/1052243763
+1052386737,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,2,16.8,7.5,True,flat,#ffffff,,3.3,369,96.1,356.0,https://www.openstreetmap.org/way/1052386737
+1052386740,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,13.0,0.0,True,flat,#ffffff,,0.2,369,99.4,355.2,https://www.openstreetmap.org/way/1052386740
+1052386742,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,26.8,12.6,True,flat,#ffffff,,0.2,369,94.4,357.2,https://www.openstreetmap.org/way/1052386742
+1052386743,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,28.0,13.2,True,flat,#ffffff,,0.2,369,94.9,357.0,https://www.openstreetmap.org/way/1052386743
+1052386744,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,29.2,13.8,True,flat,#ffffff,,0.2,369,95.4,356.8,https://www.openstreetmap.org/way/1052386744
+1052386745,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,25.6,12.0,True,flat,#ffffff,,0.2,369,99.0,355.4,https://www.openstreetmap.org/way/1052386745
+1052386746,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,26.8,12.6,True,flat,#ffffff,,0.2,369,98.6,355.6,https://www.openstreetmap.org/way/1052386746
+1052386747,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,28.0,13.2,True,flat,#ffffff,,0.2,369,98.1,355.8,https://www.openstreetmap.org/way/1052386747
+1052386748,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,29.2,13.8,True,flat,#ffffff,,0.2,369,97.6,356.0,https://www.openstreetmap.org/way/1052386748
+1052386749,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,30.4,14.4,True,flat,#ffffff,,0.2,369,97.1,356.1,https://www.openstreetmap.org/way/1052386749
+1052386750,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,30.4,14.4,True,flat,#ffffff,,0.2,369,95.8,356.6,https://www.openstreetmap.org/way/1052386750
+1052386751,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,31.6,15.0,True,flat,#ffffff,,0.3,369,96.4,356.4,https://www.openstreetmap.org/way/1052386751
+1052243743,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,16.0,0.0,True,pyramidal,#a3331e,,16.5,370,104.7,354.7,https://www.openstreetmap.org/way/1052243743
+1052386738,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,22.0,9.0,True,flat,#C0C0C0,,8.9,370,96.1,356.8,https://www.openstreetmap.org/way/1052386738
+1052386739,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,13.0,0.0,True,flat,#ffffff,,0.2,370,93.6,357.5,https://www.openstreetmap.org/way/1052386739
+1052386741,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,25.6,12.0,True,flat,#ffffff,,0.2,370,94.0,357.4,https://www.openstreetmap.org/way/1052386741
+1052983719,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,3,10.0,0.0,False,flat,#a3331e,,8.9,370,96.1,356.8,https://www.openstreetmap.org/way/1052983719
+411617778,,Воскресенская набережная 38,commercial,False,False,2,7.0,0.0,True,gabled,,,200.6,371,-367.1,-53.7,https://www.openstreetmap.org/way/411617778
+1052243742,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,16.0,0.0,True,pyramidal,#a3331e,,13.8,371,88.1,360.5,https://www.openstreetmap.org/way/1052243742
+898107549,,Воскресенский проспект 9В,yes,False,False,3,10.0,0.0,True,flat,,,468.3,374,335.3,165.1,https://www.openstreetmap.org/way/898107549
+-942322400,,Воскресенская набережная 10,apartments,False,False,5,15.0,0.0,True,flat,#ec8859,,668.6,375,-231.0,295.5,https://www.openstreetmap.org/relation/9423224
+-942322100,,,yes,False,False,2,6.0,0.0,True,pyramidal,#ec8859,brick,12.2,376,-189.3,325.2,https://www.openstreetmap.org/relation/9423221
+31865666,Бегемот,улица Эшкинина 14,yes,True,False,3,10.0,0.0,True,flat,,,831.2,377,208.9,-314.3,https://www.openstreetmap.org/way/31865666
+1064347190,,бульвар Чавайна 31,apartments,False,True,8,25.0,0.0,True,flat,,,2897.3,377,-376.2,29.3,https://www.openstreetmap.org/way/1064347190
+452365997,Бегемот,улица Эшкинина 14,yes,True,False,2,7.0,0.0,True,flat,,,145.3,378,222.9,-304.8,https://www.openstreetmap.org/way/452365997
+176043135,,,yes,False,False,3,10.0,0.0,False,flat,,,408.8,380,-291.8,243.8,https://www.openstreetmap.org/way/176043135
+1052243747,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,13.0,0.0,True,pyramidal,#a3331e,,18.8,380,84.2,370.5,https://www.openstreetmap.org/way/1052243747
+1385504268,Бегемот,улица Эшкинина 14,commercial,False,True,3,10.0,0.0,True,flat,,,1213.8,380,213.5,-313.8,https://www.openstreetmap.org/way/1385504268
+1052243748,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,22.0,0.0,True,flat,#a3331e,,72.7,381,117.4,362.6,https://www.openstreetmap.org/way/1052243748
+1052243749,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,8,43.0,18.0,True,pyramidal,#a3331e,,42.9,382,117.1,363.2,https://www.openstreetmap.org/way/1052243749
+233912480,,бульвар Чавайна 31,yes,True,False,1,3.5,0.0,True,flat,,,1738.8,384,-382.6,30.7,https://www.openstreetmap.org/way/233912480
+372584290,,бульвар Чавайна 23А,yes,False,False,3,10.0,0.0,True,flat,,,416.0,385,307.2,-232.3,https://www.openstreetmap.org/way/372584290
+244423973,Дом Карелина,Воскресенская набережная 40,construction,False,False,2,7.0,0.0,True,hipped,,,183.9,386,-380.1,-64.9,https://www.openstreetmap.org/way/244423973
+-812811900,,,yes,False,False,3,10.0,0.0,False,flat,,,1004.2,386,83.5,-377.3,https://www.openstreetmap.org/relation/8128119
+243580132,Часовня Всех Святых,Вознесенская улица 53А,chapel,False,False,3,10.0,0.0,False,flat,,,63.5,387,-368.2,118.7,https://www.openstreetmap.org/way/243580132
+452365998,Бегемот,улица Эшкинина 14,yes,True,False,2,7.0,0.0,True,flat,,,112.1,387,234.4,-308.0,https://www.openstreetmap.org/way/452365998
+1052243752,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,4,13.0,0.0,True,flat,#a3331e,,58.4,387,88.6,376.5,https://www.openstreetmap.org/way/1052243752
+56044142,,бульвар Чавайна 31,apartments,True,False,8,25.0,0.0,True,flat,,,1158.5,388,-386.4,30.3,https://www.openstreetmap.org/way/56044142
+864200890,,улица Эшкинина 21,apartments,False,False,5,16.0,0.0,True,flat,,,860.2,388,387.6,1.3,https://www.openstreetmap.org/way/864200890
+1052243753,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,5,28.0,12.0,True,flat,#a3331e,,29.5,388,87.6,377.5,https://www.openstreetmap.org/way/1052243753
+1052243754,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,37.0,15.0,True,pyramidal,#a3331e,,17.1,388,88.0,377.5,https://www.openstreetmap.org/way/1052243754
+1052243741,Республиканский театр кукол,Царьградский проспект 35,yes,False,True,3,10.0,0.0,True,flat,#a3331e,,2101.9,390,98.6,376.8,https://www.openstreetmap.org/way/1052243741
+1183301596,,,roof,False,False,1,3.5,0.0,False,flat,,,123.9,391,337.5,-197.0,https://www.openstreetmap.org/way/1183301596
+452365996,Бегемот,улица Эшкинина 14,yes,True,False,1,3.5,0.0,True,flat,,,125.2,392,219.3,-324.6,https://www.openstreetmap.org/way/452365996
+-812811700,,улица Эшкинина 5А,apartments,False,False,9,28.0,0.0,True,flat,,,1448.9,394,151.0,-364.1,https://www.openstreetmap.org/relation/8128117
+1051660896,,Царьградский проспект 37,yes,True,False,5,16.0,0.0,True,flat,#ec8859,,37.8,396,-6.4,396.1,https://www.openstreetmap.org/way/1051660896
+1052983721,,Царьградский проспект 37,yes,True,False,5,16.0,0.0,True,pyramidal,#ec8859,,22.0,396,-6.5,395.9,https://www.openstreetmap.org/way/1052983721
+1052243761,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,pyramidal,#a3331e,,15.7,398,117.5,380.6,https://www.openstreetmap.org/way/1052243761
+372584153,,Царьградский проспект 33,commercial,False,False,2,7.0,0.0,True,flat,,,354.7,399,154.7,367.9,https://www.openstreetmap.org/way/372584153
+431621956,,,yes,False,False,3,10.0,0.0,False,flat,,,79.6,399,383.4,111.6,https://www.openstreetmap.org/way/431621956
+1052243760,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,pyramidal,#a3331e,,13.9,400,96.0,388.2,https://www.openstreetmap.org/way/1052243760
+1052618180,,Царьградский проспект 37,yes,True,False,4,25.0,10.5,True,pyramidal,#ec8859,,3.4,401,-11.0,400.9,https://www.openstreetmap.org/way/1052618180
+430330513,,,yes,False,False,3,10.0,0.0,False,flat,#ec8859,,120.2,402,-293.5,274.5,https://www.openstreetmap.org/way/430330513
+1052243759,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,flat,#a3331e,,13.8,402,118.2,384.6,https://www.openstreetmap.org/way/1052243759
+596938629,,,yes,False,False,3,10.0,0.0,False,flat,,,69.5,404,-342.9,214.0,https://www.openstreetmap.org/way/596938629
+678703074,,,yes,False,False,2,5.0,0.0,True,flat,#ec8859,brick,32.0,404,-204.4,349.0,https://www.openstreetmap.org/way/678703074
+1052243758,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,flat,#a3331e,,16.1,404,98.1,391.8,https://www.openstreetmap.org/way/1052243758
+1052243756,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,19.0,0.0,True,pyramidal,#a3331e,,27.5,405,128.5,383.9,https://www.openstreetmap.org/way/1052243756
+1052618174,,Царьградский проспект 37,yes,True,False,2,13.5,6.0,True,flat,#ffffff,,26.6,405,-14.3,404.7,https://www.openstreetmap.org/way/1052618174
+1052618175,,Царьградский проспект 37,yes,True,False,3,19.5,9.0,True,flat,#ffffff,,26.6,405,-14.4,404.6,https://www.openstreetmap.org/way/1052618175
+-942322700,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,61.7,405,-200.3,352.2,https://www.openstreetmap.org/relation/9423227
+1052618176,,Царьградский проспект 37,yes,True,False,4,13.0,0.0,True,flat,#ec8859,,96.2,406,-10.6,406.0,https://www.openstreetmap.org/way/1052618176
+1052243744,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,19.0,0.0,True,pyramidal,#a3331e,,11.1,407,87.6,397.4,https://www.openstreetmap.org/way/1052243744
+1052618179,,Царьградский проспект 37,yes,True,False,4,25.0,10.5,True,pyramidal,#ec8859,,4.1,407,-2.9,406.8,https://www.openstreetmap.org/way/1052618179
+1052618177,,Царьградский проспект 37,yes,True,False,4,24.5,11.6,True,pyramidal,#ec8859,,66.4,408,-11.0,407.8,https://www.openstreetmap.org/way/1052618177
+1052618181,,Царьградский проспект 37,yes,True,False,4,25.0,10.5,True,pyramidal,#ec8859,,4.4,409,-16.8,408.4,https://www.openstreetmap.org/way/1052618181
+1052243757,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,gabled,#a3331e,,241.7,410,109.0,395.4,https://www.openstreetmap.org/way/1052243757
+-812811800,,улица Эшкинина 6,apartments,False,False,9,28.0,0.0,True,flat,,,1907.9,410,78.5,-402.7,https://www.openstreetmap.org/relation/8128118
+1051660898,,Царьградский проспект 37,yes,True,False,3,10.0,0.0,True,flat,#ec8859,,1647.2,412,-12.3,412.3,https://www.openstreetmap.org/way/1051660898
+431827114,,улица Эшкинина 10Д,yes,False,False,2,7.0,0.0,True,gabled,,,230.6,413,-51.7,-409.5,https://www.openstreetmap.org/way/431827114
+898107550,,Воскресенский проспект 9Б,commercial,False,False,3,10.0,0.0,True,flat,,,736.1,413,353.4,214.5,https://www.openstreetmap.org/way/898107550
+1051660899,,Царьградский проспект 37,retail,False,True,6,19.0,0.0,True,flat,#ec8859,,4776.6,415,-2.8,415.5,https://www.openstreetmap.org/way/1051660899
+1052243765,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,pyramidal,#a3331e,,5.3,415,123.7,396.4,https://www.openstreetmap.org/way/1052243765
+1052618178,,Царьградский проспект 37,yes,True,False,4,25.0,10.5,True,pyramidal,#ec8859,,4.2,415,-8.5,414.5,https://www.openstreetmap.org/way/1052618178
+-942322800,,,wall,False,False,1,3.0,0.0,True,flat,#ec8859,brick,44.8,416,-222.1,352.0,https://www.openstreetmap.org/relation/9423228
+133958135,,улица Эшкинина 23А,yes,False,False,9,28.0,0.0,True,flat,,,686.0,417,409.8,75.6,https://www.openstreetmap.org/way/133958135
+1052243764,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,7,31.0,9.0,True,pyramidal,#a3331e,,5.4,417,101.4,404.5,https://www.openstreetmap.org/way/1052243764
+1052618173,,Царьградский проспект 37,yes,True,False,7,22.0,0.0,True,flat,#ec8859,,37.8,419,-23.2,418.2,https://www.openstreetmap.org/way/1052618173
+1052983720,,Царьградский проспект 37,yes,True,False,7,22.0,0.0,True,pyramidal,#ec8859,,20.0,419,-23.4,418.5,https://www.openstreetmap.org/way/1052983720
+-942322201,,,yes,False,False,2,6.0,0.0,True,pyramidal,#ec8859,brick,10.5,420,-205.4,366.1,https://www.openstreetmap.org/relation/9423222
+93893288,,Вознесенская улица 71,yes,False,False,3,10.0,0.0,True,hipped,,,1925.4,421,-419.3,-37.5,https://www.openstreetmap.org/way/93893288
+-942322500,,Вознесенская улица 51,apartments,False,False,6,17.0,0.0,True,flat,#ec8859,,433.0,421,-283.1,311.5,https://www.openstreetmap.org/relation/9423225
+1052243746,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,19.0,0.0,True,flat,#a3331e,,25.6,422,128.9,402.2,https://www.openstreetmap.org/way/1052243746
+1052243750,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,34.0,15.0,True,pyramidal,#a3331e,,11.6,422,129.4,402.0,https://www.openstreetmap.org/way/1052243750
+1052243745,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,19.0,0.0,True,flat,#a3331e,,32.9,424,99.6,412.5,https://www.openstreetmap.org/way/1052243745
+1052243751,Республиканский театр кукол,Царьградский проспект 35,yes,True,False,6,34.0,15.0,True,pyramidal,#a3331e,,16.8,425,98.8,413.2,https://www.openstreetmap.org/way/1052243751
+1347755459,Информационно-туристический центр,,yes,False,False,3,10.0,0.0,False,flat,,,97.7,428,-48.0,425.3,https://www.openstreetmap.org/way/1347755459
+-942322600,,Воскресенская набережная 8,apartments,False,False,7,20.0,0.0,True,flat,#ec8859,,1131.4,428,-262.1,338.2,https://www.openstreetmap.org/relation/9423226
+1207802787,,улица Эшкинина 8А,yes,True,False,5,16.0,0.0,True,pyramidal,,,25.6,429,-180.5,-389.5,https://www.openstreetmap.org/way/1207802787
+1207802784,Институт iSpring,улица Эшкинина 8Б,yes,True,False,5,16.0,0.0,True,pyramidal,,,25.8,430,-190.1,-386.0,https://www.openstreetmap.org/way/1207802784
+-942322802,,,wall,False,False,1,3.0,0.0,True,flat,#ec8859,brick,35.0,430,-205.5,378.1,https://www.openstreetmap.org/relation/9423228
+1051660897,,Царьградский проспект 37,yes,True,False,2,7.0,0.0,True,flat,#ec8859,,3102.8,431,12.7,431.2,https://www.openstreetmap.org/way/1051660897
+361021475,,Воскресенский проспект 11А,apartments,False,False,7,22.0,0.0,True,flat,,,1925.3,432,395.8,173.8,https://www.openstreetmap.org/way/361021475
+-837435400,,набережная Брюгге 1,school,False,False,3,10.0,0.0,True,flat,,,5835.5,432,261.4,344.0,https://www.openstreetmap.org/relation/8374354
+431827112,,улица Эшкинина 8А,yes,False,True,4,13.0,0.0,True,gabled,,,1235.4,433,-168.8,-399.0,https://www.openstreetmap.org/way/431827112
+108412870,,бульвар Чавайна 21,yes,False,False,9,28.0,0.0,True,flat,,,553.9,435,345.8,-264.3,https://www.openstreetmap.org/way/108412870
+108412871,,бульвар Чавайна 23,yes,False,False,9,28.0,0.0,True,flat,,,1816.7,437,302.2,-316.1,https://www.openstreetmap.org/way/108412871
+361005728,,улица Эшкинина 8,yes,False,True,3,10.0,0.0,True,gabled,,,1138.5,438,-76.2,-431.7,https://www.openstreetmap.org/way/361005728
+1207802793,,улица Эшкинина 8А,yes,True,False,5,16.0,0.0,True,pyramidal,,,24.9,440,-184.1,-399.6,https://www.openstreetmap.org/way/1207802793
+1207802783,Институт iSpring,улица Эшкинина 8Б,yes,True,False,5,16.0,0.0,True,pyramidal,,,25.6,441,-193.7,-396.0,https://www.openstreetmap.org/way/1207802783
+1207802791,Институт iSpring,улица Эшкинина 8Б,yes,True,False,8,25.0,0.0,True,cone,,,9.7,441,-226.3,-379.1,https://www.openstreetmap.org/way/1207802791
+88801485,,улица Эшкинина 23,yes,False,False,9,28.0,0.0,True,flat,,,869.1,442,429.1,104.9,https://www.openstreetmap.org/way/88801485
+431621922,,Воскресенский проспект 9А,commercial,False,False,3,10.0,0.0,True,flat,,,372.8,442,367.7,246.0,https://www.openstreetmap.org/way/431621922
+1207802788,Институт iSpring,улица Эшкинина 8Б,yes,True,False,7,22.0,0.0,True,pyramidal,,,46.2,442,-227.1,-379.6,https://www.openstreetmap.org/way/1207802788
+1207802792,Институт iSpring,улица Эшкинина 8Б,yes,True,False,5,16.0,0.0,True,hipped,,,236.0,442,-227.3,-378.7,https://www.openstreetmap.org/way/1207802792
+1050090555,,улица Эшкинина 8,yes,True,False,4,13.0,0.0,True,dome,,,209.8,443,-68.8,-437.6,https://www.openstreetmap.org/way/1050090555
+244423979,Институт iSpring,улица Эшкинина 8Б,university,False,True,4,13.0,0.0,True,hipped,,,1017.7,446,-217.1,-389.7,https://www.openstreetmap.org/way/244423979
+-942322200,,,yes,False,False,2,6.0,0.0,True,pyramidal,#ec8859,brick,43.5,446,-205.8,395.8,https://www.openstreetmap.org/relation/9423222
+128172912,,,yes,False,False,3,10.0,0.0,False,flat,,,72.9,449,-16.2,-448.6,https://www.openstreetmap.org/way/128172912
+55954035,,бульвар Чавайна 20,yes,False,False,9,28.0,0.0,True,flat,,,2798.8,450,446.1,-57.2,https://www.openstreetmap.org/way/55954035
+383639405,Филармония,Вознесенская улица 75,yes,False,True,3,10.0,0.0,True,flat,,,1528.9,450,-440.8,-92.4,https://www.openstreetmap.org/way/383639405
+1050625895,Филармония,Вознесенская улица 75,roof,True,False,1,12.5,9.0,False,dome,,,156.7,450,-440.0,-92.6,https://www.openstreetmap.org/way/1050625895
+-942321500,Собор Воскресения Христова,,cathedral,False,False,4,13.0,0.0,False,flat,,,554.3,451,-229.8,388.3,https://www.openstreetmap.org/relation/9423215
+430298824,,Вознесенская улица 76,commercial,True,False,1,3.5,0.0,True,flat,,,515.8,452,-423.7,157.8,https://www.openstreetmap.org/way/430298824
+-942322801,,,wall,False,False,1,3.0,0.0,True,flat,#ec8859,brick,12.7,454,-213.0,401.4,https://www.openstreetmap.org/relation/9423228
+1047476730,,,yes,False,True,1,5.0,0.0,True,dome,,,13.2,455,-442.1,109.8,https://www.openstreetmap.org/way/1047476730
+1408163046,,,yes,True,False,1,3.0,2.8,True,flat,,,17.2,456,-442.1,110.0,https://www.openstreetmap.org/way/1408163046
+56053284,,Вознесенская улица 76,apartments,True,False,9,28.0,0.0,True,flat,,,1245.0,457,-424.9,168.8,https://www.openstreetmap.org/way/56053284
+1047476729,,,yes,False,True,1,5.0,0.0,True,dome,,,13.2,459,-449.5,92.2,https://www.openstreetmap.org/way/1047476729
+1081002713,,,yes,False,True,1,3.5,0.0,True,flat,#a3331e,,80.9,459,157.8,430.8,https://www.openstreetmap.org/way/1081002713
+1408163073,,,yes,True,False,1,3.0,2.8,True,flat,,,17.2,459,-449.6,92.4,https://www.openstreetmap.org/way/1408163073
+1081002714,,,yes,True,False,2,7.0,0.0,True,flat,#a3331e,,49.7,460,157.6,432.1,https://www.openstreetmap.org/way/1081002714
+106455240,,Вознесенская улица 49,yes,False,False,2,7.0,0.0,True,flat,,,658.7,461,-310.5,341.4,https://www.openstreetmap.org/way/106455240
+-942321600,,Вознесенская улица 45Б,yes,False,False,2,7.0,0.0,True,gabled,#ec8859,brick,66.7,461,-277.4,368.6,https://www.openstreetmap.org/relation/9423216
+55954004,,улица Эшкинина 6А,apartments,False,False,9,28.0,0.0,True,flat,,,845.2,462,138.9,-440.3,https://www.openstreetmap.org/way/55954004
+1207802790,Институт iSpring,улица Эшкинина 8Б,yes,True,False,5,16.0,0.0,True,pyramidal,,,25.7,462,-228.4,-401.6,https://www.openstreetmap.org/way/1207802790
+1412130745,,Вознесенская улица 76,yes,False,True,9,28.0,0.0,True,flat,,,1760.8,463,-430.6,169.5,https://www.openstreetmap.org/way/1412130745
+-812811600,,улица Эшкинина 5,apartments,False,False,9,28.0,0.0,True,flat,,,874.2,463,198.5,-418.0,https://www.openstreetmap.org/relation/8128116
+-937981200,,,yes,False,False,3,10.0,0.0,True,pyramidal,#ec8859,brick,12.5,463,-200.1,417.5,https://www.openstreetmap.org/relation/9379812
+977095096,,,yes,False,False,3,10.0,0.0,False,flat,,,16.1,464,425.8,185.2,https://www.openstreetmap.org/way/977095096
+1050625896,Филармония,Вознесенская улица 75,roof,True,False,1,12.5,9.0,False,gabled,,,237.0,464,-455.9,-84.3,https://www.openstreetmap.org/way/1050625896
+1207802780,Институт iSpring,улица Эшкинина 8Б,yes,True,False,5,16.0,0.0,True,pyramidal,,,25.9,464,-237.8,-398.2,https://www.openstreetmap.org/way/1207802780
+-942321701,,,yes,False,False,2,7.0,0.0,True,dome,#ec8859,brick,43.8,465,-282.9,369.2,https://www.openstreetmap.org/relation/9423217
+128172911,,,yes,False,False,3,10.0,0.0,False,flat,,,30.2,466,-25.5,-465.2,https://www.openstreetmap.org/way/128172911
+430298827,,,retail,False,False,2,7.0,0.0,False,flat,,,168.7,467,-385.9,263.3,https://www.openstreetmap.org/way/430298827
+128167754,,,yes,False,False,3,10.0,0.0,False,flat,,,67.3,468,353.0,-308.1,https://www.openstreetmap.org/way/128167754
+56053282,,бульвар Чавайна 33,yes,False,False,3,10.0,0.0,True,flat,,,674.1,472,-467.5,66.5,https://www.openstreetmap.org/way/56053282
+128172907,,,yes,False,False,3,10.0,0.0,False,flat,,,58.3,477,102.4,-466.2,https://www.openstreetmap.org/way/128172907
+430298825,,Вознесенская улица 74,yes,True,False,9,31.0,3.0,True,flat,,,62.1,477,-430.7,204.6,https://www.openstreetmap.org/way/430298825
+-937981100,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,31.8,477,-224.6,421.0,https://www.openstreetmap.org/relation/9379811
+-942321401,,,yes,False,False,2,5.0,0.0,True,pyramidal,#ec8859,brick,15.2,477,-280.6,385.7,https://www.openstreetmap.org/relation/9423214
+169166977,,Вознесенская улица 74А,apartments,False,False,8,25.0,0.0,True,flat,,,571.3,479,-395.9,270.2,https://www.openstreetmap.org/way/169166977
+-942321400,,,yes,False,False,2,5.0,0.0,True,pyramidal,#ec8859,brick,15.1,482,-278.9,393.3,https://www.openstreetmap.org/relation/9423214
+430298826,,Вознесенская улица 74,commercial,True,False,1,3.5,0.0,True,flat,,,213.7,483,-422.3,235.0,https://www.openstreetmap.org/way/430298826
+383639038,,Воскресенский проспект 9,commercial,False,False,3,10.0,0.0,True,flat,,,742.2,484,383.3,295.6,https://www.openstreetmap.org/way/383639038
+1050090557,,Вознесенская улица 81,yes,True,False,4,13.0,0.0,True,pyramidal,#ec8859,,123.6,486,-461.7,-152.5,https://www.openstreetmap.org/way/1050090557
+-937981102,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,42.2,487,-192.9,447.2,https://www.openstreetmap.org/relation/9379811
+1217536936,,Вознесенская улица 74,yes,False,True,14,43.0,0.0,True,flat,,,1406.8,488,-428.9,233.6,https://www.openstreetmap.org/way/1217536936
+1393042974,,,yes,False,False,3,10.0,0.0,False,flat,,,32.4,488,-29.7,487.5,https://www.openstreetmap.org/way/1393042974
+-942321601,,Вознесенская улица 45Б,yes,False,False,2,7.0,0.0,True,gabled,#ec8859,brick,137.6,488,-268.5,407.6,https://www.openstreetmap.org/relation/9423216
+56044188,,Вознесенская улица 74,apartments,True,False,14,43.0,0.0,True,flat,,,1130.9,490,-428.3,238.2,https://www.openstreetmap.org/way/56044188
+-942321700,,,yes,False,False,2,7.0,0.0,True,dome,#ec8859,brick,43.9,492,-274.5,408.5,https://www.openstreetmap.org/relation/9423217
+-937981000,,Вознесенская улица 43А,yes,False,False,3,10.0,0.0,False,gabled,#ec8859,,74.3,497,-250.1,429.8,https://www.openstreetmap.org/relation/9379810
+671100147,,,yes,False,True,1,3.5,0.0,True,flat,#a3331e,,82.8,498,-14.3,498.2,https://www.openstreetmap.org/way/671100147
+1051660894,,,yes,True,False,2,7.0,0.0,True,flat,#a3331e,,43.9,500,-13.5,499.7,https://www.openstreetmap.org/way/1051660894
+1051660895,,,yes,True,False,3,10.0,0.0,True,pyramidal,#a3331e,,24.3,500,-13.4,499.5,https://www.openstreetmap.org/way/1051660895
+169166974,,,yes,False,False,4,13.0,0.0,True,pyramidal,#ec8859,,84.9,502,-349.7,360.2,https://www.openstreetmap.org/way/169166974
+55954034,,бульвар Чавайна 18А,yes,False,False,9,28.0,0.0,True,flat,,,940.9,506,486.0,-141.0,https://www.openstreetmap.org/way/55954034
+430298823,,,yes,False,False,3,10.0,0.0,False,flat,,,205.0,506,-463.8,203.4,https://www.openstreetmap.org/way/430298823
+55954027,,улица Сомбатхей 21А,kindergarten,False,False,2,7.0,0.0,True,flat,,,1242.8,507,364.2,-352.8,https://www.openstreetmap.org/way/55954027
+56044162,,бульвар Чавайна 32,yes,False,False,4,13.0,0.0,True,flat,,,617.3,510,-486.7,152.1,https://www.openstreetmap.org/way/56044162
+-937981201,,,yes,False,False,3,10.0,0.0,True,pyramidal,#ec8859,brick,16.2,512,-184.9,477.0,https://www.openstreetmap.org/relation/9379812
+-812812100,,улица Эшкинина 3,yes,False,False,9,27.0,0.0,True,flat,,,2352.5,515,22.1,-514.5,https://www.openstreetmap.org/relation/8128121
+55953989,,улица Эшкинина 7,kindergarten,False,False,3,10.0,0.0,False,flat,,,689.2,516,80.5,-509.4,https://www.openstreetmap.org/way/55953989
+675299947,,Воскресенская набережная 4/1,yes,False,False,3,10.0,0.0,True,flat,,,448.7,516,-219.4,467.2,https://www.openstreetmap.org/way/675299947
+430330516,,,yes,False,False,2,7.0,0.0,True,gabled,#ec8859,,358.3,518,-343.1,388.0,https://www.openstreetmap.org/way/430330516
+-937980900,,Вознесенская улица 41,garage,False,False,1,3.5,0.0,False,gabled,,,525.9,519,-253.9,452.8,https://www.openstreetmap.org/relation/9379809
+431199511,,,yes,False,False,3,10.0,0.0,False,flat,,,95.3,520,-442.0,274.8,https://www.openstreetmap.org/way/431199511
+1052388777,,Вознесенская улица 43,yes,False,True,3,10.0,0.0,True,flat,,,623.4,521,-281.3,438.5,https://www.openstreetmap.org/way/1052388777
+1052388778,,Вознесенская улица 43,yes,True,False,3,10.0,0.0,True,flat,,,18.3,521,-290.3,433.0,https://www.openstreetmap.org/way/1052388778
+1052983718,,Вознесенская улица 43,yes,True,False,4,13.0,0.0,True,pyramidal,,,7.9,521,-290.4,432.8,https://www.openstreetmap.org/way/1052983718
+-1403250500,,Вознесенская улица 81,yes,False,True,3,10.0,0.0,True,hipped,#ec8859,,2935.1,521,-492.0,-170.6,https://www.openstreetmap.org/relation/14032505
+-937981101,,,wall,False,False,2,5.0,0.0,True,flat,#ec8859,brick,12.8,523,-181.3,490.7,https://www.openstreetmap.org/relation/9379811
+90606527,,,yes,False,False,3,10.0,0.0,False,flat,,,107.3,525,-196.3,487.0,https://www.openstreetmap.org/way/90606527
+361021477,,Воскресенский проспект 7,commercial,False,True,3,10.0,0.0,True,flat,,,778.6,525,408.2,330.4,https://www.openstreetmap.org/way/361021477
+-937981202,,,yes,False,False,3,10.0,0.0,True,pyramidal,#ec8859,brick,12.5,528,-178.9,496.9,https://www.openstreetmap.org/relation/9379812
+379766192,,площадь Революции 3,yes,False,False,10,31.0,0.0,True,flat,,,745.3,530,-404.6,342.2,https://www.openstreetmap.org/way/379766192
+1047187331,Детская поликлиника №3,улица Эшкинина 4Б,yes,True,False,7,22.0,0.0,True,flat,,,887.9,530,-261.6,-461.5,https://www.openstreetmap.org/way/1047187331
+1047187332,Детская поликлиника №3,улица Эшкинина 4Б,yes,True,False,8,46.0,21.0,True,dome,,,149.1,530,-261.0,-460.9,https://www.openstreetmap.org/way/1047187332
+56044156,,Советская улица 125А,yes,False,False,2,7.0,0.0,True,flat,,,427.1,531,-472.2,243.4,https://www.openstreetmap.org/way/56044156
+431199510,,,yes,False,False,3,10.0,0.0,False,flat,,,50.3,531,-453.6,276.7,https://www.openstreetmap.org/way/431199510
+1047187333,Детская поликлиника №3,улица Эшкинина 4Б,yes,False,True,3,10.0,0.0,False,flat,,,1185.9,532,-262.2,-462.8,https://www.openstreetmap.org/way/1047187333
+1052009944,,Воскресенский проспект 7,yes,True,False,3,10.0,0.0,True,flat,,,97.7,534,417.0,334.0,https://www.openstreetmap.org/way/1052009944
+1047187330,Детская поликлиника №3,улица Эшкинина 4Б,yes,True,False,1,3.5,0.0,True,flat,,,298.0,537,-255.7,-471.7,https://www.openstreetmap.org/way/1047187330
+55954023,,бульвар Чавайна 18,yes,False,False,9,28.0,0.0,True,flat,,,1497.0,539,497.1,-209.0,https://www.openstreetmap.org/way/55954023
+1052009943,,Воскресенский проспект 7,yes,True,False,3,10.0,0.0,True,flat,,,128.0,542,427.3,333.1,https://www.openstreetmap.org/way/1052009943
+430330515,,,yes,False,False,2,7.0,0.0,True,gabled,#ec8859,,361.5,543,-390.5,377.9,https://www.openstreetmap.org/way/430330515
+-812812400,,,yes,False,False,1,6.0,0.0,True,flat,,,1866.8,544,17.6,-543.4,https://www.openstreetmap.org/relation/8128124
+90606495,,,yes,False,False,3,10.0,0.0,False,flat,,,42.9,547,-253.4,484.8,https://www.openstreetmap.org/way/90606495
+90606501,,Вознесенская улица 39А,yes,False,False,3,10.0,0.0,False,flat,,,108.4,547,-236.1,493.3,https://www.openstreetmap.org/way/90606501
+87197248,,,yes,False,False,3,10.0,0.0,False,flat,,,128.3,549,205.7,508.6,https://www.openstreetmap.org/way/87197248
+90606517,,Вознесенская улица 58,yes,False,True,3,10.0,0.0,True,flat,#ec8859,,119.5,554,-325.5,448.5,https://www.openstreetmap.org/way/90606517
+835065640,,Царьградский проспект 1,apartments,False,False,9,30.0,0.0,True,flat,,,631.0,554,449.7,324.2,https://www.openstreetmap.org/way/835065640
+55954028,,улица Сомбатхей 9,yes,False,False,9,28.0,0.0,True,flat,,,2204.9,555,359.0,-423.8,https://www.openstreetmap.org/way/55954028
+675299942,,,yes,False,False,2,5.0,0.0,True,flat,,,21.4,555,-208.4,514.5,https://www.openstreetmap.org/way/675299942
+1049241528,,Вознесенская улица 58,yes,True,False,4,22.0,9.0,True,flat,#ec8859,,70.3,555,-325.3,449.7,https://www.openstreetmap.org/way/1049241528
+1049241529,,Вознесенская улица 58,yes,True,False,5,28.0,12.0,True,pyramidal,#ec8859,,46.0,555,-325.2,449.5,https://www.openstreetmap.org/way/1049241529
+1051660892,,Воскресенская набережная 2,yes,True,False,2,7.0,0.0,True,gabled,,,104.9,559,-198.9,522.1,https://www.openstreetmap.org/way/1051660892
+32373870,,,yes,False,False,3,10.0,0.0,False,flat,,,254.1,565,262.1,500.3,https://www.openstreetmap.org/way/32373870
+90606502,,Воскресенская набережная 2,yes,False,True,3,10.0,0.0,False,flat,,,446.3,565,-194.7,530.7,https://www.openstreetmap.org/way/90606502
+90606562,Усадьба Чулкова,Вознесенская улица 39,yes,False,False,2,7.0,0.0,True,hipped,,,267.1,565,-261.7,501.1,https://www.openstreetmap.org/way/90606562
+108210292,,Ленинский проспект 20А,apartments,False,False,9,28.0,0.0,True,flat,,,1780.8,567,194.3,-533.0,https://www.openstreetmap.org/way/108210292
+56044159,,площадь Революции 5,yes,False,False,5,16.0,0.0,True,flat,,,604.3,573,-445.7,360.1,https://www.openstreetmap.org/way/56044159
+56015210,,Советская улица 121,yes,False,False,5,16.0,0.0,True,flat,,,948.7,575,-481.3,313.9,https://www.openstreetmap.org/way/56015210
+361021473,,улица Эшкинина 25,apartments,False,False,9,30.0,0.0,True,flat,,,2286.4,575,500.3,283.8,https://www.openstreetmap.org/way/361021473
+1192453543,,39А,yes,False,False,1,3.5,0.0,True,flat,,,30.3,581,-257.5,520.9,https://www.openstreetmap.org/way/1192453543
+679553306,Покровская часовня,Советская улица 105А,yes,False,False,3,10.0,0.0,False,pyramidal,,brick,32.5,585,-421.0,405.4,https://www.openstreetmap.org/way/679553306
+1050090554,,,roof,True,False,1,3.5,0.0,False,gabled,,,2015.9,586,-237.3,-535.9,https://www.openstreetmap.org/way/1050090554
+55954030,,бульвар Чавайна 19А,yes,False,False,9,28.0,0.0,True,flat,,,556.8,592,471.5,-357.4,https://www.openstreetmap.org/way/55954030
+121006599,,,yes,False,False,1,3.5,0.0,True,flat,,,61.2,592,373.8,-458.8,https://www.openstreetmap.org/way/121006599
+88813126,,,yes,False,True,3,10.0,0.0,True,flat,,,10668.9,594,-252.9,-537.9,https://www.openstreetmap.org/way/88813126
+1067702208,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,0.6,594,352.3,478.7,https://www.openstreetmap.org/way/1067702208
+1067702207,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,0.6,595,355.6,477.5,https://www.openstreetmap.org/way/1067702207
+90606536,,,yes,False,True,4,13.0,0.0,True,pyramidal,#ec8859,,105.3,596,-442.6,399.7,https://www.openstreetmap.org/way/90606536
+1067702196,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,9.0,596,352.8,480.7,https://www.openstreetmap.org/way/1067702196
+1067702206,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,0.6,596,359.5,476.0,https://www.openstreetmap.org/way/1067702206
+1067702197,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,9.1,597,356.1,479.4,https://www.openstreetmap.org/way/1067702197
+-1422878000,,,yes,True,False,1,5.0,0.0,True,flat,#a3331e,,22.2,597,350.8,482.5,https://www.openstreetmap.org/relation/14228780
+1067702195,,,yes,True,False,3,10.0,9.0,True,flat,#a3331e,,82.2,598,357.8,479.1,https://www.openstreetmap.org/way/1067702195
+1067702198,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,9.2,598,360.0,477.9,https://www.openstreetmap.org/way/1067702198
+1067702200,,,yes,True,False,4,13.0,10.0,True,onion,#a3331e,,3.4,598,358.5,479.2,https://www.openstreetmap.org/way/1067702200
+1067702205,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,0.6,598,362.8,474.7,https://www.openstreetmap.org/way/1067702205
+1530071197,,,yes,True,False,5,28.0,12.0,True,pyramidal,#ec8859,,10.8,598,-445.2,399.4,https://www.openstreetmap.org/way/1530071197
+-1422878100,,,yes,False,True,5,15.0,0.0,True,flat,#a3331e,,126.9,598,358.1,479.4,https://www.openstreetmap.org/relation/14228781
+1067702199,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,9.3,599,363.4,476.7,https://www.openstreetmap.org/way/1067702199
+1067702201,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,0.6,599,354.1,483.3,https://www.openstreetmap.org/way/1067702201
+1067702202,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,0.6,600,357.3,482.1,https://www.openstreetmap.org/way/1067702202
+-566173700,,улица Эшкинина 9А,school,False,False,3,10.0,0.0,False,flat,,,3610.9,600,313.3,-511.4,https://www.openstreetmap.org/relation/5661737
+430330517,,,yes,False,False,2,7.0,0.0,True,gabled,#ec8859,,318.2,601,-375.0,470.2,https://www.openstreetmap.org/way/430330517
+1067702192,,,yes,True,False,1,5.0,0.0,True,flat,#a3331e,,22.4,601,366.5,476.5,https://www.openstreetmap.org/way/1067702192
+1067702203,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,0.6,601,361.2,480.6,https://www.openstreetmap.org/way/1067702203
+88693925,,улица Эшкинина 10,yes,False,False,2,7.0,0.0,True,flat,,,242.4,602,449.2,-401.3,https://www.openstreetmap.org/way/88693925
+1067702204,,,yes,True,False,3,9.0,0.0,True,flat,#a3331e,,0.6,602,364.7,479.3,https://www.openstreetmap.org/way/1067702204
+88693927,,,yes,False,False,1,3.5,0.0,True,flat,,,403.4,603,357.9,-485.8,https://www.openstreetmap.org/way/88693927
+1031655020,ЦСК картинг,Царьградский проспект 36,garage,False,False,1,3.5,0.0,True,flat,,,145.0,605,315.5,516.4,https://www.openstreetmap.org/way/1031655020
+430330514,,,yes,False,False,2,7.0,0.0,True,gabled,#ec8859,,439.4,615,-422.6,446.4,https://www.openstreetmap.org/way/430330514
+1419400414,,Советская улица 105,yes,True,False,5,16.0,0.0,True,flat,,,410.0,617,-357.8,503.0,https://www.openstreetmap.org/way/1419400414
+1075080421,,бульвар Чавайна 19,apartments,False,False,9,28.0,0.0,True,flat,,,3185.0,625,533.1,-326.9,https://www.openstreetmap.org/way/1075080421
+90606512,,,yes,False,False,4,13.0,0.0,True,pyramidal,#ec8859,,84.8,633,-407.6,484.9,https://www.openstreetmap.org/way/90606512
+-57121200,,Советская улица 105,apartments,False,True,4,13.0,0.0,True,saltbox,,,7759.8,635,-342.4,534.8,https://www.openstreetmap.org/relation/571212
+1051341374,Дом Булыгина,Советская улица 102,yes,True,False,2,7.0,0.0,True,gabled,,,56.7,658,-459.6,470.4,https://www.openstreetmap.org/way/1051341374
+1051341373,Дом Булыгина,Советская улица 102,yes,True,False,3,10.0,0.0,True,gabled,,,137.5,661,-456.7,477.7,https://www.openstreetmap.org/way/1051341373
+1051341372,Дом Булыгина,Советская улица 102,yes,True,False,2,7.0,0.0,True,gabled,,,66.3,664,-454.0,484.3,https://www.openstreetmap.org/way/1051341372
+90606544,Дом Булыгина,Советская улица 102,yes,False,True,2,7.0,0.0,True,flat,,,449.8,665,-461.4,478.2,https://www.openstreetmap.org/way/90606544
+171028983,,Советская улица 100А,apartments,False,False,4,13.0,0.0,True,flat,,,327.8,677,-445.8,509.3,https://www.openstreetmap.org/way/171028983
+430565432,,,yes,False,False,4,13.0,0.0,True,flat,,,445.1,689,-433.9,535.7,https://www.openstreetmap.org/way/430565432
+55953992,Веснушка,улица Петрова 3А,kindergarten,False,False,2,7.0,0.0,True,flat,,,1136.3,701,470.7,-519.3,https://www.openstreetmap.org/way/55953992

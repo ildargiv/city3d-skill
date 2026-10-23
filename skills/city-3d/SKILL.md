@@ -72,7 +72,7 @@ Show it: `city/index.html` (written next to `city.json`, with the data also in
 `city.js`) opens with a double click, no server needed. It has a Realistic /
 Cartoon switch, windows drawn per storey, pitched roofs, and a card per
 building. After `house_folders.py init` (step 5) the card also links to the
-building's folder ("Открыть папку дома").
+building's folder ("Open building folder").
 
 ## 3. Blender scene and export
 
@@ -128,24 +128,29 @@ Then give every building its own folder on the user's machine, so new
 photos land in the right place:
 
 ```bash
-python3 scripts/house_folders.py init city/city.json --root "<project>/дома" --coverage coverage.json
+python3 scripts/house_folders.py init city/city.json --root "<project>/buildings" --coverage coverage.json
 ```
 
-Each folder `NN <name> [<osm id>]` has `фото/` (the user drops photos and
-video here), `кадры/` (frames you cut from earlier videos that show this
-building), `модель/` (your result) and `ДОСНЯТЬ.md` (what is still
-missing). `<project>/дома/СТАТУС.md` sums it up. Re-running `init` keeps
-existing folders and files and refreshes the two .md files.
+Each folder `NN <name> [<osm id>]` has `photos/` (the user drops photos and
+video here), `frames/` (frames you cut from earlier videos that show this
+building), `model/` (your result) and `TO_SHOOT.md` (what is still
+missing). `<root>/STATUS.md` sums it up. Re-running `init` keeps existing
+folders and files and refreshes the two .md files.
+
+Labels and names follow `--lang` (`en` default, `ru` gives `фото/`,
+`кадры/`, `модель/`, `ДОСНЯТЬ.md`, `СТАТУС.md`). Use the user's language in
+`osm2city.py`, `shotlist.py` and `house_folders.py`; an existing root keeps
+the language it was created in.
 
 When the user says they added photos:
 
 ```bash
-python3 scripts/house_folders.py status city/city.json --root "<project>/дома" --coverage coverage.json
+python3 scripts/house_folders.py status city/city.json --root "<project>/buildings" --coverage coverage.json
 ```
 
 It lists buildings with new files since the last check; process only those
 (step 6), update `coverage.json`, and run `init` again to refresh
-`ДОСНЯТЬ.md` and `СТАТУС.md`.
+`TO_SHOOT.md` and `STATUS.md`.
 
 ## 6. Photogrammetry per building
 
@@ -222,7 +227,7 @@ route it:
 Habits that save more than model choice:
 - Look at one frame every few seconds, never at every frame.
 - Start each new round (new photos, new district) in a fresh session: the
-  state lives in the folders, `coverage.json` and `СТАТУС.md`, not in chat.
+  state lives in the folders, `coverage.json` and `STATUS.md`, not in chat.
 - Do not keep a session open while COLMAP runs; check back when it is done.
 
 ## Reporting to the user

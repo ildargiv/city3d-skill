@@ -1,119 +1,127 @@
-# city3d: настоящий город в 3D
+# city3d: a real city in 3D
 
-Скил для Claude Code, который превращает реальный район в 3D-сцену для игры.
-Каждый дом получается отдельной моделью на своём месте, ландшафт собирается
-одним куском, а стилей два: реалистичный и мультяшный.
+**English** · [Русский](README.ru.md)
 
-Основа берётся из открытых данных OpenStreetMap. Качество дают ваши
-собственные фото и видео: агент строит всё, что может, а потом говорит, какие
-дома и с каких сторон доснять.
+A Claude Code skill that turns a real neighbourhood into a 3D scene for a
+game. Every building is a separate model standing on its own footprint, the
+landscape is one piece, and there are two styles: realistic and cartoon.
 
-![Квартал в Blender, реализм](docs/blender_real.png)
-![Тот же квартал, мультяшный стиль](docs/blender_toon.png)
+The base comes from open OpenStreetMap data. The quality comes from your own
+photos and video: the agent builds everything it can, then tells you which
+buildings to shoot and from which sides.
 
-## Как это работает
+![Yoshkar-Ola centre, realistic style](docs/centre_real.png)
+![The same district, cartoon style](docs/centre_toon.png)
+
+## How it works
 
 ```
-место + радиус → OpenStreetMap → болванки всех домов → список съёмки
-       ↑                                                    ↓
-пересборка со сканами ← модели из кадров ← вы снимаете по списку
+place + radius → OpenStreetMap → block model of every building → shot list
+       ↑                                                            ↓
+rebuild with scans  ←  models from your frames  ←  you shoot what is listed
 ```
 
-1. Вы называете место и радиус, например «театр кукол, Йошкар-Ола, 300 м».
-2. Агент выгружает OSM и строит все дома по контурам и этажности, а также
-   единый ландшафт: дороги, газоны, воду и деревья.
-3. Агент смотрит ваши фото и видео и отмечает, что из них уже годится.
-4. Вы получаете **список съёмки**: карту для телефона, дома в порядке обхода
-   и для каждого дома нужные фасады. У каждого дома есть своя папка, и в ней
-   файл `ДОСНЯТЬ.md`. Новые фото вы кладёте в `фото/` этого дома и пишете
-   «добавил».
-5. Из новых кадров собираются модели домов (COLMAP + OpenMVS или
-   RealityScan). Они ставятся на свои контуры, и всё повторяется, пока
-   результат вас не устроит.
-6. Экспорт в Blender (`.blend`) и `.glb` для Unreal, Godot и Unity.
+1. You name a place and a radius, for example "the puppet theatre in
+   Yoshkar-Ola, 300 m".
+2. The agent downloads OSM and builds every building from its outline and
+   number of storeys, plus one landscape: roads, lawns, water and trees.
+3. The agent looks through the photos and video you already have and notes
+   what is usable.
+4. You get a **shot list**: a phone-friendly map, buildings in walking order
+   and the facades still needed for each. Every building gets its own folder
+   with a `TO_SHOOT.md` file. You drop new photos into that building's
+   `photos/` folder and tell the agent "added".
+5. Building models are made from the new frames (COLMAP + OpenMVS, or
+   RealityScan), placed on their footprints, and the loop repeats until you
+   are happy with the result.
+6. Export to Blender (`.blend`) and `.glb` for Unreal, Godot and Unity.
 
-![Список съёмки](docs/shotlist.png)
+| Close-up: Spasskaya Tower, realistic | The same, cartoon |
+|---|---|
+| ![](docs/tower_real.png) | ![](docs/tower_toon.png) |
 
-## Установка
+The browser preview opens with a double click. Click a building to see its
+card: name, address, storeys, height, a link to OpenStreetMap and, once the
+folders exist, a link to the building's own photo folder.
 
-В Claude Code:
+<img src="docs/shotlist.png" alt="Shot list on a phone" width="320">
+
+## Install
+
+In Claude Code:
 
 ```
 /plugin marketplace add ildargiv/city3d-skill
 /plugin install city3d@city3d
 ```
 
-Потом просто напишите: «Сделай в 3D район вокруг ... радиусом 300 м».
+Then just say: "Build the district around ... in 3D, radius 300 m".
 
-Что понадобится:
+You will need:
 - Python 3.9+
-- Blender 4.2+ (для сцены и экспорта; [BlenderMCP](https://github.com/ahujasid/blender-mcp) по желанию)
-- ffmpeg (для видео)
-- COLMAP и OpenMVS для сборки моделей из кадров. Обе программы работают без
-  NVIDIA, но медленно. С видеокартой NVIDIA лучше взять RealityScan.
-  Скачайте их сами и распакуйте, установка не нужна:
+- Blender 4.2+ for the scene and export ([BlenderMCP](https://github.com/ahujasid/blender-mcp) is optional)
+- ffmpeg for video
+- COLMAP and OpenMVS to build models from frames. Both run without an NVIDIA
+  card, only slower. With an NVIDIA card, RealityScan gives better results.
+  Download and unpack them yourself, no installation needed:
   [COLMAP](https://github.com/colmap/colmap/releases) (`colmap-x64-windows-nocuda.zip`)
-  в `Программы\colmap` и
+  into `Programs\colmap` and
   [OpenMVS](https://github.com/cdcseacave/openMVS/releases) (`OpenMVS_Windows_x64.zip`)
-  в `Программы\openmvs`. Агенту обычно не разрешено качать и запускать
-  сторонние программы самому.
+  into `Programs\openmvs`. Claude Code's safety checks usually do not let
+  the agent download and run third-party programs by itself.
 
-## Экономия: какая модель что делает
+The interface follows the browser's language. Pass `--lang ru` to
+`osm2city.py`, `shotlist.py` and `house_folders.py` for Russian labels and
+folder names; an existing project keeps the language it was created in.
 
-Тяжёлую работу (карта, Blender, видео, сборка 3D) делают программы на
-процессоре, и платить за неё не нужно. Модели нужны только для решений:
+## Keeping it cheap: which model does what
 
-- **Opus** — развитие скила и спорные случаи.
-- **Sonnet** — обычный рабочий цикл (`/model sonnet`), а также помощники
-  `building-matcher` (какой дом в кадре) и `model-builder` (сборка модели дома).
-- **Haiku** — помощник `frame-triage`: новые файлы, нарезка кадров, отсев
-  размытых.
+The heavy work (map, Blender, video, 3D reconstruction) is done by programs
+on the CPU and costs no tokens. Models are only needed for decisions:
 
-Каждый новый этап лучше начинать в новом сеансе: всё состояние лежит в
-папках и `СТАТУС.md`.
+- **Opus**: developing the skill and unclear cases.
+- **Sonnet**: the routine loop (`/model sonnet`), plus the helper agents
+  `building-matcher` (which building is in the frame) and `model-builder`
+  (building one model).
+- **Haiku**: the `frame-triage` helper: new files, cutting frames, dropping
+  blurry ones.
 
-## Что можно использовать
+Start each new round in a fresh session: all the state lives in the folders
+and `STATUS.md`.
 
-Кратко: OpenStreetMap, открытые карты высот, Mapillary/Panoramax и ваши
-собственные съёмки. Карты, панорамы и 3D-модели Google, Яндекса и 2ГИС
-можно только смотреть глазами для сверки, копировать их в модель нельзя даже
-для личных целей. Подробности и ссылки на условия сервисов:
-[references/legal.md](skills/city-3d/references/legal.md).
+## What data you may use
 
-Во всех экспортах ставится подпись «© участники OpenStreetMap (ODbL)».
+In short: OpenStreetMap, open elevation data, Mapillary/Panoramax and your
+own photos and video. Maps, panoramas and 3D models from Google, Yandex and
+2GIS are for looking at only; copying them into a model is not allowed, even
+for personal use. Details and links to each service's terms:
+[references/legal.md](skills/city-3d/references/legal.md). If you bring
+other sources, that is your own responsibility.
 
-## Пример
+Every export carries the credit "© OpenStreetMap contributors (ODbL)".
 
-[examples/yoshkar-ola](examples/yoshkar-ola): квартал у Республиканского
-театра кукол в Йошкар-Оле радиусом 320 м. Это 43 здания и 65 частей зданий
-с готовым списком съёмки. Чтобы открыть `index.html`, запустите в этой папке
-локальный сервер (`python3 -m http.server`).
+## Example
 
-## Скрипты
+[examples/yoshkar-ola](examples/yoshkar-ola): the centre of Yoshkar-Ola,
+Russia, from the puppet theatre to the Spasskaya and Blagoveshchenskaya
+towers, including the Bruges Embankment. 202 buildings and 229 building
+parts with a ready shot list. Open `index.html` with a double click.
+Building names come from OSM and stay in Russian.
 
-| Скрипт | Что делает |
+## Scripts
+
+| Script | What it does |
 |---|---|
-| `fetch_osm.py` | выгружает OSM по точке и радиусу (Overpass) |
-| `osm2city.py` | из OSM делает `buildings.csv`, `city.json` и `city.obj` |
-| `preview.html` | 3D-просмотр в браузере: два стиля, окна, крыши, карточка дома со ссылкой на его папку |
-| `blender_city.py` | сцена в Blender: дома отдельными объектами, единый ландшафт, экспорт `.glb` |
-| `shotlist.py` | список съёмки: что доснять и в каком порядке |
-| `house_folders.py` | папка на каждый дом (`фото`, `кадры`, `модель`, `ДОСНЯТЬ.md`) и проверка, куда добавились новые фото |
-| `extract_frames.py` | нарезает видео на резкие кадры |
-| `photogrammetry.py` | собирает модель дома из кадров (COLMAP + OpenMVS) |
+| `fetch_osm.py` | downloads OSM around a point and radius (Overpass) |
+| `osm2city.py` | turns OSM into `buildings.csv`, `city.json`, `city.obj` and the `index.html` preview |
+| `preview.html` | 3D browser preview: two styles, windows, roofs, a card per building with a link to its folder |
+| `blender_city.py` | Blender scene: each building a separate object, one landscape, `.glb` export |
+| `shotlist.py` | shot list: what to shoot and in what order |
+| `house_folders.py` | a folder per building (`photos`, `frames`, `model`, `TO_SHOOT.md`) and a check for newly added photos |
+| `extract_frames.py` | cuts video into sharp frames |
+| `photogrammetry.py` | builds a building model from frames (COLMAP + OpenMVS) |
 
----
+## Licence
 
-## English
-
-A Claude Code skill that turns a real neighbourhood into a game-ready 3D
-scene: one model per building on its OpenStreetMap footprint, one shared
-landscape, realistic and cartoon styles, export to Blender and
-Unreal/Godot/Unity. The agent builds everything it can from open data, then
-gives you a shot list of which facades to photograph. Your own photos and
-video are turned into building models, and the loop repeats.
-
-Install: `/plugin marketplace add ildargiv/city3d-skill`, then
-`/plugin install city3d@city3d`. Data rules:
-[legal.md](skills/city-3d/references/legal.md). The code is under the MIT
-licence; the map data is © OpenStreetMap contributors, ODbL.
+The code is MIT. The map data in the example and in every export is
+© OpenStreetMap contributors, ODbL.

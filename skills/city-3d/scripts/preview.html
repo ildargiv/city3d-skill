@@ -60,32 +60,62 @@ h1 { font: 700 1.15rem/1.2 var(--display); margin: 0; letter-spacing: -0.01em; t
 }
 </style>
 
-<div id="scene" aria-label="3D-модель квартала"></div>
+<div id="scene" data-i18n-label="scene"></div>
 <section class="panel">
   <div>
     <h1 id="title">City 3D</h1>
-    <p class="sub" id="subtitle">Загружаю данные…</p>
+    <p class="sub" id="subtitle" data-i18n="loading">Loading…</p>
   </div>
   <div class="stats">
-    <div class="stat"><b id="sB">–</b><span>домов</span></div>
-    <div class="stat"><b id="sK">–</b><span>с этажами</span></div>
-    <div class="stat"><b id="sR">–</b><span>дорог</span></div>
+    <div class="stat"><b id="sB">–</b><span data-i18n="buildings">buildings</span></div>
+    <div class="stat"><b id="sK">–</b><span data-i18n="withLevels">with levels</span></div>
+    <div class="stat"><b id="sR">–</b><span data-i18n="roads">roads</span></div>
   </div>
-  <div class="seg" role="group" aria-label="Стиль">
-    <button id="btnReal" aria-pressed="true">Реализм</button>
-    <button id="btnToon" aria-pressed="false">Мультяшный</button>
+  <div class="seg" role="group" data-i18n-label="style">
+    <button id="btnReal" aria-pressed="true" data-i18n="real">Realistic</button>
+    <button id="btnToon" aria-pressed="false" data-i18n="toon">Cartoon</button>
   </div>
-  <div id="info">Нажмите на дом, чтобы увидеть его паспорт.</div>
-  <p class="note">Это болванки по контурам OSM: высота из этажности или по умолчанию 3 этажа. Детали фасадов добавятся на следующем шаге.</p>
+  <div id="info" data-i18n="hint">Click a building to see its card.</div>
+  <p class="note" data-i18n="note">Block models from OpenStreetMap outlines: height from the number of levels, 3 levels where unknown. Scanned facades replace them building by building.</p>
   <div id="err" hidden></div>
 </section>
-<div class="credit">© участники OpenStreetMap, ODbL</div>
+<div class="credit" data-i18n="credit">© OpenStreetMap contributors, ODbL</div>
 
 <!-- Opened from disk, browsers refuse fetch(); these optional scripts carry the data instead:
      city.js (window.CITY_DATA, written by osm2city.py) and folders.js
      (window.CITY_FOLDERS, written by house_folders.py). Missing files are fine. -->
 <script src="city.js"></script>
 <script src="folders.js"></script>
+<script>
+// Interface language: city.json "lang" if set, else the browser's.
+const STRINGS = {
+  en: { scene: '3D model of the district', loading: 'Loading…', buildings: 'buildings',
+    withLevels: 'with levels', roads: 'roads', style: 'Style', real: 'Realistic', toon: 'Cartoon',
+    hint: 'Click a building to see its card.',
+    note: 'Block models from OpenStreetMap outlines: height from the number of levels, 3 levels where unknown. Scanned facades replace them building by building.',
+    credit: '© OpenStreetMap contributors, ODbL', part: 'Building part', building: 'Building',
+    address: 'Address', levels: 'Levels', levelsDefault: ' (not in OSM, default)', height: 'Height',
+    area: 'Footprint', m: 'm', m2: 'm²', openOsm: 'Open in OSM', openFolder: 'Open building folder',
+    radius: 'Radius', centre: 'centre', loadError: 'Could not load the district data (city.json).' },
+  ru: { scene: '3D-модель квартала', loading: 'Загружаю данные…', buildings: 'домов',
+    withLevels: 'с этажами', roads: 'дорог', style: 'Стиль', real: 'Реализм', toon: 'Мультяшный',
+    hint: 'Нажмите на дом, чтобы увидеть его паспорт.',
+    note: 'Болванки по контурам OSM: высота из этажности, где её нет — 3 этажа. Сканы фасадов заменяют их дом за домом.',
+    credit: '© участники OpenStreetMap, ODbL', part: 'Часть здания', building: 'Здание',
+    address: 'Адрес', levels: 'Этажей', levelsDefault: ' (нет в OSM, по умолчанию)', height: 'Высота',
+    area: 'Площадь', m: 'м', m2: 'м²', openOsm: 'Открыть в OSM', openFolder: 'Открыть папку дома',
+    radius: 'Радиус', centre: 'центр', loadError: 'Не удалось загрузить данные квартала (city.json).' },
+};
+let T = STRINGS.en;
+function applyLang(lang) {
+  const l = lang || ((navigator.language || '').startsWith('ru') ? 'ru' : 'en');
+  T = STRINGS[l] || STRINGS.en;
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach(e => { e.textContent = T[e.dataset.i18n]; });
+  document.querySelectorAll('[data-i18n-label]').forEach(e => e.setAttribute('aria-label', T[e.dataset.i18nLabel]));
+}
+applyLang(window.CITY_DATA && window.CITY_DATA.lang);
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <script>
@@ -339,12 +369,12 @@ function highlight(m) {
   selected = b.id;
   const row = (k, v) => v ? `<div><span class="k">${k}:</span> ${esc(v)}</div>` : '';
   document.getElementById('info').innerHTML =
-    `<div><b>${esc(b.name || (b.part ? 'Часть здания' : 'Здание'))}</b></div>` +
-    row('Адрес', b.address) +
-    row('Этажей', b.levels + (b.levels_known ? '' : ' (нет в OSM, по умолчанию)')) +
-    row('Высота', b.height + ' м') + row('Площадь', b.area_m2 + ' м²') +
-    `<div class="links"><a href="${osmUrl(b.id)}" target="_blank" rel="noopener">Открыть в OSM</a>` +
-    (folderOf(b) ? ` · <a href="${esc(folderOf(b))}" target="_blank" rel="noopener">Открыть папку дома</a>` : '') +
+    `<div><b>${esc(b.name || (b.part ? T.part : T.building))}</b></div>` +
+    row(T.address, b.address) +
+    row(T.levels, b.levels + (b.levels_known ? '' : T.levelsDefault)) +
+    row(T.height, b.height + ' ' + T.m) + row(T.area, b.area_m2 + ' ' + T.m2) +
+    `<div class="links"><a href="${osmUrl(b.id)}" target="_blank" rel="noopener">${T.openOsm}</a>` +
+    (folderOf(b) ? ` · <a href="${esc(folderOf(b))}" target="_blank" rel="noopener">${T.openFolder}</a>` : '') +
     `</div>`;
 }
 
@@ -381,9 +411,10 @@ resize();
 (window.CITY_DATA ? Promise.resolve(window.CITY_DATA)
   : fetch('city.json').then(r => r.json())).then(d => {
   data = d;
+  if (d.lang) applyLang(d.lang);
   if (d.name) document.getElementById('title').textContent = document.title = d.name;
   document.getElementById('subtitle').textContent =
-    `Радиус ${d.radius} м · центр ${d.center[0].toFixed(5)}, ${d.center[1].toFixed(5)}`;
+    `${T.radius} ${d.radius} ${T.m} · ${T.centre} ${d.center[0].toFixed(5)}, ${d.center[1].toFixed(5)}`;
   const whole = d.buildings.filter(b => !b.part);
   document.getElementById('sB').textContent = whole.length;
   document.getElementById('sK').textContent = whole.filter(b => b.levels_known).length;
@@ -392,14 +423,14 @@ resize();
   const maxH = Math.max(0, ...d.buildings.map(b => b.height));
   controls.target.set(0, d.radius < 150 ? maxH * 0.4 : 0, 0);
   build();
-  const centre = pickables.filter(p => /театр кукол/i.test(p.userData.name))
+  const centre = pickables.filter(p => d.focus && p.userData.name === d.focus)
       .sort((a, b) => b.userData.area_m2 - a.userData.area_m2)[0] ||
     pickables.slice().sort((a, b) => a.userData.dist_m - b.userData.dist_m)[0];
   if (centre) highlight(centre);
 }).catch(() => {
   const e = document.getElementById('err');
   e.hidden = false;
-  e.textContent = 'Не удалось загрузить данные квартала (city.json).';
+  e.textContent = T.loadError;
 });
 
 (function loop() {

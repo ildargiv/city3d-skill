@@ -1,23 +1,27 @@
 #!/usr/bin/env python3
 """One folder per building: the user drops photos and video there.
 
-  python3 house_folders.py init   city.json --root "Йошкар-Ола/дома" [--coverage coverage.json]
-  python3 house_folders.py status city.json --root "Йошкар-Ола/дома" [--coverage coverage.json]
+  python3 house_folders.py init   city.json --root buildings/ [--coverage coverage.json] [--lang en|ru]
+  python3 house_folders.py status city.json --root buildings/ [--coverage coverage.json]
 
-Layout under --root:
-  СТАТУС.md                         one table: building / status / sides left
+Layout under --root (Russian names with --lang ru: СТАТУС.md, фото/, кадры/,
+модель/, ДОСНЯТЬ.md):
+  STATUS.md                         one table: building / status / sides left
   <NN> <name or address> [<osm id>]/
-      фото/        the user drops photos and video here
-      кадры/       frames the agent cut from videos showing this building
-      модель/      the agent's result (mesh + textures)
-      ДОСНЯТЬ.md   facades still needed, how to shoot, map link
+      photos/      the user drops photos and video here
+      frames/      frames the agent cut from videos showing this building
+      model/       the agent's result (mesh + textures)
+      TO_SHOOT.md  facades still needed, how to shoot, map link
+
+The language is detected from an existing root (СТАТУС.md means ru), so a
+project keeps its folder names; for a new root it is --lang (default en).
 
 init    creates the folders for every building that needs shooting, numbered
         in the shot-list walking order. Existing folders and files are never
-        touched; ДОСНЯТЬ.md and СТАТУС.md are rewritten from the coverage.
+        touched; the two .md files are rewritten from the coverage.
         Also writes folders.js next to city.json, so the 3D preview
-        (index.html) shows "Открыть папку дома" on each building card.
-status  lists which buildings got photos or video in фото/ and which files
+        (index.html) shows "Open building folder" on each building card.
+status  lists which buildings got photos or video in photos/ and which files
         are new since the last run (tracked in <root>/.city3d_seen.json), so
         the agent processes only fresh material. With --coverage, buildings
         that received files and were "none" become "partial".
@@ -30,19 +34,48 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from shotlist import SIDE_RU, SIDES, facades, walking_order  # noqa: E402
+from shotlist import SIDES, TEXT, facades, walking_order  # noqa: E402
 
 MEDIA = (".jpg", ".jpeg", ".png", ".heic", ".heif", ".tif", ".tiff", ".dng",
          ".raw", ".arw", ".cr2", ".cr3", ".nef", ".mp4", ".mov", ".mkv", ".avi")
 ID_RE = re.compile(r"\[(-?\d+)\]\s*$")
-SUBDIRS = ("фото", "кадры", "модель")
-STATUS_RU = {"none": "не снят", "partial": "частично", "done": "готов"}
+NAMES = {
+    "en": {"subdirs": ("photos", "frames", "model"), "todo": "TO_SHOOT.md",
+           "status_md": "STATUS.md", "building": "Building",
+           "done": "**Done, nothing to shoot.**", "need": "**Facades to shoot:**",
+           "note": "**Note:**",
+           "how": "How to shoot: walk round 10–20 m away, camera on the facade, a frame "
+                  "every 1–2 steps (or slow 4K video), second lap with the camera higher. "
+                  "Overcast or shade, no panoramas from one spot.",
+           "drop": "Put the original files, no filters, into `photos` and tell the agent "
+                   "\"added\".",
+           "map": "On the map", "status_title": "# Shooting status",
+           "status_head": "| Folder | Status | Facades missing |"},
+    "ru": {"subdirs": ("фото", "кадры", "модель"), "todo": "ДОСНЯТЬ.md",
+           "status_md": "СТАТУС.md", "building": "Здание",
+           "done": "**Готово, снимать не нужно.**", "need": "**Снять фасады:**",
+           "note": "**Замечание:**",
+           "how": "Как снимать: обойти дом на 10–20 м, камера на фасаде, кадр каждые "
+                  "1–2 шага (или видео 4K, медленно), второй круг с камерой выше. "
+                  "Пасмурно или в тени, без панорам с одной точки.",
+           "drop": "Кладите оригиналы без фильтров в папку `фото` и напишите агенту «добавил».",
+           "map": "На карте", "status_title": "# Статус съёмки",
+           "status_head": "| Папка | Статус | Не хватает фасадов |"},
+}
+
+
+def lang_of(root, wanted):
+    """An existing project keeps its language; a new one uses --lang."""
+    for lang, n in NAMES.items():
+        if os.path.exists(os.path.join(root, n["status_md"])):
+            return lang
+    return wanted or "en"
 
 
 def safe(name):
     """Folder-safe on Windows, macOS and Linux."""
     name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', " ", name)
-    return re.sub(r"\s+", " ", name).strip(" .")[:60] or "Здание"
+    return re.sub(r"\s+", " ", name).strip(" .")[:60] or "Building"
 
 
 def osm_link(i):
@@ -73,6 +106,8 @@ def existing(root):
 
 def init(a):
     city, cov = load(a.city_json, a.coverage)
+    lang = lang_of(a.root, a.lang)
+    L, T = NAMES[lang], TEXT[lang]
     os.makedirs(a.root, exist_ok=True)
     have = existing(a.root)
     items = []
@@ -90,30 +125,25 @@ def init(a):
     for n, b in enumerate(walking_order(items), 1):
         folder = have.get(b["id"])
         if not folder:
-            title = b["name"] or b["address"] or "Здание"
+            title = b["name"] or b["address"] or L["building"]
             folder = f"{n:02d} {safe(title)} [{b['id']}]"
             made += 1
-        for sub in SUBDIRS:
+        for sub in L["subdirs"]:
             os.makedirs(os.path.join(a.root, folder, sub), exist_ok=True)
         b["folder"] = folder
         done = b["status"] == "done" or not b["missing"]
-        lines = [f"# {b['name'] or 'Здание'}", b["address"] or "", "",
-                 "**Готово, снимать не нужно.**" if done else
-                 "**Снять фасады:** " + ", ".join(
-                     f"{SIDE_RU[s]} ({b['sides'][s]:.0f} м)" for s in b["missing"]),
-                 f"**Замечание:** {b['note']}" if b["note"] else "", "",
-                 "Как снимать: обойти дом на 10–20 м, камера на фасаде, кадр каждые "
-                 "1–2 шага (или видео 4K, медленно), второй круг с камерой выше. "
-                 "Пасмурно или в тени, без панорам с одной точки.", "",
-                 "Кладите оригиналы без фильтров в папку `фото` и напишите агенту "
-                 "«добавил».", "", f"На карте: {osm_link(b['id'])}"]
+        lines = [f"# {b['name'] or L['building']}", b["address"] or "", "",
+                 L["done"] if done else L["need"] + " " + ", ".join(
+                     f"{T['sides'][s]} ({b['sides'][s]:.0f} {T['m']})" for s in b["missing"]),
+                 f"{L['note']} {b['note']}" if b["note"] else "", "",
+                 L["how"], "", L["drop"], "", f"{L['map']}: {osm_link(b['id'])}"]
         # BOM so Windows Notepad shows Cyrillic correctly
-        with open(os.path.join(a.root, folder, "ДОСНЯТЬ.md"), "w",
+        with open(os.path.join(a.root, folder, L["todo"]), "w",
                   encoding="utf-8-sig") as f:
             f.write("\n".join(lines) + "\n")
-    write_status(a.root, items)
+    write_status(a.root, items, lang)
     write_links(a.city_json, a.root)
-    print(f"folders: {made} new, {len(items) - made} existing -> {a.root}")
+    print(f"folders: {made} new, {len(items) - made} existing -> {a.root} ({lang})")
 
 
 def write_links(city_json, root):
@@ -127,15 +157,15 @@ def write_links(city_json, root):
         f.write(";\n")
 
 
-def write_status(root, items):
-    rows = ["# Статус съёмки", "",
-            "| Папка | Статус | Не хватает фасадов |", "|---|---|---|"]
+def write_status(root, items, lang):
+    L, T = NAMES[lang], TEXT[lang]
+    rows = [L["status_title"], "", L["status_head"], "|---|---|---|"]
     for b in sorted(items, key=lambda b: b.get("folder", "")):
         left = ("—" if b["status"] == "done" or not b["missing"]
-                else ", ".join(SIDE_RU[s] for s in b["missing"]))
+                else ", ".join(T["sides"][s] for s in b["missing"]))
         st = "done" if not b["missing"] else b["status"]
-        rows.append(f"| {b.get('folder', b['id'])} | {STATUS_RU.get(st, st)} | {left} |")
-    with open(os.path.join(root, "СТАТУС.md"), "w", encoding="utf-8-sig") as f:
+        rows.append(f"| {b.get('folder', b['id'])} | {T['status'].get(st, st)} | {left} |")
+    with open(os.path.join(root, L["status_md"]), "w", encoding="utf-8-sig") as f:
         f.write("\n".join(rows) + "\n")
 
 
@@ -148,9 +178,10 @@ def status(a):
         with open(seen_path, encoding="utf-8") as f:
             seen = json.load(f)
     report, changed = [], False
+    photos = NAMES[lang_of(a.root, a.lang)]["subdirs"][0]
     for bid, folder in sorted(existing(a.root).items(), key=lambda kv: kv[1]):
-        files = []  # only what the user brought, not the agent's кадры/модель
-        for dp, _, fs in os.walk(os.path.join(a.root, folder, "фото")):
+        files = []  # only what the user brought, not the agent's frames/model
+        for dp, _, fs in os.walk(os.path.join(a.root, folder, photos)):
             files += [os.path.relpath(os.path.join(dp, f), a.root)
                       for f in fs if f.lower().endswith(MEDIA)]
         if not files:
@@ -183,6 +214,8 @@ def main():
     ap.add_argument("city_json")
     ap.add_argument("--root", required=True, help="folder that holds the building folders")
     ap.add_argument("--coverage")
+    ap.add_argument("--lang", choices=sorted(NAMES),
+                    help="folder and file names for a new root (default en)")
     ap.add_argument("--json", action="store_true", help="status: also print JSON")
     a = ap.parse_args()
     (init if a.command == "init" else status)(a)

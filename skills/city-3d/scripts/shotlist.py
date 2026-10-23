@@ -22,7 +22,33 @@ SIDES = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
 SIDE_RU = {"N": "северный", "NE": "северо-восточный", "E": "восточный",
            "SE": "юго-восточный", "S": "южный", "SW": "юго-западный",
            "W": "западный", "NW": "северо-западный"}
+SIDE_EN = {"N": "north", "NE": "north-east", "E": "east", "SE": "south-east",
+           "S": "south", "SW": "south-west", "W": "west", "NW": "north-west"}
 STATUS_RU = {"none": "не снят", "partial": "снят частично", "done": "готов"}
+TEXT = {
+    "en": {
+        "sides": SIDE_EN, "status": {"none": "not shot", "partial": "partly shot", "done": "done"},
+        "title": "Shot list", "district": "district", "building": "Building",
+        "summary": "To shoot: {n} buildings. Done: {d}. Small structures without their own shoot: {t}.",
+        "how": "How to shoot: walk round the building 10–20 m away, camera on the facade, "
+               "a frame every 1–2 steps (or slow 4K video), then a second lap with the camera "
+               "higher. Overcast or shade, no panoramas from one spot.",
+        "levels": "levels", "m": "m", "need": "Facades to shoot", "note": "Note",
+        "map": "On the map", "facades": "Facades",
+        "legend": ("not shot", "partly", "done", "north is up"),
+    },
+    "ru": {
+        "sides": SIDE_RU, "status": STATUS_RU,
+        "title": "Список съёмки", "district": "район", "building": "Здание",
+        "summary": "Нужно снять: {n} зданий. Готово: {d}. Мелких построек без отдельной съёмки: {t}.",
+        "how": "Как снимать: обойти дом на расстоянии 10–20 м, камера всё время на фасаде, "
+               "шаг 1–2 м между кадрами (или видео 4K, медленно). Затем второй круг с камерой "
+               "выше. Пасмурная погода или тень, без панорам с одной точки.",
+        "levels": "эт.", "m": "м", "need": "Снять фасады", "note": "Замечание",
+        "map": "На карте", "facades": "Фасады",
+        "legend": ("не снят", "частично", "готов", "север сверху"),
+    },
+}
 MIN_FACADE = 4.0  # metres; shorter walls are covered by neighbouring shots
 
 
@@ -59,12 +85,15 @@ def main():
     ap.add_argument("city_json")
     ap.add_argument("--coverage", help="coverage.json from earlier rounds")
     ap.add_argument("--out", default="shotlist")
+    ap.add_argument("--lang", choices=["en", "ru"], default=None,
+                    help="text language (default: city.json lang, else en)")
     ap.add_argument("--include-parts", action="store_true",
                     help="list building:part pieces separately")
     args = ap.parse_args()
 
     with open(args.city_json, encoding="utf-8") as f:
         city = json.load(f)
+    L = TEXT[args.lang or city.get("lang") or "en"]
     cov = {}
     if args.coverage and os.path.exists(args.coverage):
         with open(args.coverage, encoding="utf-8") as f:
@@ -88,27 +117,22 @@ def main():
     route = walking_order(todo)
     os.makedirs(args.out, exist_ok=True)
 
-    lines = [f"# Список съёмки: {city.get('name') or 'район'}", "",
-             f"Нужно снять: {len(route)} зданий. Готово: {len(done)}. "
-             f"Мелких построек без отдельной съёмки: {tiny}.", "",
-             "Как снимать: обойти дом на расстоянии 10–20 м, камера всё время на "
-             "фасаде, шаг 1–2 м между кадрами (или видео 4K, медленно). Затем "
-             "второй круг с камерой выше. Пасмурная погода или тень, без "
-             "панорам с одной точки.", ""]
+    lines = [f"# {L['title']}: {city.get('name') or L['district']}", "",
+             L["summary"].format(n=len(route), d=len(done), t=tiny), "", L["how"], ""]
     for i, b in enumerate(route, 1):
-        title = b["name"] or b["address"] or f"Здание {b['id']}"
+        title = b["name"] or b["address"] or f"{L['building']} {b['id']}"
         lines.append(f"## {i}. {title}")
-        meta = [f"{b['levels']} эт.", f"{b['area_m2']:.0f} м²",
-                STATUS_RU.get(b["status"], b["status"])]
+        meta = [f"{b['levels']} {L['levels']}", f"{b['area_m2']:.0f} {L['m']}²",
+                L["status"].get(b["status"], b["status"])]
         if b["address"] and b["name"]:
             meta.insert(0, b["address"])
         lines.append(" · ".join(meta))
-        need = ", ".join(f"{SIDE_RU[s]} ({l:.0f} м)" for s, l in
+        need = ", ".join(f"{L['sides'][s]} ({l:.0f} {L['m']})" for s, l in
                          sorted(b["missing"].items(), key=lambda kv: SIDES.index(kv[0])))
-        lines.append(f"- Снять фасады: {need}")
+        lines.append(f"- {L['need']}: {need}")
         if b["note"]:
-            lines.append(f"- Замечание: {b['note']}")
-        lines.append(f"- На карте: https://www.openstreetmap.org/"
+            lines.append(f"- {L['note']}: {b['note']}")
+        lines.append(f"- {L['map']}: https://www.openstreetmap.org/"
                      f"{'relation/' + str(-b['id'] // 100) if b['id'] < 0 else 'way/' + str(b['id'])}")
         lines.append("")
     with open(os.path.join(args.out, "shotlist.md"), "w", encoding="utf-8") as f:
@@ -139,23 +163,23 @@ def main():
                       f'font-weight="700" fill="#fff" stroke="#212529" stroke-width="2.5" '
                       f'paint-order="stroke">{order[b["id"]]}</text>')
     rows = "".join(
-        f"<li><b>{order[b['id']]}. {html.escape(b['name'] or b['address'] or 'Здание ' + str(b['id']))}</b>"
-        f"<br>Фасады: {html.escape(', '.join(SIDE_RU[s] for s in b['missing']))}"
+        f"<li><b>{order[b['id']]}. {html.escape(b['name'] or b['address'] or L['building'] + ' ' + str(b['id']))}</b>"
+        f"<br>{L['facades']}: {html.escape(', '.join(L['sides'][s] for s in b['missing']))}"
         + (f"<br><i>{html.escape(b['note'])}</i>" if b["note"] else "") + "</li>"
         for b in route)
-    page = f"""<!doctype html><meta charset="utf-8">
+    page = f"""<!doctype html><html lang="{'ru' if L is TEXT['ru'] else 'en'}"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Список съёмки</title>
+<title>{L['title']}</title>
 <style>
 body{{font:15px/1.45 system-ui,sans-serif;margin:0;padding:16px;color:#212529;background:#f8f9fa}}
 svg{{width:100%;height:auto;background:#fff;border:1px solid #dee2e6;border-radius:8px}}
 .k span{{display:inline-block;width:12px;height:12px;border-radius:3px;margin:0 4px 0 12px;vertical-align:-1px}}
 li{{margin:0 0 10px}} h1{{font-size:20px;margin:0 0 8px}}
 </style>
-<h1>{html.escape(city.get('name') or 'Список съёмки')}</h1>
-<p class="k"><span style="background:{colour['none']}"></span>не снят
-<span style="background:{colour['partial']}"></span>частично
-<span style="background:{colour['done']}"></span>готов · север сверху</p>
+<h1>{html.escape(city.get('name') or L['title'])}</h1>
+<p class="k"><span style="background:{colour['none']}"></span>{L['legend'][0]}
+<span style="background:{colour['partial']}"></span>{L['legend'][1]}
+<span style="background:{colour['done']}"></span>{L['legend'][2]} · {L['legend'][3]}</p>
 <svg viewBox="{-r} {-r} {2 * r} {2 * r}">{''.join(shapes)}</svg>
 <ol style="list-style:none;padding:0">{rows}</ol>
 <p style="color:#868e96;font-size:12px">{html.escape(city.get('attribution', ''))}</p>

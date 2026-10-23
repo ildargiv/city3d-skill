@@ -207,6 +207,8 @@ def main():
                     help="metres; 0 keeps everything in the files (a box export)")
     ap.add_argument("--out", default="out")
     ap.add_argument("--name", default="")
+    ap.add_argument("--lang", choices=["en", "ru"], help="preview language (default: the browser's)")
+    ap.add_argument("--focus", default="", help="name of the building the preview opens on")
     args = ap.parse_args()
 
     nodes, ways, points = {}, {}, []
@@ -314,6 +316,10 @@ def main():
             "attribution": "© OpenStreetMap contributors (ODbL)",
             "buildings": buildings, "roads": roads, "areas": areas,
             "trees": trees}
+    if args.lang:
+        city["lang"] = args.lang
+    if args.focus:
+        city["focus"] = args.focus
     with open(os.path.join(args.out, "city.json"), "w", encoding="utf-8") as f:
         json.dump(city, f, ensure_ascii=False)
     # Same data as a script, so preview.html also works when opened from disk.
