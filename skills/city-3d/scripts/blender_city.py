@@ -1,7 +1,7 @@
 """Build a Blender scene from city.json (made by osm2city.py) and export it.
 
 Run inside Blender:
-  blender -b -P blender_city.py -- city.json --out out/ --style both
+  blender -b -P blender_city.py -- city.json --out out/
 
 Scene layout (Z up, X east, Y north, metres, origin = district centre):
   Landscape  - one ground, roads, parks/water/squares, trees
