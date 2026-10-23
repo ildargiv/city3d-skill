@@ -4,13 +4,17 @@ Run inside Blender:
   blender -b -P blender_city.py -- city.json --out out/
 
 Scene layout (Z up, X east, Y north, metres, origin = district centre):
-  Landscape  - one ground, roads, parks/water/squares, trees
+  Landscape  - ground, roads, parks/water/squares, trees, split into square
+               tiles (collections "Tile_<i>_<j>", --tile metres, default
+               250) on a grid fixed to the city origin, so a bigger map
+               later only adds tiles and never moves the old ones
   Buildings  - one object per building (or building:part), origin on the
                footprint centre at ground level, named "B_<osm id>"
 
 Outputs in --out:
   city.blend                      editable master scene
-  landscape_<style>.glb           the single landscape
+  landscape_<style>.glb           the whole landscape
+  tiles/T_<i>_<j>_<style>.glb     the landscape tile by tile (Unreal World Partition)
   buildings_<style>.glb           every building, placed in world position
   buildings/<name>.glb            each building alone, centred on its origin
   placement.json                  world position of every building origin
@@ -77,6 +81,7 @@ def args_after_dashes():
     ap.add_argument("--style", choices=["real", "toon", "both"], default="real",
                     help="real first; other styles are made from the finished real map")
     ap.add_argument("--from-blend", help="re-export an edited city.blend")
+    ap.add_argument("--tile", type=float, default=250, help="landscape tile size, metres")
     ap.add_argument("--scans", help="folder of building folders with finished models")
     ap.add_argument("--no-split", action="store_true",
                     help="skip the per-building .glb files")
@@ -194,11 +199,13 @@ def flat_polygon(name, pts, z, mat, coll):
     return ob
 
 
-def road_mesh(roads, mat, coll):
+def road_mesh(roads, mat, coll, name="Roads", keep=lambda x, y: True):
     bm = bmesh.new()
     for r in roads:
         line, w = r["line"], r["width"] / 2
         for (x1, y1), (x2, y2) in zip(line, line[1:]):
+            if not keep((x1 + x2) / 2, (y1 + y2) / 2):
+                continue
             dx, dy = x2 - x1, y2 - y1
             ln = math.hypot(dx, dy) or 1
             nx, ny = -dy / ln * w, dx / ln * w
@@ -206,12 +213,15 @@ def road_mesh(roads, mat, coll):
             vs = [bm.verts.new(p) for p in ((x1 - nx, y1 - ny, z), (x2 - nx, y2 - ny, z),
                                             (x2 + nx, y2 + ny, z), (x1 + nx, y1 + ny, z))]
             bm.faces.new(vs)
-    ob = new_object("Roads", bm, coll)
+    if not bm.faces:
+        bm.free()
+        return None
+    ob = new_object(name, bm, coll)
     ob.data.materials.append(mat)
     return ob
 
 
-def trees(points, pal, coll):
+def trees(points, pal, coll, prefix="Tree"):
     if not points:
         return
     trunk = material("trunk", pal["trunk"], pal["roughness"])
@@ -231,31 +241,43 @@ def trees(points, pal, coll):
     me.materials.append(trunk)
     me.materials.append(crown)
     for i, t in enumerate(points):
-        ob = bpy.data.objects.new(f"Tree_{i}", me)
+        ob = bpy.data.objects.new(f"{prefix}_{i}", me)
         ob.location = (t["x"], t["y"], 0)
         s = t["height"] / 8.0
         ob.scale = (s, s, s)
         coll.objects.link(ob)
 
 
-def build(data, pal):
+def build(data, pal, tile=250.0):
     land = collection("Landscape")
-    r = data["radius"] * 1.15
-    bm = bmesh.new()
-    vs = [bm.verts.new((r * math.cos(a), r * math.sin(a), 0))
-          for a in (i * math.tau / 64 for i in range(64))]
-    bm.faces.new(vs)
-    g = new_object("Ground", bm, land)
-    g.data.materials.append(material("ground", pal["ground"], pal["roughness"]))
-    for i, a in enumerate(data["areas"]):
-        if len(a["polygon"]) >= 3:
-            z = {"water": 0.02, "park": 0.03}.get(a["kind"], 0.04)
-            flat_polygon(f"Area_{a['kind']}_{i}", a["polygon"], z,
-                         material(a["kind"], pal.get(a["kind"], pal["park"]),
-                                  pal["roughness"]), land)
-    if data["roads"]:
-        road_mesh(data["roads"], material("road", pal["road"], pal["roughness"]), land)
-    trees(data.get("trees", []), pal, land)
+    T = tile
+    key = lambda x, y: (math.floor(x / T), math.floor(y / T))
+    centroid = lambda pts: (sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts))
+    # every tile that holds something gets a ground square
+    used = {key(b["x"], b["y"]) for b in data["buildings"]}
+    used |= {key(*centroid(a["polygon"])) for a in data["areas"] if a["polygon"]}
+    used |= {key(*p) for r in data["roads"] for p in r["line"]}
+    used |= {key(t["x"], t["y"]) for t in data.get("trees", [])}
+    ground = material("ground", pal["ground"], pal["roughness"])
+    road = material("road", pal["road"], pal["roughness"])
+    for i, j in sorted(used):
+        name = f"Tile_{i}_{j}"
+        tc = bpy.data.collections.get(name) or bpy.data.collections.new(name)
+        if tc.name not in land.children:
+            land.children.link(tc)
+        flat_polygon(f"Ground_{i}_{j}", [(i * T, j * T), ((i + 1) * T, j * T),
+                                         ((i + 1) * T, (j + 1) * T), (i * T, (j + 1) * T)],
+                     0.0, ground, tc)
+        for n, a in enumerate(data["areas"]):
+            if len(a["polygon"]) >= 3 and key(*centroid(a["polygon"])) == (i, j):
+                z = {"water": 0.02, "park": 0.03}.get(a["kind"], 0.04)
+                flat_polygon(f"Area_{a['kind']}_{n}", a["polygon"], z,
+                             material(a["kind"], pal.get(a["kind"], pal["park"]),
+                                      pal["roughness"]), tc)
+        road_mesh(data["roads"], road, tc, f"Roads_{i}_{j}",
+                  keep=lambda x, y, ij=(i, j): key(x, y) == ij)
+        trees([t for t in data.get("trees", []) if key(t["x"], t["y"]) == (i, j)],
+              pal, tc, f"Tree_{i}_{j}")
 
     roof = material("roof", pal["roof"], pal["roughness"])
     for b in data["buildings"]:
@@ -440,7 +462,7 @@ def main():
         bpy.ops.wm.read_factory_settings(use_empty=True)
         with open(a.city_json, encoding="utf-8") as f:
             data = json.load(f)
-        build(data, PALETTES[styles[0]])
+        build(data, PALETTES[styles[0]], a.tile)
         bpy.context.scene["city3d_attribution"] = data.get("attribution", "")
         bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(
             os.path.join(a.out, "city.blend")))
@@ -466,6 +488,10 @@ def main():
         if i or a.from_blend:
             recolour(PALETTES[style])
         export_glb(os.path.join(a.out, f"landscape_{style}.glb"), land)
+        os.makedirs(os.path.join(a.out, "tiles"), exist_ok=True)
+        for tc in bpy.data.collections["Landscape"].children:
+            export_glb(os.path.join(a.out, "tiles", f"T{tc.name[4:]}_{style}.glb"),
+                       list(tc.all_objects))
         export_glb(os.path.join(a.out, f"buildings_{style}.glb"), blds)
         if not a.no_split:
             for o in blds:

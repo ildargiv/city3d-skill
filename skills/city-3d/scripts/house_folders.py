@@ -144,9 +144,16 @@ def init(a):
                       "status": c.get("status", "none"), "note": c.get("note", "")})
     parts = [p for p in city["buildings"] if p.get("part")]
     made = 0
-    for n, b in enumerate(walking_order(items), 1):
+    # numbers of existing folders stay; buildings added by a bigger map
+    # continue the numbering after them
+    taken = [int(m.group(1)) for d in have.values() for m in [re.match(r"(\d+) ", d)] if m]
+    next_n = max(taken, default=0)
+    for n, b in enumerate(walking_order(items, city.get("center_xy", (0, 0))), 1):
         folder = have.get(b["id"])
         if not folder:
+            if have:
+                next_n += 1
+                n = next_n
             title = b["name"] or b["address"] or L["building"]
             folder = f"{n:02d} {safe(title)} [{b['id']}]"
             made += 1

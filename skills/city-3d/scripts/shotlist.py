@@ -69,9 +69,9 @@ def facades(ring):
     return {s: round(l, 1) for s, l in out.items() if l >= MIN_FACADE}
 
 
-def walking_order(items):
-    """Greedy nearest-neighbour tour starting from the centre."""
-    left, path, pos = list(items), [], (0.0, 0.0)
+def walking_order(items, start=(0.0, 0.0)):
+    """Greedy nearest-neighbour tour starting from the district centre."""
+    left, path, pos = list(items), [], tuple(start)
     while left:
         nxt = min(left, key=lambda b: math.hypot(b["x"] - pos[0], b["y"] - pos[1]))
         left.remove(nxt)
@@ -114,7 +114,7 @@ def main():
             continue
         (done if status == "done" or not missing else todo).append(item)
 
-    route = walking_order(todo)
+    route = walking_order(todo, city.get("center_xy", (0, 0)))
     os.makedirs(args.out, exist_ok=True)
 
     lines = [f"# {L['title']}: {city.get('name') or L['district']}", "",
@@ -140,6 +140,7 @@ def main():
 
     # SVG map: north up, 1 unit = 1 m
     r = city["radius"]
+    cx, cy = city.get("center_xy", (0, 0))
     colour = {"none": "#d9480f", "partial": "#f59f00", "done": "#2f9e44"}
     order = {b["id"]: i for i, b in enumerate(route, 1)}
     shapes = []
@@ -180,7 +181,7 @@ li{{margin:0 0 10px}} h1{{font-size:20px;margin:0 0 8px}}
 <p class="k"><span style="background:{colour['none']}"></span>{L['legend'][0]}
 <span style="background:{colour['partial']}"></span>{L['legend'][1]}
 <span style="background:{colour['done']}"></span>{L['legend'][2]} · {L['legend'][3]}</p>
-<svg viewBox="{-r} {-r} {2 * r} {2 * r}">{''.join(shapes)}</svg>
+<svg viewBox="{cx - r:.0f} {-cy - r:.0f} {2 * r} {2 * r}">{''.join(shapes)}</svg>
 <ol style="list-style:none;padding:0">{rows}</ol>
 <p style="color:#868e96;font-size:12px">{html.escape(city.get('attribution', ''))}</p>
 """

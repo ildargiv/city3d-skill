@@ -10,6 +10,13 @@ Usage:
 
 Without --lat/--lon the centre of the data is used. Data (c) OpenStreetMap
 contributors, ODbL.
+
+Growing the map later: pass the same --origin (one fixed point for the whole
+city, e.g. a landmark) every time, and all the .osm exports made so far plus
+the new one. Coordinates are then measured from that point, so buildings,
+scans and landscape tiles of earlier districts keep exactly their place, and
+the new area just adds to them. city.json stores the origin; it is reused
+automatically when --out already holds a city.json.
 """
 import argparse
 import csv
@@ -208,6 +215,8 @@ def main():
     ap.add_argument("--out", default="out")
     ap.add_argument("--name", default="")
     ap.add_argument("--lang", choices=["en", "ru"], help="preview language (default: the browser's)")
+    ap.add_argument("--origin", help="LAT,LON of the fixed city origin (default: "
+                    "the one in an existing <out>/city.json, else the district centre)")
     ap.add_argument("--focus", default="", help="name of the building the preview opens on")
     args = ap.parse_args()
 
@@ -225,19 +234,30 @@ def main():
         lons = [p[1] for p in nodes.values()]
         args.lat = (min(lats) + max(lats)) / 2
         args.lon = (min(lons) + max(lons)) / 2
+    old = os.path.join(args.out, "city.json")
+    if args.origin:
+        lat0, lon0 = map(float, args.origin.split(","))
+    elif os.path.exists(old):
+        with open(old, encoding="utf-8") as f:
+            prev = json.load(f)  # older files: the origin was their centre
+            lat0, lon0 = prev.get("origin") or prev["center"]
+    else:
+        lat0, lon0 = args.lat, args.lon
     k_lat = 111_320.0
-    k_lon = 111_320.0 * math.cos(math.radians(args.lat))
+    k_lon = 111_320.0 * math.cos(math.radians(lat0))
+    # district centre in the city frame: the radius and walking order use it
+    ox, oy = (args.lon - lon0) * k_lon, (args.lat - lat0) * k_lat
 
     def xy(nid):
         lat, lon = nodes[nid]
-        return ((lon - args.lon) * k_lon, (lat - args.lat) * k_lat)
+        return ((lon - lon0) * k_lon, (lat - lat0) * k_lat)
 
     buildings, roads, areas, trees = [], [], [], []
     for lat, lon, tags in points:
         if tags.get("natural") != "tree":
             continue
-        x, y = (lon - args.lon) * k_lon, (lat - args.lat) * k_lat
-        if not args.radius or math.hypot(x, y) <= args.radius:
+        x, y = (lon - lon0) * k_lon, (lat - lat0) * k_lat
+        if not args.radius or math.hypot(x - ox, y - oy) <= args.radius:
             trees.append({"x": round(x, 2), "y": round(y, 2),
                           "height": num(tags.get("height")) or 8.0})
     for wid, refs, tags in ways:
@@ -247,7 +267,7 @@ def main():
         closed = refs[0] == refs[-1] and len(refs) >= 4
         cx = sum(p[0] for p in pts) / len(pts)
         cy = sum(p[1] for p in pts) / len(pts)
-        if args.radius and math.hypot(cx, cy) > args.radius:
+        if args.radius and math.hypot(cx - ox, cy - oy) > args.radius:
             continue
         rounded = [[round(x, 2), round(y, 2)] for x, y in pts]
         if closed and ("building" in tags or "building:part" in tags):
@@ -269,7 +289,7 @@ def main():
                 "material": tags.get("building:material", ""),
                 "area_m2": round(abs(polygon_area(ring)), 1),
                 "x": round(cx, 1), "y": round(cy, 1),
-                "dist_m": round(math.hypot(cx, cy)),
+                "dist_m": round(math.hypot(cx - ox, cy - oy)),
                 "footprint": [[round(x, 2), round(y, 2)] for x, y in ring],
             })
             continue
@@ -311,6 +331,7 @@ def main():
             w.writerow({**b, "osm_url": osm_url(b["id"])})
 
     city = {"name": args.name, "center": [args.lat, args.lon],
+            "origin": [lat0, lon0], "center_xy": [round(ox, 2), round(oy, 2)],
             # box exports: the extent of what was kept
             "radius": args.radius or max([b["dist_m"] for b in buildings] + [50]) + 30,
             "attribution": "© OpenStreetMap contributors (ODbL)",

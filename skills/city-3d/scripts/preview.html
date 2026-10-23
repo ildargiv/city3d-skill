@@ -270,6 +270,7 @@ function build() {
 
   const ground = new THREE.Mesh(new THREE.CircleGeometry(data.radius * 1.2, 64), mat(S.ground));
   ground.rotation.x = -Math.PI / 2;
+  if (data.center_xy) ground.position.set(data.center_xy[0], 0, -data.center_xy[1]);
   ground.receiveShadow = true;
   world.add(ground);
 
@@ -333,6 +334,9 @@ function build() {
     crown.castShadow = true;
     world.add(trunk, crown);
   }
+  // the city frame's origin may be outside this district: centre the view on it
+  const [cx, cy] = data.center_xy || [0, 0];
+  world.position.set(-cx, 0, cy);
   scene.add(world);
   if (selected) highlight(pickables.find(p => p.userData.id === selected));
 }

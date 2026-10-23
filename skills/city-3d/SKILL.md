@@ -68,6 +68,32 @@ everything in it, and put the centre between the landmarks. A big area that
 openstreetmap.org refuses to export in one go can be exported in pieces and
 passed together: `osm2city.py part1.osm part2.osm ...` merges them.
 
+Fix the city origin on the first build and never change it: one landmark
+for the whole city, passed as `--origin LAT,LON` (ask the user which; the
+first project uses its main tower). Every later build reuses the origin
+stored in `city/city.json`. The district circle (`--lat/--lon/--radius`) is
+separate from it, so moving the origin does not change which buildings are
+kept.
+
+### Growing the map
+
+To add a neighbouring area later: export its box from openstreetmap.org,
+keep every earlier export (an `osm/` folder is handy), and rebuild with all
+of them and a circle or `--radius 0` box that covers the new extent:
+
+```bash
+python3 scripts/osm2city.py osm/*.osm --radius 0 --out city/
+python3 scripts/house_folders.py init city/city.json --root "<project>/buildings"
+blender -b -P scripts/blender_city.py -- city/city.json --scans "<project>/buildings" --out build/
+```
+
+Buildings keep their OSM ids and positions, existing folders keep their
+names and numbers (new ones are numbered after them), finished models are
+placed again from their folders, and the landscape is cut into tiles of
+`--tile` metres (default 250) on a grid fixed to the origin, so old tiles
+stay identical and new ones are added. In Unreal, import the tiles with
+World Partition.
+
 Show it: `city/index.html` (written next to `city.json`, with the data also in
 `city.js`) opens with a double click, no server needed. It has a Realistic /
 Cartoon switch, windows drawn per storey, pitched roofs, and a card per
