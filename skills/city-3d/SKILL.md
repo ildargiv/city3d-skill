@@ -194,6 +194,26 @@ textures, rough PBR. `toon`: a bright palette per building, flat roofs in
 one colour, cel-shading in the engine. Keep both exports in sync from the
 same `city.blend`.
 
+## Keeping it cheap: which model does what
+
+Heavy lifting (OSM, Blender, ffmpeg, COLMAP, OpenMVS) is done by programs on
+the CPU and costs nothing in tokens. Spend model time only on judgement, and
+route it:
+
+| Work | Model | How |
+|---|---|---|
+| Developing the skill, unclear cases, quality calls, talking the user through decisions | Opus (main session) | only when needed |
+| The routine loop: run scripts, update folders and statuses, explain results | Sonnet | `/model sonnet` in the session doing the loop |
+| Bulk checks: new files, cutting frames, blur/glare, file lists | Haiku | the `frame-triage` agent |
+| Matching frames to buildings without GPS | Sonnet | the `building-matcher` agent |
+| Photogrammetry per building and its verdict | Sonnet | the `model-builder` agent |
+
+Habits that save more than model choice:
+- Look at one frame every few seconds, never at every frame.
+- Start each new round (new photos, new district) in a fresh session: the
+  state lives in the folders, `coverage.json` and `СТАТУС.md`, not in chat.
+- Do not keep a session open while COLMAP runs; check back when it is done.
+
 ## Reporting to the user
 
 After each round say: what was built (counts), what the material allowed and
