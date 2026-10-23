@@ -1,6 +1,7 @@
 # Bringing the scene into a game engine
 
-`blender_city.py` writes, per style (`real`, `toon`):
+`blender_city.py` writes, per style (`real` by default; `toon` or others once
+the real map is done):
 
 - `landscape_<style>.glb` — one landscape: ground, roads, parks, water, trees
 - `buildings_<style>.glb` — all buildings, each a separate mesh in its world

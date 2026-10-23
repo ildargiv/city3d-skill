@@ -74,7 +74,8 @@ def args_after_dashes():
     ap = argparse.ArgumentParser()
     ap.add_argument("city_json", nargs="?")
     ap.add_argument("--out", default="out")
-    ap.add_argument("--style", choices=["real", "toon", "both"], default="both")
+    ap.add_argument("--style", choices=["real", "toon", "both"], default="real",
+                    help="real first; other styles are made from the finished real map")
     ap.add_argument("--from-blend", help="re-export an edited city.blend")
     ap.add_argument("--scans", help="folder of building folders with finished models")
     ap.add_argument("--no-split", action="store_true",

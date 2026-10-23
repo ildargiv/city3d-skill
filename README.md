@@ -4,7 +4,9 @@
 
 A Claude Code skill that turns a real neighbourhood into a 3D scene for a
 game. Every building is a separate model standing on its own footprint, the
-landscape is one piece, and there are two styles: realistic and cartoon.
+landscape is one piece. The map is built realistic first; once it is
+finished, it can be restyled (cartoon, low-poly or any other look) from the
+same scene.
 
 The base comes from open OpenStreetMap data. The quality comes from your own
 photos and video: the agent builds everything it can, then tells you which
@@ -125,7 +127,7 @@ Building names come from OSM and stay in Russian.
 |---|---|
 | `fetch_osm.py` | downloads OSM around a point and radius (Overpass) |
 | `osm2city.py` | turns OSM into `buildings.csv`, `city.json`, `city.obj` and the `index.html` preview |
-| `preview.html` | 3D browser preview: two styles, windows, roofs, a card per building with a link to its folder |
+| `preview.html` | 3D browser preview: realistic and cartoon looks, windows, roofs, a card per building with a link to its folder |
 | `blender_city.py` | Blender scene: each building a separate object, one landscape, `.glb` export |
 | `shotlist.py` | shot list: what to shoot and in what order |
 | `house_folders.py` | a folder per building (`photos`, `frames`, `model`, `TO_SHOOT.md`) and a check for newly added photos |

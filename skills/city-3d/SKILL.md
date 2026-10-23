@@ -1,6 +1,6 @@
 ---
 name: city-3d
-description: Build a 3D model of a real city district from OpenStreetMap plus the user's own photos and video, one model per building on one shared landscape, in a realistic and a cartoon style, exported to Blender and Unreal/Godot/Unity. Use when someone wants to recreate a real street, district or town in 3D or in a game.
+description: Build a 3D model of a real city district from OpenStreetMap plus the user's own photos and video, one model per building on one shared landscape, realistic first and restyled later (cartoon or any other look), exported to Blender and Unreal/Godot/Unity. Use when someone wants to recreate a real street, district or town in 3D or in a game.
 ---
 
 # City 3D
@@ -79,7 +79,7 @@ building's folder ("Open building folder").
 Run with Blender 4.2+ (or `pip install bpy` for headless use):
 
 ```bash
-blender -b -P scripts/blender_city.py -- city/city.json --out build/ --style both
+blender -b -P scripts/blender_city.py -- city/city.json --out build/
 ```
 
 Writes `city.blend`, `landscape_<style>.glb`, `buildings_<style>.glb`,
@@ -233,12 +233,22 @@ what is missing into `coverage.json` entries and go back to step 5.
 
 Roofs not seen from the ground keep the OSM roof shape and colour.
 
-## 8. Two styles
+## 8. Styles, after the real map
 
-Geometry is shared; only materials change. `real`: OSM colours, scanned
-textures, rough PBR. `toon`: a bright palette per building, flat roofs in
-one colour, cel-shading in the engine. Keep both exports in sync from the
-same `city.blend`.
+Build the realistic map first and finish it; only then talk about other
+looks. A style is a layer on top of the finished real map: the geometry,
+placement and folders stay, only materials (and maybe simplified meshes)
+change, so any number of styles can be made from one `city.blend`.
+
+- `real` (default): OSM colours, scanned textures, rough PBR.
+- `toon`, built in: a bright palette per building, flat roofs in one
+  colour, cel-shading in the engine (`--style toon` or `--style both`).
+- Others on request (low-poly, winter, night, a historical period, ...):
+  add a palette to `PALETTES` in `blender_city.py` or a material pass in
+  Blender, and export it next to `real`.
+
+Do not spend time on styles while the user is still shooting and building
+the real map, unless they ask.
 
 ## Working on one building
 
