@@ -1,5 +1,7 @@
 # city3d: настоящий город в 3D
 
+[![tests](https://github.com/ildargiv/city3d-skill/actions/workflows/tests.yml/badge.svg)](https://github.com/ildargiv/city3d-skill/actions/workflows/tests.yml) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ildargiv/city3d-skill/blob/main/LICENSE) [![release](https://img.shields.io/github/v/release/ildargiv/city3d-skill?label=release)](https://github.com/ildargiv/city3d-skill/releases/latest) [![Claude Code skill](https://img.shields.io/badge/Claude%20Code-skill-D97757)](https://claude.com/claude-code)
+
 [English](README.md) · **Русский**
 
 Скил для Claude Code, который строит настоящий город в 3D: универсальную
