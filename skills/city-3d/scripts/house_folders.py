@@ -15,6 +15,8 @@ Layout under --root:
 init    creates the folders for every building that needs shooting, numbered
         in the shot-list walking order. Existing folders and files are never
         touched; ДОСНЯТЬ.md and СТАТУС.md are rewritten from the coverage.
+        Also writes folders.js next to city.json, so the 3D preview
+        (index.html) shows "Открыть папку дома" on each building card.
 status  lists which buildings got photos or video in фото/ and which files
         are new since the last run (tracked in <root>/.city3d_seen.json), so
         the agent processes only fresh material. With --coverage, buildings
@@ -23,6 +25,7 @@ status  lists which buildings got photos or video in фото/ and which files
 import argparse
 import json
 import os
+import pathlib
 import re
 import sys
 
@@ -109,7 +112,19 @@ def init(a):
                   encoding="utf-8-sig") as f:
             f.write("\n".join(lines) + "\n")
     write_status(a.root, items)
+    write_links(a.city_json, a.root)
     print(f"folders: {made} new, {len(items) - made} existing -> {a.root}")
+
+
+def write_links(city_json, root):
+    """folders.js next to city.json: the 3D preview links each building to its folder."""
+    links = {bid: pathlib.Path(root, d).resolve().as_uri()
+             for bid, d in existing(root).items()}
+    with open(os.path.join(os.path.dirname(os.path.abspath(city_json)), "folders.js"),
+              "w", encoding="utf-8") as f:
+        f.write("window.CITY_FOLDERS = ")
+        json.dump(links, f, ensure_ascii=False)
+        f.write(";\n")
 
 
 def write_status(root, items):

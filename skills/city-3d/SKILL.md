@@ -68,8 +68,11 @@ everything in it, and put the centre between the landmarks. A big area that
 openstreetmap.org refuses to export in one go can be exported in pieces and
 passed together: `osm2city.py part1.osm part2.osm ...` merges them.
 
-Show it: copy `scripts/preview.html` next to `city.json` and open or publish
-it. It has a Realistic / Cartoon switch and a card per building.
+Show it: `city/index.html` (written next to `city.json`, with the data also in
+`city.js`) opens with a double click, no server needed. It has a Realistic /
+Cartoon switch, windows drawn per storey, pitched roofs, and a card per
+building. After `house_folders.py init` (step 5) the card also links to the
+building's folder ("Открыть папку дома").
 
 ## 3. Blender scene and export
 

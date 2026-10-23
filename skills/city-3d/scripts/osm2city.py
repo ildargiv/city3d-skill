@@ -17,6 +17,7 @@ import json
 import math
 import os
 import re
+import shutil
 import xml.etree.ElementTree as ET
 
 LEVEL_HEIGHT = 3.0
@@ -289,9 +290,9 @@ def main():
             continue
         inner = [p for p in parts if point_in((p["x"], p["y"]), b["footprint"])]
         b["has_parts"] = bool(inner)
-        for p in inner:  # parts show the name and address of their building
-            p["name"] = p["name"] or b["name"]
-            p["address"] = p["address"] or b["address"]
+        for p in inner:  # parts inherit name, address and colours of their building
+            for k in ("name", "address", "colour", "material"):
+                p[k] = p[k] or b[k]
     buildings.sort(key=lambda b: b["dist_m"])
     os.makedirs(args.out, exist_ok=True)
 
@@ -307,14 +308,22 @@ def main():
         for b in buildings:
             w.writerow({**b, "osm_url": osm_url(b["id"])})
 
+    city = {"name": args.name, "center": [args.lat, args.lon],
+            # box exports: the extent of what was kept
+            "radius": args.radius or max([b["dist_m"] for b in buildings] + [50]) + 30,
+            "attribution": "© OpenStreetMap contributors (ODbL)",
+            "buildings": buildings, "roads": roads, "areas": areas,
+            "trees": trees}
     with open(os.path.join(args.out, "city.json"), "w", encoding="utf-8") as f:
-        json.dump({"name": args.name, "center": [args.lat, args.lon],
-                   # box exports: the extent of what was kept
-                   "radius": args.radius or max([b["dist_m"] for b in buildings] + [50]) + 30,
-                   "attribution": "© OpenStreetMap contributors (ODbL)",
-                   "buildings": buildings, "roads": roads, "areas": areas,
-                   "trees": trees},
-                  f, ensure_ascii=False)
+        json.dump(city, f, ensure_ascii=False)
+    # Same data as a script, so preview.html also works when opened from disk.
+    with open(os.path.join(args.out, "city.js"), "w", encoding="utf-8") as f:
+        f.write("window.CITY_DATA = ")
+        json.dump(city, f, ensure_ascii=False)
+        f.write(";\n")
+    preview = os.path.join(os.path.dirname(os.path.abspath(__file__)), "preview.html")
+    if os.path.exists(preview):
+        shutil.copy(preview, os.path.join(args.out, "index.html"))
 
     # OBJ: Y-up, X east, Z south (so it looks right in Blender/Godot).
     with open(os.path.join(args.out, "city.obj"), "w", encoding="utf-8") as f:
