@@ -1,4 +1,4 @@
-# Bringing the scene into a game engine
+# Using the map: engines, film, tours
 
 `blender_city.py` writes, per style (`real` by default; `toon` or others once
 the real map is done):
@@ -28,6 +28,21 @@ re-export with `--from-blend city.blend`.
    material; for realism, swap the flat colours for Quixel/Fab materials.
 4. Big areas: a Landscape actor sculpted from the DEM can replace the flat
    ground; keep the roads mesh above it.
+
+## Film and animation
+
+`blender_city.py --usd` also writes `city.usdc`, the whole scene as USD with
+the building properties. Open it in Blender, Houdini, NVIDIA Omniverse or
+Unreal (USD Stage). Keep one master map and make a separate shot scene per
+film that references it, so fixes to the map reach every film.
+
+## Guided walks and virtual tours
+
+The `.glb` files carry each building's OSM id, name, address and height as
+glTF extras, so a tour app can label buildings and link them to text or
+audio. In the browser, three.js or Babylon.js load the per-tile and
+per-building files; `city.json` already has names, addresses and positions
+for a route. For VR, use Unreal or Godot with the same files.
 
 ## Godot 4
 

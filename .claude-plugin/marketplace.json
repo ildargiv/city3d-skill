@@ -4,12 +4,12 @@
     "name": "ildargiv",
     "url": "https://github.com/ildargiv"
   },
-  "description": "Real city districts in 3D from OpenStreetMap plus your own photos and video.",
+  "description": "A universal realistic 3D map of a real city from OpenStreetMap plus your own photos and video.",
   "plugins": [
     {
       "name": "city3d",
       "source": "./",
-      "description": "Real city districts in 3D from OpenStreetMap plus your own photos and video."
+      "description": "A universal realistic 3D map of a real city from OpenStreetMap plus your own photos and video."
     }
   ]
 }

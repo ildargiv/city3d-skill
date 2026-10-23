@@ -2,11 +2,19 @@
 
 **English** · [Русский](README.ru.md)
 
-A Claude Code skill that turns a real neighbourhood into a 3D scene for a
-game. Every building is a separate model standing on its own footprint, the
-landscape is one piece. The map is built realistic first; once it is
-finished, it can be restyled (cartoon, low-poly or any other look) from the
-same scene.
+A Claude Code skill that builds a real city in 3D: a universal, realistic
+map that other projects are built on. Every building is a separate model
+standing on its own footprint and knows its name and address; the
+landscape is shared and grows tile by tile as the map gets bigger.
+
+On top of one map you can make many things:
+- games (Unreal, Godot, Unity);
+- films and animation (USD for Blender, Houdini, Omniverse, Unreal);
+- a guided walk or virtual tour of famous places (in the browser or VR);
+- restyled versions of the city: cartoon, low-poly, winter, historical.
+
+The map itself stays realistic and accurate; styles and projects are made
+from it, not in it.
 
 The base comes from open OpenStreetMap data. The quality comes from your own
 photos and video: the agent builds everything it can, then tells you which
