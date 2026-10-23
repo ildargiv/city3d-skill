@@ -167,7 +167,10 @@ Never decide this yourself and never fill a side in silently. Invented sides
 leave the shot list, show as "Invented, not shot" in the building's
 TO_SHOOT.md, and `blender_city.py --coverage coverage.json` writes
 `shot_sides` and `invented_sides` onto the building, so every export (glTF
-extras, USD) says which parts of the city are real.
+extras, USD) says which parts of the city are real. Each build also writes
+`build/sources.json`, the map's source manifest: how many buildings are OSM
+blocks, scans or drone cuts, and which ones have invented parts. Hand it
+over with every release of the map.
 
 ## 5. Shot list
 

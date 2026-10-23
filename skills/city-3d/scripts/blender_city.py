@@ -17,7 +17,11 @@ Outputs in --out:
   tiles/T_<i>_<j>_<style>.glb     the landscape tile by tile (Unreal World Partition)
   buildings_<style>.glb           every building, placed in world position
   buildings/<name>.glb            each building alone, centred on its origin
-  placement.json                  world position of every building origin
+  placement.json                  world position of every building origin, with
+                                  its geometry source (osm-block | scan | drone)
+                                  and shot / invented sides
+  sources.json                    the map's source manifest: counts per source,
+                                  buildings with invented parts, attribution
   city.usdc                       the whole scene as USD (--usd), for film and
                                   VFX tools (Blender, Houdini, Omniverse, Unreal)
 
@@ -188,6 +192,7 @@ def building_mesh(b, wall_mat, roof_mat):
     for k in ("name", "address", "type", "levels", "height", "roof"):
         ob[k] = b.get(k) or ""
     ob["osm_id"] = b["id"]
+    ob["geometry"] = "osm-block"
     return ob
 
 
@@ -456,6 +461,7 @@ def place_scans(data, root):
             ob[key] = b.get(key) or ""
         ob["osm_id"] = bid
         ob["scan"] = os.path.relpath(path, root)
+        ob["geometry"] = "drone" if os.path.basename(path).lower().startswith("drone.") else "scan"
         placed.append(f"{ob.name} <- {ob['scan']} (scale {k:.3g})")
     for line in placed:
         print("city3d: placed", line)
@@ -511,12 +517,28 @@ def main():
         mark_sources(a.city_json, a.coverage)
     blds = [o for o in bpy.data.collections["Buildings"].all_objects]
     land = [o for o in bpy.data.collections["Landscape"].all_objects]
+    keys = ("geometry", "scan", "coverage", "shot_sides", "invented_sides")
     placement = [{"object": o.name, "osm_id": o.get("osm_id"),
                   "name": o.get("name", ""), "x": round(o.location.x, 2),
-                  "y": round(o.location.y, 2), "z": round(o.location.z, 2)}
+                  "y": round(o.location.y, 2), "z": round(o.location.z, 2),
+                  **{k: o[k] for k in keys if k in o}}
                  for o in blds]
     with open(os.path.join(a.out, "placement.json"), "w", encoding="utf-8") as f:
         json.dump(placement, f, ensure_ascii=False, indent=1)
+    # the source manifest: what in this map is real, from OSM, or invented
+    count = lambda key, val: sum(p.get(key) == val for p in placement)
+    manifest = {
+        "attribution": bpy.context.scene.get("city3d_attribution")
+        or "© OpenStreetMap contributors (ODbL)",
+        "buildings": len(placement),
+        "geometry": {g: count("geometry", g) for g in ("osm-block", "scan", "drone")},
+        "with_invented_parts": [p["object"] for p in placement if p.get("invented_sides")],
+        "landscape": "OpenStreetMap (roads, areas, trees), flat ground tiles",
+        "rule": "Only the user's own photos/video/drone flights and open data; "
+                "invented parts only with the user's consent, listed here.",
+    }
+    with open(os.path.join(a.out, "sources.json"), "w", encoding="utf-8") as f:
+        json.dump(manifest, f, ensure_ascii=False, indent=1)
 
     for i, style in enumerate(styles):
         if i or a.from_blend:

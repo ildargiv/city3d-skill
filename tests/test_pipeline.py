@@ -180,6 +180,9 @@ class BlenderScene(unittest.TestCase):
                       "--out", os.path.join(tmp, "build"), "--no-split")
             self.assertIn("placed B_200", out)
             self.assertTrue(os.listdir(os.path.join(tmp, "build", "tiles")))
+            with open(os.path.join(tmp, "build", "sources.json"), encoding="utf-8") as f:
+                manifest = json.load(f)
+            self.assertEqual(manifest["geometry"]["scan"], 1)
         finally:
             shutil.rmtree(tmp)
 
