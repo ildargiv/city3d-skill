@@ -87,13 +87,13 @@ h1 { font: 700 1.15rem/1.2 var(--display); margin: 0; letter-spacing: -0.01em; t
 const STYLES = {
   real: {
     sky: 0xcdd8de, ground: 0x8d958f, road: 0x4a4f53, park: 0x6f8f5a, water: 0x5b7f99,
-    square: 0xb9b2a5, pitch: 0x6d9a5f, fog: true,
+    square: 0xb9b2a5, pitch: 0x6d9a5f, trunk: 0x5a4330, crown: 0x4f7a3a, fog: true,
     building: b => colourOf(b.colour) ?? (b.levels >= 5 ? 0xc9c3b8 : b.levels >= 3 ? 0xd8cfc0 : 0xbfae98),
     edges: false,
   },
   toon: {
     sky: 0x9fd8ff, ground: 0x7cc95a, road: 0x7c7f99, park: 0x6cc955, water: 0x4fb3ff,
-    square: 0xffe2a8, pitch: 0x58c26a, fog: false,
+    square: 0xffe2a8, pitch: 0x58c26a, trunk: 0x9c6b3c, crown: 0x3fbf4f, fog: false,
     building: b => [0xff8fa3, 0xffc46b, 0x8fd3ff, 0xb59cff, 0x7fe0b8, 0xffa07a][Math.abs(b.id) % 6],
     edges: true,
   },
@@ -201,6 +201,23 @@ function build() {
       world.add(e);
     }
   }
+  const trees = data.trees || [];
+  if (trees.length) {
+    const trunkG = new THREE.CylinderGeometry(0.25, 0.3, 2.5, 6).translate(0, 1.25, 0);
+    const crownG = (style === 'toon'
+      ? new THREE.SphereGeometry(2.2, 8, 6) : new THREE.IcosahedronGeometry(2.2, 1)).translate(0, 4.2, 0);
+    const trunk = new THREE.InstancedMesh(trunkG, mat(S.trunk), trees.length);
+    const crown = new THREE.InstancedMesh(crownG, mat(S.crown), trees.length);
+    const m4 = new THREE.Matrix4();
+    trees.forEach((t, i) => {
+      const k = (t.height || 8) / 8;
+      m4.makeScale(k, k, k).setPosition(t.x, 0, -t.y);
+      trunk.setMatrixAt(i, m4);
+      crown.setMatrixAt(i, m4);
+    });
+    crown.castShadow = true;
+    world.add(trunk, crown);
+  }
   scene.add(world);
   if (selected) highlight(pickables.find(p => p.userData.id === selected));
 }
@@ -267,7 +284,8 @@ fetch('city.json').then(r => r.json()).then(d => {
   camera.position.set(d.radius * 0.9, d.radius * 0.8, d.radius * 0.9);
   controls.target.set(0, 0, 0);
   build();
-  const centre = pickables.find(p => /театр кукол/i.test(p.userData.name)) ||
+  const centre = pickables.filter(p => /театр кукол/i.test(p.userData.name))
+      .sort((a, b) => b.userData.area_m2 - a.userData.area_m2)[0] ||
     pickables.slice().sort((a, b) => a.userData.dist_m - b.userData.dist_m)[0];
   if (centre) highlight(centre);
 }).catch(() => {

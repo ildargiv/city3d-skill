@@ -110,6 +110,10 @@ def relation_rings(ways, rels):
                     segs.pop(i)
                     joined = True
                     break
+            # A box export cuts big water bodies (a river) into open pieces;
+            # close them across the cut so the water still shows.
+            if ring[0] != ring[-1] and tags.get("natural") == "water" and len(ring) > 3:
+                ring.append(ring[0])
             if ring[0] == ring[-1]:
                 out.append((-(rid * 100 + n), ring, tags))  # negative id = relation
                 n += 1
