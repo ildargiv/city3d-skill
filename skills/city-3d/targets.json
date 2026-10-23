@@ -1,0 +1,21 @@
+{
+  "_about": "Measurable quality budgets for the city map. qa.py checks finished building models against them; the agent reports misses in plain words.",
+  "capture": {
+    "registered_images_min_ratio": 0.7,
+    "reprojection_error_max_px": 1.5,
+    "distance_to_facade_m": [10, 20]
+  },
+  "building_model": {
+    "triangles": {"house": [5000, 80000], "landmark": [5000, 300000]},
+    "texture_px_max": 4096,
+    "texture_px_min": 1024,
+    "size_vs_footprint": [0.8, 1.25],
+    "height_vs_osm": [0.6, 2.5],
+    "placement_tolerance_m": 2.0
+  },
+  "landmarks": ["church", "cathedral", "chapel", "tower", "castle", "theatre"],
+  "map": {
+    "tile_m": 250,
+    "attribution": "© OpenStreetMap contributors (ODbL)"
+  }
+}

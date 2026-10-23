@@ -1,0 +1,20 @@
+{
+  "_about": "Does the city-3d skill fire when it should and stay quiet otherwise? Run with the skill-creator description optimiser, or by hand: give each query to Claude Code with the plugin installed and note whether the skill loads.",
+  "skill": "city-3d",
+  "queries": [
+    {"query": "Сделай в 3D район вокруг театра кукол в Йошкар-Оле радиусом 300 м", "should_trigger": true},
+    {"query": "I want my street as a 3D level in Unreal, every house separate", "should_trigger": true},
+    {"query": "build a realistic 3D map of the old town from OpenStreetMap and my phone photos", "should_trigger": true},
+    {"query": "у меня видео прогулки по набережной, можно из него сделать дома в 3D для карты города?", "should_trigger": true},
+    {"query": "I flew my drone over the block and processed it in WebODM, put the buildings on our city map", "should_trigger": true},
+    {"query": "добавь к карте соседний микрорайон, вот новый .osm", "should_trigger": true},
+    {"query": "make a virtual walking tour of the city centre in 3D for tourists", "should_trigger": true},
+    {"query": "which facades of the houses do I still need to photograph?", "should_trigger": true},
+    {"query": "model a fantasy castle in Blender for my game", "should_trigger": false},
+    {"query": "convert this .obj to .fbx", "should_trigger": false},
+    {"query": "show me a 2D map of cafes near me", "should_trigger": false},
+    {"query": "fix the shadow bug in my three.js scene", "should_trigger": false},
+    {"query": "scan my shoe with photogrammetry", "should_trigger": false},
+    {"query": "напиши скрипт, который скачивает погоду для Йошкар-Олы", "should_trigger": false}
+  ]
+}

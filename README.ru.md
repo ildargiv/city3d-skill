@@ -113,6 +113,13 @@ blender -b -P blender_city.py -- city/city.json --scans дома/ --out build/
 щелчком. Интерфейс примера на английском; для своего проекта передайте
 `--lang ru` в `osm2city.py`, `shotlist.py` и `house_folders.py`.
 
+## Тесты
+
+Офлайн-тесты на маленьком придуманном районе (без сети и без Blender; часть
+с Blender запускается, если установлен `pip install bpy`):
+`python3 -m unittest discover -s tests`. В `evals/trigger_evals.json`
+перечислены просьбы, на которые скилл должен и не должен срабатывать.
+
 ## Скрипты
 
 | Скрипт | Что делает |
@@ -125,5 +132,7 @@ blender -b -P blender_city.py -- city/city.json --scans дома/ --out build/
 | `house_folders.py` | папка на каждый дом (с `--lang ru`: `фото`, `кадры`, `модель`, `ДОСНЯТЬ.md`) и проверка, куда добавились новые фото |
 | `extract_frames.py` | нарезает видео на резкие кадры |
 | `photogrammetry.py` | собирает модель дома из кадров (COLMAP + OpenMVS) |
+| `doctor.py` | проверяет, какие программы для скилла есть на компьютере, и даёт ссылки на недостающие |
+| `qa.py` | проверяет готовые модели домов по бюджетам из `targets.json` |
 | `odm_split.py` | режет модель с дрона из OpenDroneMap/WebODM на модели отдельных домов |
 

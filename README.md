@@ -141,7 +141,21 @@ Building names come from OSM and stay in Russian.
 | `house_folders.py` | a folder per building (`photos`, `frames`, `model`, `TO_SHOOT.md`) and a check for newly added photos |
 | `extract_frames.py` | cuts video into sharp frames |
 | `photogrammetry.py` | builds a building model from frames (COLMAP + OpenMVS) |
+| `doctor.py` | checks the machine for every tool the skill uses, with download links |
+| `qa.py` | checks finished building models against the budgets in `targets.json` |
 | `odm_split.py` | cuts a drone model from OpenDroneMap/WebODM into one model per building |
+
+## Tests
+
+Offline tests on a tiny hand-made district (no network, no Blender needed;
+the Blender part runs when `pip install bpy` is present):
+
+```
+python3 -m unittest discover -s tests
+```
+
+`evals/trigger_evals.json` lists requests that should and should not start
+the skill. They run on every push (GitHub Actions).
 
 ## Licence
 

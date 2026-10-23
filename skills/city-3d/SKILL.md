@@ -40,6 +40,11 @@ Russian because the first project was in Yoshkar-Ola.
 - Never modify or delete the user's original photos and videos. Write
   derived files into new folders.
 
+- On a new machine, or when a step says "not found", run
+  `python3 scripts/doctor.py` first: one call lists Python, Blender, ffmpeg,
+  COLMAP, OpenMVS and the optional packages, with download links. Install
+  nothing yourself; give the user the links.
+
 ## 1. Area
 
 Ask for a place (an address or landmark) and a radius. 200–300 m is a good
@@ -295,7 +300,11 @@ Flight rules: `references/capture.md`.
    the footprint and fixes the scale when it is more than 25 % off; the
    rotation must come from step 2, or from `model/place.json`
    (`{"rotate_deg": 90, "scale": 1, "offset": [0, 0, 0]}`).
-5. Mark the building `done` in `coverage.json`.
+5. Check it against the budgets in `targets.json` (triangles, texture size,
+   size and height against OSM):
+   `python3 scripts/qa.py city/city.json --root "<project>/buildings"`.
+   Fix or explain every miss before calling a building done.
+6. Mark the building `done` in `coverage.json`.
 
 Roofs not seen from the ground keep the OSM roof shape and colour.
 

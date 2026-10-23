@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-made test district (not real data): two buildings, one with parts, a road, a park, water, a tree. -->
+<osm version="0.6">
+  <bounds minlat="56.6320" minlon="47.9080" maxlat="56.6330" maxlon="47.9100"/>
+  <node id="1" lat="56.6322" lon="47.9082"/>
+  <node id="2" lat="56.6322" lon="47.9086"/>
+  <node id="3" lat="56.6325" lon="47.9086"/>
+  <node id="4" lat="56.6325" lon="47.9082"/>
+  <node id="11" lat="56.6322" lon="47.9090"/>
+  <node id="12" lat="56.6322" lon="47.9096"/>
+  <node id="13" lat="56.6326" lon="47.9096"/>
+  <node id="14" lat="56.6326" lon="47.9090"/>
+  <node id="15" lat="56.6322" lon="47.9093"/>
+  <node id="16" lat="56.6326" lon="47.9093"/>
+  <node id="21" lat="56.6320" lon="47.9080"/>
+  <node id="22" lat="56.6320" lon="47.9100"/>
+  <node id="31" lat="56.6327" lon="47.9081"/>
+  <node id="32" lat="56.6327" lon="47.9087"/>
+  <node id="33" lat="56.6329" lon="47.9087"/>
+  <node id="34" lat="56.6329" lon="47.9081"/>
+  <node id="41" lat="56.6327" lon="47.9090"/>
+  <node id="42" lat="56.6327" lon="47.9099"/>
+  <node id="43" lat="56.6330" lon="47.9099"/>
+  <node id="44" lat="56.6330" lon="47.9090"/>
+  <node id="51" lat="56.6324" lon="47.9088"><tag k="natural" v="tree"/></node>
+  <way id="100">
+    <nd ref="1"/><nd ref="2"/><nd ref="3"/><nd ref="4"/><nd ref="1"/>
+    <tag k="building" v="apartments"/><tag k="building:levels" v="5"/>
+    <tag k="addr:street" v="Test street"/><tag k="addr:housenumber" v="1"/>
+  </way>
+  <way id="200">
+    <nd ref="11"/><nd ref="12"/><nd ref="13"/><nd ref="14"/><nd ref="11"/>
+    <tag k="building" v="yes"/><tag k="name" v="Test tower"/>
+  </way>
+  <way id="201">
+    <nd ref="11"/><nd ref="15"/><nd ref="16"/><nd ref="14"/><nd ref="11"/>
+    <tag k="building:part" v="yes"/><tag k="building:levels" v="3"/>
+  </way>
+  <way id="202">
+    <nd ref="15"/><nd ref="12"/><nd ref="13"/><nd ref="16"/><nd ref="15"/>
+    <tag k="building:part" v="yes"/><tag k="height" v="30"/><tag k="roof:shape" v="pyramidal"/>
+  </way>
+  <way id="300">
+    <nd ref="21"/><nd ref="22"/>
+    <tag k="highway" v="residential"/><tag k="name" v="Test street"/>
+  </way>
+  <way id="400">
+    <nd ref="31"/><nd ref="32"/><nd ref="33"/><nd ref="34"/><nd ref="31"/>
+    <tag k="leisure" v="park"/>
+  </way>
+  <way id="500">
+    <nd ref="41"/><nd ref="42"/><nd ref="43"/><nd ref="44"/><nd ref="41"/>
+    <tag k="natural" v="water"/>
+  </way>
+</osm>
