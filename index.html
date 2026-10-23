@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>city3d — a real city in 3D</title>
+<meta name="description" content="A Claude Code skill that builds a real city in 3D from OpenStreetMap: one model per building, a shared growable landscape, your own photos raising the quality. Export to Blender, USD, Unreal, Godot, Unity.">
+<meta property="og:title" content="city3d — a real city in 3D">
+<meta property="og:description" content="Every building a separate model with its name and address, built from OpenStreetMap, improved with your photos.">
+<meta property="og:image" content="https://ildargiv.github.io/city3d-skill/docs/centre_real.png">
+<style>
+  :root{
+    --bg:#0C1016; --panel:#131A23; --line:#243040; --ink:#E8EEF5; --muted:#93A2B4;
+    --accent:#E2703A; --accent2:#4FA98A;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 72px}
+  .eyebrow{font:600 .72rem/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent)}
+  h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.05;letter-spacing:-.02em;margin:14px 0 0;font-weight:750}
+  h2{font-size:clamp(1.25rem,2.4vw,1.6rem);letter-spacing:-.01em;margin:0 0 8px;font-weight:650}
+  p{margin:0;max-width:62ch;color:var(--muted)}
+  .lede{font-size:1.1rem;margin-top:16px}
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;align-items:center;padding:24px 0 8px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+  .btn{display:inline-block;padding:11px 18px;border-radius:10px;text-decoration:none;
+    font-weight:600;font-size:.95rem;border:1px solid var(--line);background:var(--panel)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#14100C}
+  .btn:hover{filter:brightness(1.08)}
+  figure{margin:0}
+  figure img{width:100%;display:block;border-radius:14px;border:1px solid var(--line)}
+  figcaption{font-size:.8rem;color:var(--muted);margin-top:8px;text-align:center}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  section{margin-top:56px;padding-top:28px;border-top:1px solid var(--line)}
+  ul{margin:12px 0 0;padding-left:20px;color:var(--muted)}
+  li{margin:6px 0}
+  pre{background:#0A0E13;border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+    overflow:auto;font:13.5px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;color:#CFE3DA;margin:12px 0 0}
+  code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .card b{display:block;margin-bottom:6px;font-size:.98rem}
+  .card span{color:var(--muted);font-size:.9rem}
+  footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr}
+    .grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div>
+      <span class="eyebrow">Claude Code skill · MIT</span>
+      <h1>city3d: a real city in 3D</h1>
+      <p class="lede">A universal, realistic map of a real place: every building is a separate model
+        that knows its name and address, the landscape is shared and grows tile by tile, and your own
+        photos and video raise the quality building by building.</p>
+      <div class="cta">
+        <a class="btn primary" href="examples/yoshkar-ola/">Open the live demo</a>
+        <a class="btn" href="#install">Install</a>
+        <a class="btn" href="https://github.com/ildargiv/city3d-skill">GitHub</a>
+      </div>
+    </div>
+    <figure>
+      <img src="docs/centre_real.png" alt="Yoshkar-Ola centre built in 3D from OpenStreetMap">
+      <figcaption>Yoshkar-Ola centre: 202 buildings, 153 with levels, 592 roads — from OpenStreetMap</figcaption>
+    </figure>
+  </div>
+
+  <section>
+    <h2>The same map, restyled — not rebuilt</h2>
+    <p>A style is a project on top of the map, not a change inside it. The realistic master stays
+      accurate and keeps serving new work.</p>
+    <div class="pair">
+      <figure>
+        <img src="docs/tower_real.png" alt="Spasskaya Tower in the realistic style">
+        <figcaption>Realistic</figcaption>
+      </figure>
+      <figure>
+        <img src="docs/tower_toon.png" alt="Spasskaya Tower in the cartoon style">
+        <figcaption>Cartoon, from the same geometry</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>What you get</h2>
+    <div class="grid">
+      <div class="card"><b>One model per building</b><span>On its own OSM footprint, with name, address and storeys; one shared landscape: roads, lawns, water, trees.</span></div>
+      <div class="card"><b>A shot list</b><span>Which buildings to photograph and from which sides, in walking order. Each building gets its own folder for photos, frames and the model.</span></div>
+      <div class="card"><b>Exports that open elsewhere</b><span>Blender scene and <code>.glb</code> for Unreal, Godot and Unity; USD for film and Omniverse.</span></div>
+    </div>
+    <figure style="margin-top:22px">
+      <img src="docs/shotlist.png" alt="Shot list on a phone" style="max-width:320px;margin:0 auto">
+      <figcaption>The shot list opens on a phone: buildings in walking order</figcaption>
+    </figure>
+  </section>
+
+  <section id="install">
+    <h2>Install</h2>
+    <p>In Claude Code:</p>
+    <pre>/plugin marketplace add ildargiv/city3d-skill
+/plugin install city3d@city3d</pre>
+    <p style="margin-top:14px">Then say: <em>“Build the district around … in 3D, radius 300 m”</em>.</p>
+    <p style="margin-top:14px">You will need Python 3.9+, Blender 4.2+, ffmpeg, and — for models from
+      your own frames — COLMAP and OpenMVS. <code>doctor.py</code> checks the machine and prints the
+      download links.</p>
+  </section>
+
+  <footer>
+    Code MIT · Map data © OpenStreetMap contributors, ODbL ·
+    <a href="https://github.com/ildargiv/city3d-skill">Repository</a> ·
+    <a href="https://github.com/ildargiv/city3d-skill/blob/main/DATA-LICENSE.md">Data licences</a>
+  </footer>
+
+</div>
+</body>
+</html>
