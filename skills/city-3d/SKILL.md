@@ -287,27 +287,33 @@ Flight rules: `references/capture.md`.
 
 ## 7. Put the scan on the map
 
-1. Clean the mesh (in Blender, or ask the user): delete ground, cars, people
+1. Judge the raw scan before touching it:
+   `python3 scripts/fix_scan.py <building>/model/scan.glb --height <OSM height>`.
+   On `reshoot` stop: the geometry is a facade sheet and belongs back in the
+   shot list, not in Blender. On `repair` keep going -- `--out fixed.glb`
+   fixes the winding, normals, debris, scale and axis, `--collision boxes.glb`
+   gives the game stand-in boxes, `--triangles 20000` decimates.
+2. Clean the mesh (in Blender, or ask the user): delete ground, cars, people
    and trees around the building; fill holes.
-2. Align it to the folder's `block.obj` (the OSM block in the same frame:
+3. Align it to the folder's `block.obj` (the OSM block in the same frame:
    metres, origin on the footprint centre, north up the map): walls along
    the block's walls, ground at 0.
-3. Decimate to a game budget (houses 20–80k triangles; landmarks more) and
+4. Decimate to a game budget (houses 20–80k triangles; landmarks more) and
    bake the texture to one 4K map. Save it as `.glb` in the folder's
    `model/`.
-4. Put every finished model on the map at once:
+5. Put every finished model on the map at once:
    `blender -b -P scripts/blender_city.py -- city/city.json --scans "<project>/buildings" --out build/`
    (add `--from-blend build/city.blend` to keep edits made in the scene).
    Each `model/*.glb|obj|fbx` replaces that building's block and its
    `building:part` blocks. The script lands it on the ground, centres it on
    the footprint and fixes the scale when it is more than 25 % off; the
-   rotation must come from step 2, or from `model/place.json`
+   rotation must come from step 3, or from `model/place.json`
    (`{"rotate_deg": 90, "scale": 1, "offset": [0, 0, 0]}`).
-5. Check it against the budgets in `targets.json` (triangles, texture size,
+6. Check it against the budgets in `targets.json` (triangles, texture size,
    size and height against OSM):
    `python3 scripts/qa.py city/city.json --root "<project>/buildings"`.
    Fix or explain every miss before calling a building done.
-6. Mark the building `done` in `coverage.json`.
+7. Mark the building `done` in `coverage.json`.
 
 Roofs not seen from the ground keep the OSM roof shape and colour.
 

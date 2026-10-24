@@ -9,6 +9,7 @@ import json
 import math
 import os
 import shutil
+import struct
 import subprocess
 import sys
 import tempfile
@@ -130,6 +131,81 @@ class Pipeline(unittest.TestCase):
         report = json.loads(run("qa.py", self.city_json, "--root", root, "--json"))
         self.assertEqual(len(report), 1)
         self.assertTrue(any("footprint" in i for i in report[0]["issues"]))
+
+
+class ScanRepair(unittest.TestCase):
+    """fix_scan.py: judge and repair a .glb before it reaches the map."""
+
+    @staticmethod
+    def make_glb(path, sheet=False):
+        """A 2 m cube (closed) or a 2 m sheet, Y-up, no normals, no texture."""
+        if sheet:
+            v = [(-1, -1, 1), (1, -1, 1), (1, 1, 1), (-1, 1, 1)]
+            f = [(0, 1, 2), (0, 2, 3)]
+        else:
+            v = [(x, y, z) for x in (-1, 1) for y in (-1, 1) for z in (-1, 1)]
+            f = [(0, 1, 3), (0, 3, 2), (4, 6, 7), (4, 7, 5),
+                 (0, 4, 5), (0, 5, 1), (2, 3, 7), (2, 7, 6),
+                 (0, 2, 6), (0, 6, 4), (1, 5, 7), (1, 7, 3)]
+        pos = b"".join(struct.pack("<3f", *p) for p in v)
+        idx = b"".join(struct.pack("<I", i) for t in f for i in t)
+        pos += b"\0" * (-len(pos) % 4)
+        binary = pos + idx
+        gl = {"asset": {"version": "2.0"},
+              "scenes": [{"nodes": [0]}], "nodes": [{"mesh": 0}],
+              "meshes": [{"primitives": [{"attributes": {"POSITION": 0}, "indices": 1}]}],
+              "accessors": [
+                  {"bufferView": 0, "componentType": 5126, "count": len(v),
+                   "type": "VEC3", "min": [min(p[k] for p in v) for k in range(3)],
+                   "max": [max(p[k] for p in v) for k in range(3)]},
+                  {"bufferView": 1, "componentType": 5125, "count": len(idx) // 4,
+                   "type": "SCALAR"}],
+              "bufferViews": [{"buffer": 0, "byteOffset": 0, "byteLength": len(pos)},
+                              {"buffer": 0, "byteOffset": len(pos), "byteLength": len(idx)}],
+              "buffers": [{"byteLength": len(binary)}]}
+        js = json.dumps(gl, separators=(",", ":")).encode() + b" " * 0
+        js += b" " * (-len(js) % 4)
+        with open(path, "wb") as f:
+            f.write(struct.pack("<III", 0x46546C67, 2, 12 + 8 + len(js) + 8 + len(binary)))
+            f.write(struct.pack("<II", len(js), 0x4E4F534A) + js)
+            f.write(struct.pack("<II", len(binary), 0x004E4942) + binary)
+
+    def test_closed_box_is_ok_and_repairs(self):
+        tmp = tempfile.mkdtemp()
+        try:
+            box = os.path.join(tmp, "box.glb")
+            self.make_glb(box)
+            rep = json.loads(run("fix_scan.py", box, "--json"))
+            # closed and solid, but the fixture has no normals: repair, not reshoot
+            self.assertEqual(rep["verdict"], "repair")
+            self.assertGreater(rep["flatness"], 0.8)
+            self.assertEqual(rep["border_edges"], 0)
+
+            fixed = os.path.join(tmp, "fixed.glb")
+            coll = os.path.join(tmp, "coll.glb")
+            run("fix_scan.py", box, "--out", fixed, "--collision", coll,
+                "--triangles", str(rep["triangles"]))
+            again = json.loads(run("fix_scan.py", fixed, "--json"))
+            self.assertEqual(again["verdict"], "ok")
+            self.assertTrue(again["normals"])
+            self.assertEqual(again["border_edges"], 0)
+            box_rep = json.loads(run("fix_scan.py", coll, "--json"))
+            self.assertEqual(box_rep["border_edges"], 0)
+            self.assertEqual(box_rep["inward_share"], 0.0)
+        finally:
+            shutil.rmtree(tmp)
+
+    def test_sheet_is_sent_back_to_the_shot_list(self):
+        tmp = tempfile.mkdtemp()
+        try:
+            sheet = os.path.join(tmp, "sheet.glb")
+            self.make_glb(sheet, sheet=True)
+            rep = json.loads(run("fix_scan.py", sheet, "--json"))
+            self.assertEqual(rep["verdict"], "reshoot")
+            self.assertLess(rep["flatness"], 0.1)
+            self.assertLessEqual(rep["coverage"], 0.55)
+        finally:
+            shutil.rmtree(tmp)
 
 
 class Helpers(unittest.TestCase):

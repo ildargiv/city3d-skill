@@ -151,6 +151,7 @@ Building names come from OSM and stay in Russian.
 | `depth_relief.py` | metric depth from one photo (Depth Anything V2), a draft marked as invented |
 | `doctor.py` | checks the machine for every tool the skill uses, with download links |
 | `qa.py` | checks finished building models against the budgets in `targets.json` |
+| `fix_scan.py` | judges a raw scan (facade sheet or building?) and repairs winding, normals, debris, scale and collision |
 | `odm_split.py` | cuts a drone model from OpenDroneMap/WebODM into one model per building |
 
 ## Tests
