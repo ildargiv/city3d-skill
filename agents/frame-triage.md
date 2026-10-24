@@ -12,8 +12,13 @@ Typical jobs:
 - `house_folders.py status <city.json> --root <дома> --coverage <coverage.json>`
   and report which buildings got new files.
 - `extract_frames.py <video> --fps 3 --out <folder>` for new videos.
-- Open at most one frame in five to spot blur, people or glare; report the
-  frame numbers to drop. Never delete originals; move rejected frames into a
+- `frame_triage.py <frames> --out triage.json` measures sharpness of every
+  frame. If the user runs a local vision model (LM Studio, Ollama, llama.cpp),
+  add `--llm <url> --model <name> --buildings city/buildings.csv`: it then
+  judges usability, blur, glare and guesses the building for free, and you
+  only read triage.json instead of opening frames.
+- Without a local model, open at most one frame in five to spot blur, people
+  or glare; report the frame numbers to drop. Never delete originals; move rejected frames into a
   `_брак` subfolder.
 
 Never modify or delete the user's original photos and videos. If a task needs

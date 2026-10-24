@@ -360,6 +360,8 @@ route it:
 | Developing the skill, unclear cases, quality calls, talking the user through decisions | Opus (main session) | only when needed |
 | The routine loop: run scripts, update folders and statuses, explain results | Sonnet | `/model sonnet` in the session doing the loop |
 | Bulk checks: new files, cutting frames, blur/glare, file lists | Haiku | the `frame-triage` agent |
+| Looking at many frames (usable? blur? which building?) | the user's local vision model, free | `frame_triage.py --llm http://localhost:1234/v1`; a guess to confirm, not a decision |
+| Texts: building descriptions for a guide, notes, translations | the user's local model, free | ask the user for its address; Claude reviews |
 | Matching frames to buildings without GPS | Sonnet | the `building-matcher` agent |
 | Photogrammetry per building and its verdict | Sonnet | the `model-builder` agent |
 

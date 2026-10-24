@@ -147,6 +147,8 @@ Building names come from OSM and stay in Russian.
 | `house_folders.py` | a folder per building (`photos`, `frames`, `model`, `TO_SHOOT.md`) and a check for newly added photos |
 | `extract_frames.py` | cuts video into sharp frames |
 | `photogrammetry.py` | builds a building model from frames (COLMAP + OpenMVS) |
+| `frame_triage.py` | sorts frames by sharpness and, with a local vision model (LM Studio, Ollama), by usability and building |
+| `depth_relief.py` | metric depth from one photo (Depth Anything V2), a draft marked as invented |
 | `doctor.py` | checks the machine for every tool the skill uses, with download links |
 | `qa.py` | checks finished building models against the budgets in `targets.json` |
 | `odm_split.py` | cuts a drone model from OpenDroneMap/WebODM into one model per building |
